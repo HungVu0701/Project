@@ -614,4 +614,5 @@ return array(
     'upload_fee_list' => 'Upload fee',
     'sms' => 'Send sms',
     'send_sms' => 'Send sms',
+    'do_you_want_to_publish_this_fee' => 'Do you want to publish this fee',
 );

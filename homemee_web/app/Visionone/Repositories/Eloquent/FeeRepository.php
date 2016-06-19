@@ -100,6 +100,7 @@ class FeeRepository extends AbstractRepository implements FeeRepositoryInterface
 
             if ($user->type == 'apartment_manager' or $user->type == 'apartment_member') {
                 $fee = \DB::table('tbl_fee')
+                    ->where('tbl_fee.id', '=', $feeId)
                     ->join('user', 'tbl_fee.room_name', '=', 'user.room_name')
                     ->get(['email',
                         'month',
@@ -191,26 +192,23 @@ class FeeRepository extends AbstractRepository implements FeeRepositoryInterface
             // $user = app('userLogined');
             $size_of_list = count($device_list);
             if ($size_of_list > 0) {
+                //xoa record co thang = month - stupid code
+                $month1 = $device_list[1]['month'];
+                \DB::table('tbl_fee')->where('tbl_fee.month', '=', $month1)->delete();
+
                 for ($i = 1; $i < $size_of_list; $i++) {
                     $data = $device_list[$i];
-//                $pre_device = \Fee::where('tenant_id', '=', $user['tenant_id'])
-//                    ->where('device_id', '=', $data['device_id'])
-//                    ->first();
-//                if ($pre_device != null) {
-//                    \PreDevice::where('tenant_id', '=', $user['tenant_id'])
-//                        ->where('device_id', '=', $data['device_id'])->delete();
-//                }
 //
 //                $data['create_by'] = $user['id'];
 //                $data['tenant_id'] = $user['tenant_id'];
                     \Fee::create($data);
-            }
+                }
                 return BaseController::response(array(
                     'msg' => 'visionone_upload_device_list_success',
                     'data' => '',
                     'method' => 'POST',
                     'status' => \Config::get('constants.Created')));
-            }else{
+            } else {
                 return BaseController::response(array(
                     'msg' => 'visionone_upload_device_list_success',
                     'data' => 'ko co du lieu',

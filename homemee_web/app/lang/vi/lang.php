@@ -623,4 +623,5 @@ return array(
     'upload_fee_list' => 'Nhập dữ liệu phí',
     'sms' => 'Gửi tin nhắn',
     'send_sms' => 'gửi tin nhắn',
+    'do_you_want_to_publish_this_fee' => 'Bạn có muốn xác nhận mức phí',
 );
