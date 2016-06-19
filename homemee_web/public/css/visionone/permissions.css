@@ -1,0 +1,414 @@
+table.permissions {
+  border: 1px solid #ccc;
+  border-radius: 4px 4px 0 0;
+}
+
+.permissions th,
+.permissions td {
+  padding: 10px 15px;
+  vertical-align: middle;
+  
+}
+
+.permissions td {
+  background-color: #fff;
+}
+
+.permissions th {
+  margin: 30px auto 0 auto;
+  font-size: 16px;
+  color: #555;
+  text-shadow: 0 1px white;
+
+}
+
+.permissions thead {
+  width: 470px;
+  font-size: 18px;
+  color: #555;
+  text-shadow: 0 1px white;
+  background: #f8f8f8;
+  background: -moz-linear-gradient(top, #f8f8f8 0%, #eeeeee 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#eeeeee));
+  background: -webkit-linear-gradient(top, #f8f8f8 0%,#eeeeee 100%);
+  background: -o-linear-gradient(top, #f8f8f8 0%,#eeeeee 100%);
+  background: -ms-linear-gradient(top, #f8f8f8 0%,#eeeeee 100%);
+  background: linear-gradient(to bottom, #f8f8f8 0%,#eeeeee 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#eeeeee',GradientType=0 );
+  border: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+  border-bottom: 0;
+  border-radius: 4px 4px 0 0;
+
+}
+
+.permission .ui-widget-content {
+  background: #ddd;
+  border: 1px solid #A8A8A8;
+  border-radius: 2px;
+  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.2), 0 0 0 1px #ffffff;
+}
+
+.permission .ui-state-default {
+  background: #eee;
+  border: 1px solid #999;
+  border-radius: 10px;
+}
+
+.permission .ui-state-focus {
+  border-color: #488DF0;
+  box-shadow: 0 0 2px #488DF0;
+}
+
+.permission .ui-slider {
+  margin-top: 10px;
+  margin-left: 5px;
+  font-size: 10px;
+}
+
+.permission .ui-slider-horizontal {
+  height: 6px;
+  width: 194px;
+  margin: 0 auto;
+}
+
+.permission .ui-slider-horizontal .ui-slider-handle {
+  top: -6px;
+  width: 15px;
+  height: 15px;
+  display: block;
+}
+
+.permission .objects td.name {
+  width: 120px;
+}
+
+td.permission {
+  width: 500px;
+}
+
+td.description,
+td.name {
+  border-right: 1px solid #ccc;
+}
+
+tr:last-child td.name {
+  border-right: 0;
+}
+
+.selectize-input {
+  width: 100%;
+  vertical-align: middle;
+}
+
+#columnRight.permissions {
+  width: 600px;
+}
+
+.permission .ui-slider-range {
+  background-color: #98DF64;
+  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.2), 0 0 0 1px #ffffff;
+  height: 6px;
+  border: 1px solid #009245;
+  border-radius: 2px;
+  margin-top: -1px;
+}
+
+.permissions tbody tr:hover{
+  background-color: transparent;
+}
+
+.permissions thead tr th {
+  border-bottom: 1px solid #fff;
+}
+
+.permissions tr th {
+  text-align: center;
+  border: 0;
+  height: 20px;
+  padding: 10px 15px;
+  margin: 30px auto 0 auto;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.permissions tr th:first-of-type {
+  text-align: left;
+  border-right: 1px solid #ccc;
+  border-radius: 4px 0 0 0;
+}
+
+.permissions tr th:last-of-type {
+  width: 30px;
+  border-left: 1px solid #ccc;
+  border-radius: 0 4px 0 0;
+}
+
+.permissions tr:nth-child(even) {
+  background-color: #E8F2F7;
+}
+
+.permissions tr td {
+  height: 36px;
+  border-top: 1px solid #ccc;
+}
+
+.permissions tr td:last-of-type  {
+  height: 36px;
+  text-align: center;
+  border-left: 1px solid #ccc;
+}
+
+.permissions tr:last-of-type td:last-of-type  {
+  border-left: none;
+}
+
+.permissions .permission-slider.ui-slider-active {
+  opacity: 0.5;
+}
+
+a.removed {
+  font-family: Pictos;
+  color: #ccc;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+#columnRight.narrow.permissions {
+  width: 560px;
+  float: right;
+  margin: 0 0 0 20px;
+}
+
+#columnRight.narrow.permissions h3 {
+  width: 528px;
+}
+
+.permissions th:first-of-type,
+.permissions th:last-of-type {
+  padding-left: 14px;
+}
+
+.narrow.permissions .ui-slider-horizontal {
+  width: 188px;
+}
+
+#columnLeft.about {
+  width: 368px;
+  margin: 0 0 0 34px;
+}
+
+.about .panel-content {
+  padding: 20px;
+  color: #777;
+}
+
+.about p {
+  margin-bottom: 10px;
+}
+
+.about .panel-title {
+  font-size: 16px;
+  color: #555;
+}
+
+.permissions tr.object .email {
+  color: #aaa;
+  font-style: italic;
+}
+
+.selectize-control.multi .selectize-input > div {
+  border-radius: 2px;
+  border: 1px solid #d0d0d0;
+  background: #ECECEC;
+}
+
+#columnRight.report {
+  width: 585px;
+  margin: 0;
+}
+
+.doodle-half-width {
+  width: 480px;
+  margin: 0 auto;
+  height: 220px;
+  padding: 20px 40px;
+  background: url(icons/doodle-half-width.png) transparent no-repeat 50%;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.doodle-half-width > * {
+  padding: 0;
+  margin: 0;
+  /*font-family: "Neuton", Times, "Times New Roman", serif;*/
+  color: white;
+  text-shadow: 1px 2px 5px rgba(51, 51, 51, 0.2);
+}
+
+.doodle-half-width > h4 {
+  margin-bottom: 15px;
+  font-size: 32px;
+}
+
+.doodle-half-width > p {
+  font-size: 24px;
+}
+
+/*--campaigns--*/
+.switch input {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  z-index: 100;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.switch {
+  width: 56px;
+  height: 20px;
+  z-index: 2;
+  display: inline-block;
+  position: relative;
+}
+
+.switch label {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  border: 1px solid #CCC;
+  background: #f1f1f1;
+  -webkit-box-shadow: inset 0 0 0 1px rgba(201, 201, 201, 0.22), inset 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 0 1px rgba(201, 201, 201, 0.22), inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.switch label i {
+  display: block;
+  height: 100%;
+  width: 50%;
+  border-radius: inherit;
+  position: absolute;
+  z-index: 2;
+  right: 50%;
+  top: 0;
+  background: #f8f8f8;
+  background: -moz-linear-gradient(top, #f8f8f8 0%, #D6D6D6 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#D6D6D6));
+  background: -webkit-linear-gradient(top, #f8f8f8 0%,#D6D6D6 100%);
+  background: -o-linear-gradient(top, #f8f8f8 0%,#D6D6D6 100%);
+  background: -ms-linear-gradient(top, #f8f8f8 0%,#D6D6D6 100%);
+  background: linear-gradient(to bottom, #f8f8f8 0%,#D6D6D6 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#D6D6D6',GradientType=0 );
+  box-shadow: 0 0px 6px rgba(0,0,0,0.3);
+  text-align: center;
+  line-height: 22px;
+  text-shadow: 0px 1px 2px rgba(105, 105, 105, 0.4);
+  color: #EEE;
+}
+
+.switch label i:before {
+  content: "off";
+  text-transform: uppercase;
+  font-style: normal;
+  font-weight: bold;
+  color: rgba(0,0,0,0.4);
+  text-shadow: 0 1px 0 #F5F5F5, 0 -1px 0 #D6D2C5;
+  /*font-family: Helvetica, Arial, sans-serif;*/
+  font-size: 9px;
+  position: absolute;
+  top: 50%;
+  margin-top: -7px;
+  right: -76%;
+  line-height: 16px;
+}
+
+.switch input:checked ~ label {
+  background: #98DF64;
+}
+
+.switch input:checked ~ label i {
+  right: -1%;
+}
+
+.switch input:checked ~ label i:before {
+  content: "on";
+  right: 130%;
+  color: #57A717;
+  text-shadow: 0 1px 0 #D7F0C5, 0 -1px 0 #438A13;
+}
+
+table.permissions.campaign-acl tr td:first-of-type {
+  text-align: left;
+}
+
+table.permissions.campaign-acl tr td {
+  text-align: center;
+}
+
+table.permissions.campaign-acl tr th {
+  background: #E4E4E4;
+  border: 0;
+  border-width: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 0;
+}
+
+table.permissions.campaign-acl {
+  border-top: 0;
+  border-radius: 0;
+}
+
+table.narrow.permissions.acl {
+  margin: 20px 0;
+}
+
+#columnLeft.about .panel-content {
+  height: auto;
+  margin-bottom: 20px;
+  clear: both;
+  background: white;
+  border: 1px solid #CCC;
+}
+
+#columnRight.acl {
+ width: 583px;
+ margin: 0;
+}
+
+tr.campaign-acl td.description {
+  font-size: 14px;
+}
+
+.campaign-acl .description {
+  border-bottom:0;
+  border-left:0;
+}
+
+button.add-objects {
+  font-family: Pictos;
+}
+
+#columnRight table.account {
+  width: 550px;
+}
+
+#columnRight table.file-acl {
+  width: 550px;
+  margin: 0 0 20px 0;
+}
+
+table.file-acl.narrow.permissions .ui-slider-horizontal {
+  width: 141px;
+}

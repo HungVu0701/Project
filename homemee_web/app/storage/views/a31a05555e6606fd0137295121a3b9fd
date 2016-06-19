@@ -1,0 +1,16 @@
+<?php $__env->startSection('title', trans('lang.about')); ?>
+
+<?php $__env->startSection('scripts-bottom'); ?>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('scripts'); ?>
+    <script src="<?php echo URL::asset('js/notify.min.js'); ?>"></script>
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('content'); ?>
+    <h1>
+        <?php echo trans('lang.not_found_page'); ?>
+
+    </h1>
+<?php $__env->stopSection(); ?>

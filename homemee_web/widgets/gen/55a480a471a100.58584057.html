@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>News Widget</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <style type="text/css" media="screen">
+            body,
+            div,
+            p,
+            span {
+                padding: 0;
+                margin: 0;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+
+            html {
+                height: 100%;
+            }
+
+            body {
+                background-color: #a80003;
+                font-family: Roboto, 'Helvetica Neue', Arial, Tahoma, sans-serif;
+                overflow: hidden;
+                height: 100%;
+
+                -webkit-transform-origin: 0 0;
+                -moz-transform-origin: 0 0;
+                transform-origin: 0 0;
+            }
+
+            #carousel {
+                position: relative;
+                top: 0px;
+                right: auto;
+                bottom: auto;
+                left: 0px;
+
+                z-index: auto;
+                width: 100000px;
+                height: 100%;
+                padding: 0;
+                text-align: left;
+                white-space: nowrap;
+            }
+
+            #carousel.animated {
+                width: 100%;
+            }
+
+            #fit-to-box-container {
+                position: relative;
+            }
+
+            @-webkit-keyframes bannermove1 {
+                0% {
+                    -webkit-transform: translateX(0);
+                }
+                50% {
+                    -webkit-transform: translateX(-100%);
+                }
+                50.01% {
+                    -webkit-transform: translateX(100%);
+                }
+                100% {
+                    -webkit-transform: translateX(0);
+                }
+            }
+
+            @-moz-keyframes bannermove1 {
+                0% {
+                    -moz-transform: translateX(0);
+                }
+                50% {
+                    -moz-transform: translateX(-100%);
+                }
+                50.01% {
+                    -moz-transform: translateX(100%);
+                }
+                100% {
+                    -moz-transform: translateX(0);
+                }
+            }
+
+            @-ms-keyframes bannermove1 {
+
+            0
+            %
+            {
+                -ms-transform: translateX(0)
+            ;
+            }
+            50
+            %
+            {
+                -ms-transform: translateX(-100%)
+            ;
+            }
+            50.01
+            %
+            {
+                -ms-transform: translateX(100%)
+            ;
+            }
+            100
+            %
+            {
+                -ms-transform: translateX(0)
+            ;
+            }
+            }
+
+            @keyframes  bannermove1 {
+                0% {
+                    transform: translateX(0);
+                }
+                50% {
+                    transform: translateX(-100%);
+                }
+                50.01% {
+                    transform: translateX(100%);
+                }
+                100% {
+                    transform: translateX(0);
+                }
+            }
+
+            @-webkit-keyframes bannermove2 {
+                0% {
+                    -webkit-transform: translateX(100%);
+                }
+                50% {
+                    -webkit-transform: translateX(0);
+                }
+                100% {
+                    -webkit-transform: translateX(-100%);
+                }
+            }
+
+            @-moz-keyframes bannermove2 {
+                0% {
+                    -moz-transform: translateX(100%);
+                }
+                50% {
+                    -moz-transform: translateX(0);
+                }
+                100% {
+                    -moz-transform: translateX(-100%);
+                }
+            }
+
+            @-ms-keyframes bannermove2 {
+
+            0
+            %
+            {
+                -ms-transform: translateX(100%)
+            ;
+            }
+            50
+            %
+            {
+                -ms-transform: translateX(0)
+            ;
+            }
+            100
+            %
+            {
+                -ms-transform: translateX(-100%)
+            ;
+            }
+            }
+
+            @keyframes  bannermove2 {
+                0% {
+                    transform: translateX(100%);
+                }
+                50% {
+                    transform: translateX(0);
+                }
+                100% {
+                    transform: translateX(-100%);
+                }
+            }
+
+            .fit-to-box {
+                float: left;
+                margin: 0;
+                padding: 0;
+                display: inline-block;
+                list-style-type: none;
+            }
+
+            .fit-to-box li {
+                float: left;
+                line-height: 1em;
+                margin: 0 0 0 100px;
+                font-weight: bold;
+                color: #ffffff;
+                line-height: 1em;
+                /*text-shadow: 0.05em 0.05em 0.1em rgba(0, 0, 0, 0.5);*/
+            }
+
+            .animated .fit-to-box {
+                position: absolute;
+                width: 100%;
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                -ms-backface-visibility: hidden;
+                backface-visibility: hidden;
+                -webkit-perspective: 1000;
+                -moz-perspective: 1000;
+                -ms-perspective: 1000;
+                perspective: 1000;
+            }
+
+            .animated #fit-to-box-1 {
+                -webkit-transform: translate3d(100%, 0, 0);
+                -moz-transform: translate3d(100%, 0, 0);
+                -ms-transform: translate3d(100%, 0, 0);
+                transform: translate3d(100%, 0, 0);
+             -webkit-animation: bannermove1 8.0s linear infinite;
+                -moz-animation: bannermove1 128.0s linear infinite;
+                -ms-animation: bannermove1 128.0s linear infinite;
+                animation: bannermove1 128.0s linear infinite;
+            
+            }
+
+            .animated #fit-to-box-2 {
+                -webkit-transform: translate3d(200%, 0, 0);
+                -moz-transform: translate3d(200%, 0, 0);
+                -ms-transform: translate3d(200%, 0, 0);
+                transform: translate3d(200%, 0, 0);
+
+             -webkit-animation: bannermove2 8.0s linear infinite;
+                -moz-animation: bannermove2 128.0s linear infinite;
+                -ms-animation: bannermove2 128.0s linear infinite;
+                animation: bannermove2 128.0s linear infinite;
+            
+            }
+        </style>
+    </head>
+    <body>
+    <div id="carousel">
+        <div class="animated" style="width: 2446px;" id="fit-to-box-container">
+            <ul style="font-size: 640.8px;" id="fit-to-box-1" class="fit-to-box">
+                <li>No Data</li>
+            </ul>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" charset="utf-8">
+        function getDataFromStorage(name) {
+           try {
+               return JSON.parse(localStorage.getItem(name));
+           } catch (e) {
+               console.error("It was not possible retrieve data from Local Storage.");
+               return null;
+           }
+        }
+
+        function setDataToStorage(name, value) {
+           try {
+               localStorage.setItem(name, JSON.stringify(value));
+           } catch (e) {
+               console.error("It was not possible set data on Local Storage.");
+           }
+        }
+
+        function displayText(data) {
+          console.log("updating ...");
+          var arrayData = data.split("\n");
+          var divCarousel = document.getElementById("carousel");
+          var containerWidth = document.getElementById("fit-to-box-container").offsetWidth;
+          var count = arrayData.length;
+          var divContainer, ulBox, li1;
+          divContainer = document.createElement("div");
+          divContainer.setAttribute("id", "fit-to-box-container");
+          ulBox1 = document.createElement("ul");
+          ulBox1.setAttribute("id", "fit-to-box-1");
+          ulBox1.setAttribute("class", "fit-to-box");
+          ulBox1.setAttribute("style", "font-size: 620.1px;");
+          for (i = 0; i < count; i++) {
+               li1 = document.createElement("li");
+               li1.innerHTML = arrayData[i];
+               ulBox1.appendChild(li1);
+          }
+          divContainer.appendChild(ulBox1);
+          divCarousel.innerHTML = '';
+          divCarousel.appendChild(divContainer);
+
+          var fitBoxContainer = document.getElementById('fit-to-box-container');
+          var fitBox_1 = document.getElementById('fit-to-box-1');
+          var fitBox_2 = fitBox_1.cloneNode(true);
+          fitBox_2.setAttribute('id', 'fit-to-box-2');
+          fitBoxContainer.appendChild(fitBox_2);
+
+          var setFontSize = function () {
+              var innerHeight = window.innerHeight;
+              fitBox_1.style.fontSize = innerHeight - (innerHeight * 0.1) + 'px';
+              fitBox_2.style.fontSize = innerHeight - (innerHeight * 0.1) + 'px';
+          };
+          setFontSize();
+
+          fitBoxContainer.style.width = (ulBox1.scrollWidth + 110) + 'px';
+          fitBoxContainer.setAttribute('class', 'animated');
+        }
+
+        function getData() {
+        var url = "http://103.1.210.178/widget/5d6d4ffb190addc29964763284bfe5f47cd7e428/ticker",
+                   protocol = /^([\w-]+:)\/\//.test(url)? RegExp.$1 : window.location.protocol;
+
+           xhr = new window.XMLHttpRequest();
+           xhr.open('GET', url, true);
+           xhr.send();
+           xhr.onreadystatechange = function() {
+               if (xhr.readyState == 4) {
+                   xhr.onreadystatechange = function() {};
+                   if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304 || (xhr.status == 0 && protocol == 'file:')) {
+                       result = xhr.responseText;
+                       if (result) {
+                           try {
+                               var oldData = getDataFromStorage("scroll_text");
+                               if (oldData == result) {
+                                   return;
+                               } else {
+                                   setDataToStorage('scroll_text', result);
+                                   displayText(result);
+                               }
+                           } catch (e) {
+                               console.error('got exception', e);
+                           }
+                       }
+                   }
+               }
+           }
+        }
+
+        setInterval(function() {
+           getData()
+        }, 20000);
+
+        (function () {
+            setDataToStorage("scroll_text", "");
+            getData();
+            var fitBoxContainer = document.getElementById('fit-to-box-container');
+            var fitBox_1 = document.getElementById('fit-to-box-1');
+            var fitBox_2 = fitBox_1.cloneNode(true);
+            fitBox_2.setAttribute('id', 'fit-to-box-2');
+            fitBoxContainer.appendChild(fitBox_2);
+
+            var setFontSize = function () {
+                fitBox_1 = document.getElementById('fit-to-box-1');
+                fitBox_2 = document.getElementById('fit-to-box-2');
+                var innerHeight = window.innerHeight;
+                fitBox_1.style.fontSize = innerHeight - (innerHeight * 0.1) + 'px';
+                fitBox_2.style.fontSize = innerHeight - (innerHeight * 0.1) + 'px';
+            };
+            setFontSize();
+
+            var resizeTimeout = null;
+            var resize = function () {
+                if (resizeTimeout !== null) {
+                    window.clearTimeout(resizeTimeout);
+                    resizeTimeout = null;
+                }
+
+                resizeTimeout = window.setTimeout(function () {
+                    fitBoxContainer = document.getElementById('fit-to-box-container');
+                    fitBoxContainer.setAttribute('class', '');
+                    setFontSize();
+                    window.setTimeout(function () {
+                        fitBoxContainer.style.width = (fitBox_1.scrollWidth + 110) + 'px';
+                        fitBoxContainer.setAttribute('class', 'animated');
+                    }, 100);
+
+                }, 200);
+            };
+            window.onresize = resize;
+
+            document.addEventListener('DOMContentLoaded', function () {
+                window.setTimeout(function () {
+                    resize();
+                }, 100);
+                fitBoxContainer.style.width = (fitBox_1.scrollWidth + 110) + 'px';
+                fitBoxContainer.setAttribute('class', 'animated');
+            });
+        })();
+    </script>
+    </body>
+    </html>

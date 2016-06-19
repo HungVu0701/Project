@@ -1,0 +1,486 @@
+<script type="text/html" id="widget-base">
+    @{{=[[ ]]=}}
+    <div class="dialogbox timeline-item">
+        <div class="dialog-header">
+            <h3>[[#is_widget]]Widget Properties[[/is_widget]] [[^is_widget]]Item Properties[[/is_widget]]</h3>
+            <div class="header-action">
+                <button class="btn-secondary btn-warning remove-item close">[[#is_widget]]Remove Widget[[/is_widget]] [[^is_widget]]Remove Item[[/is_widget]]</button>
+            </div>
+        </div>
+        <div class="dialog-content properties">
+            <div class="pop-over-inner">
+                [[#thumb]]
+                <div class="thumb">
+                    <img src="[[thumb]]" />
+                </div>
+                [[/thumb]]
+                <div class="details">
+                    <div class="control">
+                        <label><strong>Item duration:</strong></label>
+                        <input class="small item-duration" type="text" value="[[duration]]" /> seconds
+                    </div>
+                    [[&widget-content]]
+                </div>
+            </div>
+        </div>
+        <div class="dialog-buttons">
+            <button class="cancel close">Cancel</button>
+            [[#render_preview]]
+            <button class="btn-secondary preview">Preview</button>
+            [[/render_preview]]
+            <button class="close apply">Apply</button>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="widget-clock">
+    @{{=[[ ]]=}}
+    <div class="control">
+        <label><strong>Color scheme:</strong></label>
+        <select name="colorscheme" style="min-width: initial; min-width: auto;">
+            <option value="black" [[#widget_colorscheme_black]]selected="selected"[[/widget_colorscheme_black]]>Black</option>
+            <option value="sandstone" [[#widget_colorscheme_sandstone]]selected="selected"[[/widget_colorscheme_sandstone]]>Sandstone</option>
+            <option value="teal" [[#widget_colorscheme_teal]]selected="selected"[[/widget_colorscheme_teal]]>Teal</option>
+            <option value="olive" [[#widget_colorscheme_olive]]selected="selected"[[/widget_colorscheme_olive]]>Olive</option>
+            <option value="coral" [[#widget_colorscheme_coral]]selected="selected"[[/widget_colorscheme_coral]]>Coral</option>
+        </select>
+    </div>
+    <div class="control">
+        <label><strong>Clock format:</strong></label>
+        <input [[#widget_format_ampm]]checked="checked"[[/widget_format_ampm]] name="format" type="radio" value="ampm"> AM/PM
+        <input [[#widget_format_24h]]checked="checked"[[/widget_format_24h]] name="format" type="radio" value="24h"> 24 H
+    </div>
+    <div class="control">
+        <label><strong>Clock language:</strong></label>
+        <select name="language" style="min-width: initial; min-width: auto;">
+            <option value="pt-br" [[#widget_language_ptbr]]selected="selected"[[/widget_language_ptbr]]>Brazilian Portuguese</option>
+            <option value="en" [[#widget_language_en]]selected="selected"[[/widget_language_en]]>English</option>
+            <option value="es" [[#widget_language_es]]selected="selected"[[/widget_language_es]]>Spanish</option>
+            <option value="it" [[#widget_language_it]]selected="selected"[[/widget_language_it]]>Italian</option>
+            <option value="da" [[#widget_language_da]]selected="selected"[[/widget_language_da]]>Danish</option>
+            <option value="fr" [[#widget_language_fr]]selected="selected"[[/widget_language_fr]]>French</option>
+            <option value="nn" [[#widget_language_nn]]selected="selected"[[/widget_language_nn]]>Norwegian Nynorsk</option>
+            <option value="sv" [[#widget_language_sv]]selected="selected"[[/widget_language_sv]]>Swedish</option>
+            <option value="zh" [[#widget_language_zh]]selected="selected"[[/widget_language_zh]]>Chinese</option>
+            <option value="ja" [[#widget_language_ja]]selected="selected"[[/widget_language_ja]]>Japanese</option>
+        </select>
+    </div>
+</script>
+
+<script type="text/html" id="widget-url">
+    @{{=[[ ]]=}}
+    <div class="control vertical" [[#thumb]]style="margin-top: 50px"[[/thumb]]>
+    <label><strong>URL:</strong></label>
+    <input type="text" name="url" value="[[widget_url]]" style="padding: 6px;">
+    </div>
+</script>
+
+<script type="text/html" id="widget-weather">
+    @{{=[[ ]]=}}
+    <div class="control">
+        <label><strong>City name:</strong></label>
+        <input name="city" class="medium" type="text" value="[[widget_city]]"/>
+    </div>
+    <div class="control">
+        <label><strong>Format:</strong></label>
+        <input [[#widget_format_celsius]]checked="checked"[[/widget_format_celsius]] name="format" type="radio" value="celsius"> Celsius
+        <input [[#widget_format_fahrenheit]]checked="checked"[[/widget_format_fahrenheit]] name="format" type="radio" value="fahrenheit"> Fahrenheit
+    </div>
+    <div class="control">
+        <label><strong>Language:</strong></label>
+        <select name="language" style="min-width: initial; min-width: auto;">
+            <option value="pt-br" [[#widget_language_ptbr]]selected="selected"[[/widget_language_ptbr]]>Brazilian Portuguese</option>
+            <option value="en" [[#widget_language_en]]selected="selected"[[/widget_language_en]]>English</option>
+            <option value="es" [[#widget_language_es]]selected="selected"[[/widget_language_es]]>Spanish</option>
+            <option value="it" [[#widget_language_it]]selected="selected"[[/widget_language_it]]>Italian</option>
+            <option value="da" [[#widget_language_da]]selected="selected"[[/widget_language_da]]>Danish</option>
+            <option value="fr" [[#widget_language_fr]]selected="selected"[[/widget_language_fr]]>French</option>
+            <option value="nn" [[#widget_language_nn]]selected="selected"[[/widget_language_nn]]>Norwegian Nynorsk</option>
+            <option value="sv" [[#widget_language_sv]]selected="selected"[[/widget_language_sv]]>Swedish</option>
+            <option value="zh" [[#widget_language_zh]]selected="selected"[[/widget_language_zh]]>Chinese</option>
+            <option value="ja" [[#widget_language_ja]]selected="selected"[[/widget_language_ja]]>Japanese</option>
+        </select>
+    </div>
+    <div class="control column">
+        <label><strong>Latitude:</strong></label>
+        <input type="text" name="latitude" value="[[widget_latitude]]" placeholder="ex: -27.59">
+        <label><strong>Longitude:</strong></label>
+        <input type="text" name="longitude" value="[[widget_longitude]]" placeholder="ex: -48.54">
+    </div>
+</script>
+
+<script type="text/html" id="widget-ig">
+    @{{=[[ ]]=}}
+    <div class="control">
+        <label><strong>Show each article for:</strong></label>
+        <input class="small" name='interval' type="text" value="[[widget_interval]]" /> sec.
+    </div>
+    <div class="control">
+        <label><strong>Animate article transition:</strong></label>
+        <input [[#widget_animation]]checked="checked"[[/widget_animation]]name="animation" type="checkbox" value="enabled">
+    </div>
+    <div class="control vertical">
+        <div class="source">
+            <label><strong>News Section:</strong></label>
+            <select name="feed">
+                <option value="http://rss.iginforma.ig.com.br/economia_3/xml/noticias.rss">iG Notícias - Economia</option>
+                <option value="http://rss.iginforma.ig.com.br/esportes_4/xml/noticias.rss">iG Notícias - Esporte</option>
+                <option value="http://rss.iginforma.ig.com.br/gente_5/xml/noticias.rss">iG Notícias - Gente</option>
+                <option value="http://rss.iginforma.ig.com.br/ultimo_segundo_2/xml/noticias.rss">iG Notícias - Último Segundo</option>
+            </select>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="widget-ic">
+    @{{=[[ ]]=}}
+    <div class="control">
+        <label><strong>Show each article for:</strong></label>
+        <input class="small" name='interval' type="text" value="[[widget_interval]]" /> sec.
+    </div>
+    <div class="control">
+        <label><strong>Logo:</strong></label>
+        <select name="logo" placeholder="No logo" data-pk="[[widget_logo]]"></select>
+    </div>
+    <div class="control vertical">
+        <label><strong>Feed URL:</strong></label>
+        <input class="url" type="text" name="feed" value="[[widget_feed]]">
+    </div>
+</script>
+
+<script type="text/html" id="widget-news">
+    @{{=[[ ]]=}}
+    <div class="control">
+        <label><strong>Show each article for:</strong></label>
+        <input class="small" name='interval' type="text" value="[[widget_interval]]" /> sec.
+    </div>
+    <div class="control">
+        <label><strong>Animate article transition:</strong></label>
+        <input [[#widget_animation]]checked="checked"[[/widget_animation]]name="animation" type="checkbox" value="enabled">
+    </div>
+    <div class="control">
+        <label><strong>Options:</strong></label>
+        <input [[#widget_display_title]]checked="checked"[[/widget_display_title]] name="display_title" type="checkbox" value="true"> Show Title
+        <input [[#widget_display_description]]checked="checked"[[/widget_display_description]] name="display_description" type="checkbox" value="true"> Show Description
+        <input [[#widget_display_date]]checked="checked"[[/widget_display_date]] name="display_date" type="checkbox" value="true"> Show Date
+    </div>
+    [[#widget_date_format]]
+    <div class="control">
+        <label><strong>Date format:</strong></label>
+        <select name="date_format" style="min-width: initial; min-width: auto;">
+            <option [[#widget_date_format_mdy]]selected[[/widget_date_format_mdy]] value="m/d/Y">12/31/2014</option>
+            <option [[#widget_date_format_dmy]]selected[[/widget_date_format_dmy]] value="d/m/Y">31/12/2014</option>
+            <option [[#widget_date_format_ymd]]selected[[/widget_date_format_ymd]] value="Y-m-d">2014-12-31</option>
+        </select>
+        <input name="time_format" [[#widget_time_format_hia]]checked="checked"[[/widget_time_format_hia]] type="radio" value="h:i a"> AM/PM
+        <input name="time_format" [[#widget_time_format_hi]]checked="checked"[[/widget_time_format_hi]] type="radio" value="H:i"> 24 H
+    </div>
+    [[/widget_date_format]]
+    <div class="control vertical">
+        <label><strong>Feed URL:</strong></label>
+        <input class="url" type="text" name="feed" value="[[widget_feed]]">
+    </div>
+    <div class="control">
+        <label><strong>Logo:</strong></label>
+        <select name="logo" placeholder="No logo" data-pk="[[widget_logo]]"></select>
+    </div>
+    <div class="control">
+        <label><strong>Background:</strong></label>
+        <select name="background" placeholder="Default background" data-pk="[[widget_background]]"></select>
+    </div>
+</script>
+
+<script type="text/html" id="widget-mediarss">
+    @{{=[[ ]]=}}
+    <div class="control">
+        <label><strong>Image interval:</strong></label>
+        <input class="small" name='interval' type="text" value="[[widget_interval]]" /> sec.
+    </div>
+    <div class="control vertical">
+        <label><strong>Feed URL:</strong></label>
+        <input class="url" type="text" name="feed" value="[[widget_feed]]">
+    </div>
+</script>
+
+<script type="text/html" id="widget-scroller">
+    @{{=[[ ]]=}}
+    <div class="control">
+        <label><strong>Color scheme:</strong></label>
+        <select name="colorscheme" style="min-width: initial; min-width: auto;">
+            <option value="black" [[#widget_colorscheme_black]]selected="selected"[[/widget_colorscheme_black]]>Black</option>
+            <option value="sandstone" [[#widget_colorscheme_sandstone]]selected="selected"[[/widget_colorscheme_sandstone]]>Sandstone</option>
+            <option value="teal" [[#widget_colorscheme_teal]]selected="selected"[[/widget_colorscheme_teal]]>Teal</option>
+            <option value="olive" [[#widget_colorscheme_olive]]selected="selected"[[/widget_colorscheme_olive]]>Olive</option>
+            <option value="coral" [[#widget_colorscheme_coral]]selected="selected"[[/widget_colorscheme_coral]]>Coral</option>
+        </select>
+    </div>
+    <div class="control">
+        <label><strong>Scrolling speed:</strong></label>
+        <input [[#widget_speed_slow]]checked="checked"[[/widget_speed_slow]] name="speed" type="radio" value="slow"> Slow
+        <input [[#widget_speed_normal]]checked="checked"[[/widget_speed_normal]] name="speed" type="radio" value="normal"> Normal
+        <input [[#widget_speed_fast]]checked="checked"[[/widget_speed_fast]] name="speed" type="radio" value="fast"> Fast
+    </div>
+    <div class="control">
+        <label><strong>Options:</strong></label>
+        <input [[#widget_display_date]]checked="checked"[[/widget_display_date]] name="display_date" type="checkbox" value="true"> Show Date
+    </div>
+    [[#widget_date_format]]
+    <div class="control">
+        <label><strong>Date format:</strong></label>
+        <select name="date_format" style="min-width: initial; min-width: auto;">
+            <option [[#widget_date_format_mdy]]selected[[/widget_date_format_mdy]] value="m/d/Y">12/31/2014</option>
+            <option [[#widget_date_format_dmy]]selected[[/widget_date_format_dmy]] value="d/m/Y">31/12/2014</option>
+            <option [[#widget_date_format_ymd]]selected[[/widget_date_format_ymd]] value="Y-m-d">2014-12-31</option>
+        </select>
+        <input name="time_format" [[#widget_time_format_hia]]checked="checked"[[/widget_time_format_hia]] type="radio" value="h:i a"> AM/PM
+        <input name="time_format" [[#widget_time_format_hi]]checked="checked"[[/widget_time_format_hi]] type="radio" value="H:i"> 24 H
+    </div>
+    [[/widget_date_format]]
+    <div class="control vertical">
+        <label><strong>Feed URL:</strong></label>
+        <input class="url" type="text" name="feed" value="[[widget_feed]]">
+    </div>
+</script>
+
+<script type="text/html" id="widget-text">
+    @{{=[[ ]]=}}
+    <div class="control">
+        <label><strong>Text Color:</strong></label>
+        <input type="text" name="text_color" class="color-picker" data-presets="000000:ffffff" value="[[widget_text_color]]">
+    </div>
+    <div class="control">
+        <label><strong>Background Color:</strong></label>
+        <input type="text" name="background_color" class="color-picker"
+               data-presets="007184:ff6346:776c5c:666514:000000" value="[[widget_background_color]]">
+    </div>
+    <div class="control">
+        <label><strong>Choose animation:</strong></label>
+        <input [[#widget_animation_none]]checked="checked"[[/widget_animation_none]] name="animation" type="radio" value="none"> None
+        <input [[#widget_animation_fade]]checked="checked"[[/widget_animation_fade]] name="animation" type="radio" value="fade"> Fade
+        [[^widget_name_vertical]]
+        <input [[#widget_animation_scroll]]checked="checked"[[/widget_animation_scroll]] name="animation" type="radio" value="scroll"> Scroll
+        [[/widget_name_vertical]]
+    </div>
+    <div class="control" [[^widget_animation_scroll]]style="display:none;"[[/widget_animation_scroll]]>
+    <label><strong>Scrolling speed:</strong></label>
+    <input [[#widget_speed_slow]]checked="checked"[[/widget_speed_slow]] name="speed" type="radio" value="slow"> Slow
+    <input [[#widget_speed_normal]]checked="checked"[[/widget_speed_normal]] name="speed" type="radio" value="normal"> Normal
+    <input [[#widget_speed_fast]]checked="checked"[[/widget_speed_fast]] name="speed" type="radio" value="fast"> Fast
+    </div>
+    <div class="control" [[#widget_animation_scroll]]style="display:none;"[[/widget_animation_scroll]]>
+    <label><strong>Show each message for:</strong></label>
+    <input class="small" name='interval' type="text" value="[[widget_interval]]" /> sec.
+    </div>
+    <div class="control vertical">
+        <label><strong>Text:</strong><em>one line per message</em></label>
+        <textarea style="resize: none;" name="text" cols="50" rows="10">[[widget_text]]</textarea>
+    </div>
+</script>
+
+<script type="text/html" id="widget-lottery">
+    @{{=[[ ]]=}}
+    <div class="control">
+        <label><strong>Tipo de Loteria:</strong></label>
+        <select name="lottery" style="min-width: initial; min-width: auto;">
+            <option value="1" [[#widget_lottery_1]]selected="selected"[[/widget_lottery_1]]>Mega-Sena</option>
+            <option value="2" [[#widget_lottery_2]]selected="selected"[[/widget_lottery_2]]>Quina</option>
+            <option value="3" [[#widget_lottery_3]]selected="selected"[[/widget_lottery_3]]>Dupla Sena</option>
+            <option value="4" [[#widget_lottery_4]]selected="selected"[[/widget_lottery_4]]>Timemania</option>
+            <option value="6" [[#widget_lottery_6]]selected="selected"[[/widget_lottery_6]]>Lotomania</option>
+            <option value="7" [[#widget_lottery_7]]selected="selected"[[/widget_lottery_7]]>Federal</option>
+            <option value="9" [[#widget_lottery_9]]selected="selected"[[/widget_lottery_9]]>Lotofácil</option>
+        </select>
+    </div>
+</script>
+
+<script type="text/html" id="item-properties">
+    @{{=[[ ]]=}}
+    <div class="control">
+        <span class="file-uri" style="float: left">[[name]]</span>
+    </div>
+    [[#mediaduration]]
+    <div class="control">
+        <label><strong>Duration:</strong></label>
+        <span>[[mediaduration]] seconds</span>
+    </div>
+    [[/mediaduration]]
+    [[#render_mute]]
+    <div class="control">
+        <label for="mute"><strong>Mute:</strong></label>
+        <input id="mute" name="mute" type="checkbox" [[#mute]]checked[[/mute]] />
+    </div>
+    [[/render_mute]]
+    [[#render_aspectratio]]
+    <div class="control">
+        <label><strong>Aspect Ratio:</strong></label>
+        <select name="aspectratio" style="min-width: initial; min-width: auto;">
+            <option value="stretch" [[#aspectratio_stretch]]selected="selected"[[/aspectratio_stretch]]>Stretch</option>
+            <option value="keep_original" [[#aspectratio_keep_original]]selected="selected"[[/aspectratio_keep_original]]>Keep Original</option>
+            <option value="fit_height" [[#aspectratio_fit_height]]selected="selected"[[/aspectratio_fit_height]]>Fit Height</option>
+            <option value="fit_width" [[#aspectratio_fit_width]]selected="selected"[[/aspectratio_fit_width]]>Fit Width</option>
+        </select>
+    </div>
+    [[/render_aspectratio]]
+</script>
+
+<script type="text/html" id="media-properties">
+    @{{=[[ ]]=}}
+    <div class="properties fade">
+        <div class="pop-over-header">
+            <h4>Media Properties</h4>
+        </div>
+        <div class="pop-over-inner clearfix">
+            [[#thumb]]
+            <div class="thumb">
+                <img src="[[thumb]]" />
+            </div>
+            [[/thumb]]
+            <div class="details">
+                <div class="control">
+                    <label><strong>File Name:</strong></label>
+                    <span class="file-uri" style="float: left">[[name]]</span>
+                </div>
+                <div style="clear: both"></div>
+                [[#mediaduration]]
+                <div class="control">
+                    <label><strong>Duration:</strong></label>
+                    <span>[[mediaduration]] seconds</span>
+                </div>
+                [[/mediaduration]]
+            </div>
+        </div>
+        <div class="arrow"></div>
+    </div>
+</script>
+
+<script type="text/html" id="widget-properties">
+    @{{=[[ ]]=}}
+    <div class="properties fade">
+        <div class="pop-over-header">
+            <h4>[[name]]</h4>
+        </div>
+        <div class="pop-over-inner">
+            <div class="details">
+                <div class="control">
+                    <p>[[& description ]]</p>
+                </div>
+            </div>
+        </div>
+        <div class="arrow"></div>
+    </div>
+</script>
+
+<script type="text/html" id="library-item">
+    @{{=[[ ]]=}}
+    <li data-pk="[[pk]]" data-name="[[name]]" data-type="[[type]]" data-path="[[path]]" data-uri="[[uri]]" data-thumb="[[thumb]]"
+    [[#home]]data-home="true"[[/home]] [[#public]]data-public="true"[[/public]]
+    [[#duration]]data-mediaduration="[[duration]]"[[/duration]] [[#sample]]data-sample="true"[[/sample]]>
+    <span class="item-thumb" [[#thumbAvailable]]style="background: url('[[thumb]]') center no-repeat; background-size: contain;"[[/thumbAvailable]]></span>
+    <span class="filename">[[ name ]]</span>
+    </li>
+</script>
+
+<script type="text/html" id="breadcrumb-item">
+    @{{=[[ ]]=}}
+    [[#path]]
+    <li data-pk="[[pk]" title="[[name]]">
+        <span>[[name]]</span>
+    </li>
+    [[/path]]
+</script>
+
+<script type="text/html" id="file-progress">
+    @{{=[[ ]]=}}
+    [[#file]]
+    <li class="file-progress" data-index="[[index]]">
+        [[name]]
+        <div class="upload-progress hidden"></div>
+        <span class="cancel-upload">D</span>
+    </li>
+    [[/file]]
+</script>
+
+<script type="text/html" id="layout-dialog">
+    @{{=[[ ]]=}}
+    <div class="dialogbox dialog-layout bb-fix">
+        <h3>
+            [[#pk]]Edit Custom Layout[[/pk]]
+            [[^pk]]Add Custom Layout[[/pk]]
+            <em>[[#usage_message]] [[& usage_message]] [[/usage_message]]</em>
+        </h3>
+        <div class="dialog-content">
+            <div class="notification hidden">
+                <ul>
+                    <li class="error"></li>
+                </ul>
+            </div>
+            <div class="panel-left">
+                <form id="custom-layout" action="[[#pk]] /layout/[[pk]] [[/pk]] [[^pk]] /layout/add [[/pk]]">
+                    <fieldset id="device-orientation">
+                        <legend>Device orientation:</legend>
+                        <label><input type="radio" name="orientation" value="H" [[#orientation_h]]checked[[/orientation_h]]> Horizontal</label>
+                        <label><input type="radio" name="orientation" value="V" [[#orientation_v]]checked[[/orientation_v]]> Vertical</label>
+                    </fieldset>
+                    <fieldset id="device-resolution">
+                        <legend>Device resolution:</legend>
+                        <select name="resolution">
+                            <option value="720" [[#resolution_720]]selected[[/resolution_720]]>HD (720p)</option>
+                            <option value="1080" [[#resolution_1080]]selected[[/resolution_1080]]>Full HD (1080p)</option>
+                            <option value="2160" [[#resolution_2160]]selected[[/resolution_2160]]>Ultra HD (4K)</option>
+                        </select>
+                    </fieldset>
+                    <fieldset id="screen-divisions">
+                        <legend>Screen divisions <em> (in pixels)</em>:</legend>
+                        <table class="region-group">
+                            <thead><tr>
+                                <th>#</th>
+                                <th>X</th>
+                                <th>Y</th>
+                                <th>Width</th>
+                                <th>Height</th>
+                            </tr></thead>
+                            <tbody></tbody>
+                        </table>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="layout-preview">
+                <legend>Layout Preview</legend>
+                <canvas></canvas>
+                <button type="button" data-action="add" class="btn-secondary"> Add Division </button>
+                <button type="button" disabled class="btn-secondary" data-action="raise" data-target="object"> Raise </button>
+                <button type="button" disabled class="btn-secondary" data-action="lower" data-target="object"> Lower </button>
+                <button type="button" disabled class="btn-secondary btn-warning" style="float: right;" data-action="remove" data-target="object"> Remove Division </button>
+            </div>
+        </div>
+        <div class="dialog-buttons">
+            <button class="close cancel">Cancel</button>
+            <button data-action="create-layout" class="close proceed">
+                [[#pk]]Save Layout[[/pk]]
+                [[^pk]]Create Layout[[/pk]]
+            </button>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="layout-region-row">
+    @{{=[[ ]]=}}
+    <tr [[#pk]] data-pk="[[pk]]" [[/pk]]>
+    <td><span>[[label]]</span></td>
+    <td><input type="number" name="x" value="[[x]]"/></td>
+    <td><input type="number" name="y" value="[[y]]"/></td>
+    <td><input type="number" name="width" value="[[width]]"/></td>
+    <td><input type="number" name="height" value="[[height]]"/></td>
+    </tr>
+</script>
+
+<script type="text/html" id="layout-select-li">
+    @{{=[[ ]]=}}
+    <li data-pk="[[pk]]" [[#is_selected]] class="selected"[[/is_selected]]>
+    <canvas [[#is_horizontal]] width='100' height='59' [[/is_horizontal]] [[^is_horizontal]] width='59' height='100' [[/is_horizontal]]></canvas>
+    [[#is_user_created]]
+    <a href="/layout/delete/[[pk]]" data-pk="[[pk]]" data-deletion-confirm="true" class="delete-layout">#</a>
+    <a href="#" data-pk="[[pk]]" class="edit-layout">p</a>
+    [[/is_user_created]]
+    </li>
+</script>

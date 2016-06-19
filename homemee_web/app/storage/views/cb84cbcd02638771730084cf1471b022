@@ -1,0 +1,109 @@
+<script type="text/javascript">
+    api_token = "<?php echo \Session::get('token'); ?>";
+
+    function responseHandler(response) {
+        if (response == null) {
+            $.notify("<?php echo trans('lang.response_is_empty'); ?>", "error");
+        } else {
+            var msg = response.msg;
+            var msgType = response.msgType;
+            if (msg != null && msgType != null) {
+                $.notify(msg, msgType);
+            }
+            var status = response.status;
+            if (status == 200 || status == 201) {
+                return response.data;
+            }
+        }
+        return [];
+    }
+
+    function showNotify(response, callback) {
+        if (response == null) {
+            $.notify("<?php echo trans('lang.response_is_empty'); ?>", "error");
+        } else {
+            var msg = response.msg;
+            var msgType = response.msgType;
+            if (msg != null && msgType != null) {
+                $.notify(msg, msgType);
+            }
+
+            var status = response.status;
+            if (status == 200 || status == 201) {
+                if (callback != null) {
+                    callback();
+                }
+            }
+        }
+    }
+
+    $('body').on('hidden.bs.modal', '.modal', function () {
+        $('video').trigger('pause');
+    });
+
+    function visionone_ajax(options) {
+        options.headers = {"Api-Token": api_token};
+        return $.ajax(options);
+    }
+
+    function indexFormatter(value, row, index){
+        return index + 1;
+    }
+
+    var iconSelect;
+
+    window.onload = function () {
+        <?php /*iconSelect = new IconSelect("icon-language-select",*/ ?>
+                <?php /*{*/ ?>
+                    <?php /*'selectedIconWidth': 24,*/ ?>
+                    <?php /*'selectedIconHeight': 18,*/ ?>
+                    <?php /*'selectedBoxPadding': 1,*/ ?>
+                    <?php /*'iconsWidth': 24,*/ ?>
+                    <?php /*'iconsHeight': 18,*/ ?>
+                    <?php /*'boxIconSpace': 1,*/ ?>
+                    <?php /*'vectoralIconNumber': 1,*/ ?>
+                    <?php /*'horizontalIconNumber': 1*/ ?>
+                <?php /*});*/ ?>
+        <?php /*var icons = [];*/ ?>
+        <?php /*icons.push({'iconFilePath': '/img/icon/vi.png', 'iconValue': 0});*/ ?>
+        <?php /*icons.push({'iconFilePath': '/img/icon/en.png', 'iconValue': 1});*/ ?>
+        <?php /*iconSelect.refresh(icons);*/ ?>
+        <?php /*iconSelect.setSelectedIndex(<?php echo \Session::get('language',1); ?>);*/ ?>
+        $( "#en_selected" ).click(function() {
+            var postData = {
+                "lang": 1
+            };
+            visionone_ajax({
+                url: "/language/change",
+                type: "POST",
+                data: postData,
+                success: function (data, textStatus, jqXHR) {
+                    showNotify(data, function () {
+                        location.reload();
+                    })
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    $.notify("<?php echo trans('lang.error'); ?>", "error");
+                }
+            });
+        });
+        $( "#vi_selected" ).click(function() {
+            var postData = {
+                "lang": 0
+            };
+            visionone_ajax({
+                url: "/language/change",
+                type: "POST",
+                data: postData,
+                success: function (data, textStatus, jqXHR) {
+                    showNotify(data, function () {
+                        location.reload();
+                    })
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    $.notify("<?php echo trans('lang.error'); ?>", "error");
+                }
+            });
+        });
+    };
+</script>

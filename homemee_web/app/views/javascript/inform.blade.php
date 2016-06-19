@@ -1,0 +1,223 @@
+<script type="text/javascript">
+    var isFormShow = false;
+    var isFormDelShow = false;
+    var isFormUsingShow = false;
+    document.onkeydown = function (event) {
+        if (event.keyCode === 13 && isFormShow) {
+            $('#save-bt-update').focus();
+        }
+        if (event.keyCode === 13 && isFormDelShow) {
+            $('#delete-bt').focus();
+        }
+        if (event.keyCode === 13 && isFormUsingShow) {
+            isFormUsingShow = false;
+            $('#viewModal').modal('hide')
+        }
+    };
+
+    $("#description").keypress(function () {
+        isFormShow = false;
+    });
+
+    $("#description").blur(function () {
+        isFormShow = true;
+    });
+
+    function operateFormatter(value, row, index) {
+        var actions = [];
+        if (row['state'] == 'new') {
+            actions.push('<a class="remove ml10" href="javascript:void(0)" title="{{trans('lang.remove')}}"><i class="fa fa-times" aria-hidden="true"></i> </a>');
+            actions.push('<a class="edit ml10" href="javascript:void(0)" title="{{trans('lang.edit')}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a>');
+            actions.push('<a class="publish ml10" href="javascript:void(0)" title="{{trans('lang.publish')}}"><i class="fa fa-paper-plane" aria-hidden="true"></i> </a>');
+        } else {
+
+        }
+        return actions.join('');
+    }
+
+    function setFocus() {
+        document.form - license.save - bt - update.focus();
+    }
+
+    window.operateEvents = {
+        'click .remove': function (e, value, row, index) {
+            isFormDelShow = true;
+            $("#delModal #id").val(row['id']);
+            $('button, input[type=submit]').attr('disabled', false);
+            $('#delModal').modal('show');
+        },
+
+        'click .publish': function (e, value, row, index) {
+            $("#publishModal #id").val(row['id']);
+            $('button, input[type=submit]').attr('disabled', false);
+            $('#publishModal').modal('show');
+        },
+
+        'click .edit': function (e, value, row, index) {
+            $("#editModal #informId").val(row['id']);
+            $("#editModal #sms_content").val(row['sms_content' +
+            '']);
+            $("#editModal #title").val(row['title']);
+            $("#editModal #content").val(row['content']);
+            $("#editModal #available").val(row['available']);
+            $("#editModal #method").val('edit');
+            $("#page-title-create").attr('style', "display:none");
+            $("#page-title-edit").show();
+            $('button, input[type=submit]').attr('disabled', false);
+            $('#editModal').modal('show');
+        }
+    };
+
+    $("#form-delete-inform").submit(function (e) {
+        var postData = $(this).serializeArray();
+        $('#delete-bt, input[type=submit]').attr('disabled', true);
+        $('#delModal').modal('hide');
+        isFormDelShow = false;
+        visionone_ajax({
+            url: "/informs/" + $('#delModal #id').val() + "/delete",
+            type: "POST",
+            data: postData,
+            success: function (data, textStatus, jqXHR) {
+                showNotify(data, function () {
+                    $('#table-informs').bootstrapTable('refresh', {
+                        url: "/informs"
+                    });
+                });
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                $.notify("{{trans('lang.error')}}", "error");
+            }
+        });
+        e.preventDefault(); //STOP default action
+    });
+
+    $("#form-publish-inform").submit(function (e) {
+        var postData = $(this).serializeArray();
+        $('#delete-bt, input[type=submit]').attr('disabled', true);
+        $('#publishModal').modal('hide');
+        isFormDelShow = false;
+        visionone_ajax({
+            url: "/informs/" + $('#publishModal #id').val() + "/publish",
+            type: "POST",
+            data: postData,
+            success: function (data, textStatus, jqXHR) {
+                showNotify(data, function () {
+                    $('#table-informs').bootstrapTable('refresh', {
+                        url: "/informs"
+                    });
+                });
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                $.notify("{{trans('lang.error')}}", "error");
+            }
+        });
+        e.preventDefault(); //STOP default action
+    });
+
+
+    $(document).ready(function () {
+        validateForm = $("#form-edit-inform").validate({
+            rules: {
+                sms_content: {
+                    required: {
+                        depends: function () {
+                            clearTimeout(timer);
+                            timer = setTimeout(function () {
+                                $("#form-edit-inform #sms_content").val($.trim($("#form-edit-inform #sms_content").val()));
+                            }, time_out);
+                            return true;
+                        }
+                    },
+                    maxlength: 200
+                },
+                title: {
+                    required: {
+                        depends: function () {
+                            clearTimeout(timer);
+                            timer = setTimeout(function () {
+                                $("#form-edit-inform #title").val($.trim($("#form-edit-inform #title").val()));
+                            }, time_out);
+                            return true;
+                        }
+                    },
+                    maxlength: 100
+                },
+                content: {
+                    required: {
+                        depends: function () {
+                            clearTimeout(timer);
+                            timer = setTimeout(function () {
+                                $("#form-edit-inform #content").val($.trim($("#form-edit-inform #content").val()));
+                            }, time_out);
+                            return true;
+                        }
+                    },
+                    maxlength: 1000
+                }
+            },
+            messages: {
+                sms_content: {
+                    required: '{{ trans('lang.error_required') }}',
+                    maxlength: '{{ trans('lang.error_maxlength') }}'
+                },
+                title: {
+                    required: '{{ trans('lang.error_required') }}',
+                    maxlength: '{{ trans('lang.error_maxlength') }}'
+                },
+                content: {
+                    required: '{{ trans('lang.error_required') }}',
+                    maxlength: '{{ trans('lang.error_maxlength') }}'
+                }
+            },
+            submitHandler: function (form) {
+                $('#save-bt-update, input[type=submit]').attr('disabled', true);
+                $('#editModal').modal('hide');
+                var postData = $("#form-edit-inform").serializeArray();
+                //trim values
+                for (var i = 0; i < postData.length; i++) {
+                    postData[i].name = postData[i].name;
+                    postData[i].value = $.trim(postData[i].value);
+                }
+                postData = $.param(postData);
+                isFormShow = false;
+                var urlQuery = "";
+                if ($("#editModal #method").val() == "edit") {
+                    urlQuery = "/informs/" + $("#editModal #informId").val() + "/update";
+                } else {
+                    urlQuery = "/informs";
+                }
+
+                visionone_ajax({
+                    url: urlQuery,
+                    type: "POST",
+                    data: postData,
+                    success: function (data, textStatus, jqXHR) {
+                        showNotify(data, function () {
+                            $('#table-informs').bootstrapTable('refresh', {
+                                url: "/informs"
+                            });
+                        });
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        $.notify("{{trans('lang.error')}}", "error");
+                    }
+                });
+            }
+        });
+    });
+
+    $('#create-bt').click(function () {
+        $('#page-title-edit').hide();
+        $('#page-title-create').show();
+        validateForm.resetForm();
+        $('#form-edit-inform')[0].reset();
+        isFormShow = true;
+        $('button, input[type=submit]').attr('disabled', false);
+        $("#editModal").modal('show');
+    });
+
+    //Date picker
+    $('#available').datepicker({
+        autoclose: true
+    });
+</script>

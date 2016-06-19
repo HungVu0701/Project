@@ -1,0 +1,7 @@
+<footer class="main-footer">
+    <div class="pull-right hidden-xs">
+        <b><?php echo trans('lang.version'); ?></b> 1.0.1
+    </div>
+    <strong><?php echo trans('lang.copyright'); ?> <a href="<?php echo url('about'); ?>"><?php echo trans('lang.viettel'); ?></a>.</strong> <?php echo trans('lang.all_rights_reserved'); ?>
+
+</footer>

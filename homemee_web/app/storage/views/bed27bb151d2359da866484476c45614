@@ -1,0 +1,25 @@
+<?php $__env->startSection('body'); ?>
+    <body class="skin-blue fixed sidebar-mini">
+    <?php echo $__env->make('javascript.visionone', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <?php echo $__env->yieldContent('scripts'); ?>
+
+    <?php echo $__env->make('partials.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <?php echo $__env->make('partials.asideMain', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <div class="content-wrapper" style="min-height: 157px;">
+    <div class="row">
+    <div class="col-xs-12">
+    <?php echo $__env->yieldContent('content'); ?>
+    </div>
+    </div>
+    </div>
+    <?php echo $__env->make('partials.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php /*    <?php echo $__env->make('partials.asideController', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>*/ ?>
+    <div class="control-sidebar-bg" style="position: fixed; height: auto;"></div>
+
+    <?php echo $__env->yieldContent('modal'); ?>
+    <?php echo $__env->yieldContent('scripts-bottom'); ?>
+    <?php echo $__env->make('javascript.visionone_bottom', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    </body>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

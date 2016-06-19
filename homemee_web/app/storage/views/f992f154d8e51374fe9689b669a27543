@@ -1,0 +1,95 @@
+<header class="main-header">
+    <!-- Logo -->
+    <a class="logo" href="/">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b>H</b>M</span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>HOME.</b>Mee</span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+        <!-- Sidebar toggle button-->
+        <a role="button" data-toggle="offcanvas" class="sidebar-toggle" href="#">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+
+                <!-- Language: style can be found in dropdown.less -->
+                <li class="dropdown user user-menu">
+                    <?php if(Session::get('language', 1) == 0): ?>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img class="user-image" src="/img/icon/vi.png"> <span class="caret"></span></a>
+                    <?php else: ?>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img class="user-image" src="/img/icon/en.png"> <span class="caret"></span></a>
+                    <?php endif; ?>
+
+                    <ul class="dropdown-menu" role="menu">
+                        <li id="en_selected">
+                            <a href="#">
+                                <img class="user-image" src="/img/icon/en.png">
+                                <?php echo trans('lang.en'); ?>
+
+                            </a>
+                        </li>
+                        <li id="vi_selected">
+                            <a href="#">
+                                <img  class="user-image" src="/img/icon/vi.png">
+                                <?php echo trans('lang.vi'); ?>
+
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- User Account: style can be found in dropdown.less -->
+                <li class="dropdown user user-menu">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <img alt="User Image" class="user-image" src="/img/adminlte/user2-160x160.jpg">
+                        <span class="hidden-xs"><?php echo strlen(Session::get('username')) <= 10 ? Session::get('username') : substr(Session::get('username'), 0, 10).'...'; ?></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!-- User image -->
+                        <li class="user-header">
+                            <img alt="User Image" class="img-circle" src="/img/adminlte/user2-160x160.jpg">
+
+                            <p>
+                                <?php echo Session::get('first_name'); ?> <?php echo Session::get('last_name'); ?>
+
+                                <br><?php echo Session::get('apartment_name'); ?>
+
+                                <small>Member since Nov. 2012</small>
+                            </p>
+                        </li>
+                        <!-- Menu Body -->
+                        <li class="user-body">
+                            <div class="row">
+                                <div class="col-xs-4 text-center">
+                                    <?php /*<a href="#">Followers</a>*/ ?>
+                                </div>
+                                <div class="col-xs-4 text-center">
+                                    <?php /*<a href="#">Sales</a>*/ ?>
+                                </div>
+                                <div class="col-xs-4 text-center">
+                                    <?php /*<a href="#">Friends</a>*/ ?>
+                                </div>
+                            </div>
+                            <!-- /.row -->
+                        </li>
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+                            <div class="pull-left">
+                                <?php /*<a class="btn btn-default btn-flat" href="#">Profile</a>*/ ?>
+                            </div>
+                            <div class="pull-right">
+                                <a class="btn btn-default btn-flat" href="<?php echo url('/logout'); ?>"><?php echo trans('lang.sign_out'); ?></a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

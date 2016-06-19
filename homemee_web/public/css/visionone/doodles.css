@@ -1,0 +1,602 @@
+/*--reset--*/
+.doodle,
+.doodle * {
+  padding: 0;
+  margin: 0;
+  font-size: 24px;
+  line-height: 24px;
+  /*font-family: "Neuton", Times, "Times New Roman", serif;*/
+  color: white;
+  text-shadow: 1px 2px 5px rgba(51, 51, 51, 0.2);
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.doodle p {
+  display: block;
+  text-shadow: none;
+}
+
+.doodle p.leading {
+  margin-bottom: 15px;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.doodle a.btn {
+  display: inline-block;
+  background-color: #F15A24;
+  border-radius: 4px;
+  border: 1px solid #C74B1E;
+  /*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+  font-size: 14px;
+  line-height: 20px;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+/* overwrite something too generic */
+.doodle a.btn:link,
+.doodle a.btn:visited {
+  color: white;
+}
+
+.doodle a.btn:hover {
+  background-color: #d4420e;
+  border-color: #b3380b;
+}
+
+/*--general--*/
+.doodle.half-width {
+  width: 390px;
+  margin: 0 auto;
+  height: 176px;
+  padding: 20px 40px;
+  background: url(icons/doodle-half-width.png) transparent no-repeat 50%;
+  background-size: 100%;
+}
+
+.doodle.short-height {
+  width: 390px;
+  margin: 0 auto;
+  height: 94px;
+  padding: 7px 35px;
+  text-align: right;
+  background: url(icons/doodle-half-width.png) transparent no-repeat 88%;
+  background-size: 398px 110px;
+}
+
+.doodles-split {
+  min-height: 420px;
+  position: relative;
+}
+
+.doodles-split .doodle {
+  position: absolute;
+  top: 30px;
+  left: 315px;
+}
+
+.doodles-split .doodle.half-width {
+  width: 600px;
+  height: 160px;
+  background-size: 600px 170px;
+  top: 14px;
+  left: 104px;
+}
+
+.doodles-split .doodle.half-width:after {
+  content: "";
+  display: block;
+  background: url(icons/doodle-arrow-long-r-up.png) no-repeat;
+  width: 76px;
+  height: 286px;
+  left: 100%;
+  margin-top: -72px;
+  bottom: 100%;
+  top: 0;
+  margin-left: 42px;
+  position: absolute;
+  -webkit-transform:rotate(63deg);
+      -ms-transform:rotate(63deg);
+          transform:rotate(63deg);
+}
+
+/*--filebrowser--*/
+.doodle-medias {
+  height: 100%;
+  background-image: url(icons/bg-doodle-medias.png);
+}
+
+.doodle-medias .doodle {
+  left: 50%;
+  width: 465px;
+  height: 298px;
+  padding-top: 62px;
+}
+
+.doodle-medias p,
+.doodle-medias strong,
+.doodle-medias em {
+  font-size: 19px;
+}
+
+.doodle-info .icon {
+  height: 97px;
+  width: 189px;
+  font-family: Pictos;
+  font-size: 90px;
+  color: rgba(0, 122, 148, 0.2);
+  padding: 13px 0;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.doodle-info .doodle.half-width {
+  width: 189px;
+  height: 168px;
+  background-size: 100% 100%;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.filebrowser .doodle-medias,
+.filebrowser.empty.search .doodle-medias {
+  display: none;
+}
+
+.filebrowser .doodle-empty-search {
+  display: none;
+}
+
+.filebrowser.empty.search .doodle-empty-search {
+  display: block;
+  margin-top: 60px;
+}
+
+.filebrowser.empty .doodle-medias {
+  display: block;
+}
+
+.filebrowser .library-sidebar .doodle-info p.empty-folder,
+.filebrowser.empty .library-sidebar .doodle-info p {
+  display: none;
+}
+
+.filebrowser.empty .library-sidebar .doodle-info p.empty-folder,
+.filebrowser .library-sidebar .doodle-info p {
+  display: block;
+}
+
+/*--campaigns--*/
+.doodles-split.campaign {
+  background: url(icons/bg-doodles-campaign0.png);
+  z-index: -2;
+}
+
+.doodles-split.campaign .doodle.short-height {
+  top: 239px;
+  left: 491px;
+  background-size: 398px 100px;
+}
+
+.doodles-split.campaign .doodle.half-width {
+  width: 424px;
+  margin: 0 auto;
+  height: 198px;
+  padding: 20px 40px;
+  background-size: 100%;
+  left: 310px;
+}
+
+.doodles-split.campaign .doodle.half-width:after {
+  content: "";
+  display: block;
+  background: url(icons/doodles-arrow-short-l.png) no-repeat;
+  width: 73px;
+  height: 96px;
+  margin-top: -8px;
+  left: -103px;
+  -webkit-transform:rotate(0deg);
+      -ms-transform:rotate(0deg);
+          transform:rotate(0deg);
+}
+
+.doodles-split.campaign .doodle.short-height:after {
+  content: "";
+  display: block;
+  background: url(icons/doodle-arrow-long-r-up.png) no-repeat;
+  width: 76px;
+  height: 277px;
+  margin-top: -320px;
+  margin-left: 348px;
+}
+
+.doodles-split.groups {
+  background: url(icons/doodle-campaign-groups-02.png) no-repeat bottom ;
+}
+
+.doodle.campaigns.in-group {
+  background: url(icons/doodle-campaign-groups-modal.png) no-repeat;
+}
+
+.doodle.campaigns.in-group p {
+  font-style: normal;
+  font-weight: bold;
+  color: #2686c6;
+  text-shadow: 0 1px 1px #ccc;
+  font-size: 32px;
+  line-height: 42px;
+  margin: 100px 0 0 17px;
+}
+
+html[lang=ja] .doodle.campaigns.in-group p {
+  font-size: 20px;
+}
+
+.doodle.campaigns.in-group ul {
+  margin-top: -142px;
+}
+
+.doodles-split.player-campaign.unpublished.short .doodle.half-width {
+  width: 334px;
+  height: 288px;
+  background-size: 341px 300px;
+  top: 9px;
+  left: 20px;
+  padding: 31px;
+}
+
+.doodles-split.player-campaign.short .doodle.half-width:after {
+  margin-top: -70px;
+}
+
+.doodles-split.player-campaign.unpublished.short .description {
+  height: 299px;
+  width: 664px;
+}
+
+.doodle.doodle-timelines {
+  margin-top: 23px;
+  padding: 35px 50px 0px 50px;
+  height: 100px;
+  width: 460px;
+  text-align: center;
+}
+
+.doodle.doodle-regions {
+  float: right;
+  width: 365px;
+  height: 115px;
+  padding: 35px 70px 0px 0px;
+  text-align: center;
+}
+
+/*--players--*/
+.doodle.doodle-players {
+  width: 988px;
+  height: 406px;
+  background: url(icons/doodle-devices.png) no-repeat;
+  border: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.doodle.doodle-players p {
+  font-style: italic;
+  font-size: 28px;
+  line-height: 28px;
+}
+
+.doodle-players .doodle-column-left {
+  width: 400px;
+  float: left;
+  margin-top: 12px;
+}
+
+.doodle-players .doodle-column-left p:first-of-type {
+  margin: 40px 0 0 207px;
+  width: 343px;
+}
+
+.doodle-players .doodle-column-left p:last-of-type {
+  margin: 113px 0 0 126px;
+  width: 199px;
+}
+
+.doodle-players .doodle-column-right {
+  width: 261px;
+  float: right;
+  margin: 50px 40px 0 7px;
+}
+
+.doodle-players .doodle-column-right p {
+  float: none;
+  width: 200px;
+  margin: -10px 0 0 45px;
+}
+
+.doodle .google-play-button {
+  margin: 30px 0 0 63px;
+}
+
+.doodles-split.players.groups {
+  background: url(icons/doodle-player-groups_02.png) no-repeat bottom;
+}
+
+/*--accounts--*/
+.doodles-split.accounts {
+  min-height: 430px;
+  background: url(icons/doodle-accounts-02.png) no-repeat bottom;
+}
+
+.doodles-split.accounts * {
+  font-size: 23px;
+}
+
+.doodles-split.accounts p:last-of-type {
+  text-align: right;
+}
+
+.doodles-split.accounts .doodle.half-width {
+  height: 200px;
+  background-size: 600px 212px;
+  top: 0px;
+  left: 170px;
+  padding: 20px 50px;
+}
+
+.doodles-split.accounts .doodle.half-width:after {
+  margin-left: 20px;
+  margin-top: -41px;
+  -webkit-transform: rotate(36deg);
+      -ms-transform: rotate(36deg);
+          transform: rotate(36deg);
+}
+
+/*--players with campaigns--*/
+.doodles-split.player-campaign {
+  min-height: 0;
+}
+
+.doodles-split.player-campaign .doodle.half-width:after {
+  background: none;
+}
+
+.doodles-split.player-campaign .doodle.half-width:after {
+  background: url(icons/doodle-no-players-campaign.png) no-repeat top right;
+  width: 349px;
+  height: 306px;
+  margin-left: 0;
+  margin-top: -118px;
+  -webkit-transform:rotate(0deg);
+      -ms-transform:rotate(0deg);
+          transform:rotate(0deg);
+}
+
+.doodles-split.player-campaign .doodle.half-width {
+  left: 53px;
+}
+
+.doodles-split .description {
+  height: 200px;
+}
+
+/*--campaigns with players--*/
+.doodles-split.player-campaign.unpublished .doodle.half-width {
+  top: 38px;
+}
+
+.doodles-split.player-campaign.unpublished .description {
+  height: 225px;
+}
+
+/*--lists--*/
+.doodle.helper {
+  min-height: 120px;
+  width: 726px;
+}
+
+.doodle-list.campaigns {
+  background: center url(icons/doodle-no-campaigns-group.png) transparent no-repeat;
+}
+
+.doodle-list.hint.add p {
+    line-height: 17px;
+}
+
+.doodle.list-small {
+  background: url(icons/doodle-half-width.png) transparent no-repeat center top;
+  background-size: 219px 113px;
+  margin: 0;
+  position: relative;
+  border: 0;
+  height: 115px;
+  border-radius: 4px;
+  overflow: hidden;
+  padding: 14px 30px;
+}
+
+.doodle.list-small p.leading {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+html[lang=ja] .doodle.list-small p.leading {
+  font-size: 16px;
+}
+
+.doodle.list-small p {
+  font-size: 16px;
+  text-align: center;
+  line-height: 20px;
+}
+
+html[lang=ja] .doodle.list-small p {
+  font-size: 12px;
+}
+
+.doodle.list-small a {
+  left: 0;
+}
+
+.doodle-list .wide {
+  height: 118px;
+  width: 691px;
+  text-align: center;
+  padding: 20px 0 0 0;
+}
+
+.doodle-list.players {
+  background: url(icons/doodle-empty-player-group.png) transparent no-repeat;
+}
+
+.doodle-list {
+  position: relative;
+}
+
+.doodle-list a {
+  display: block;
+  height: 108px;
+  width: 691px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.doodle-list .short-height {
+  height: 110px;
+  padding: 20px;
+  text-align: center;
+}
+
+/*--player status--*/
+.doodle .panel-tiny {
+  background: url(icons/doodle-half-width.png) transparent no-repeat center top;
+  background-size: 155px 146px;
+  padding: 10px;
+}
+
+.doodle .panel-tiny p.leading {
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.doodle .panel-tiny p {
+  font-size: 18px;
+  line-height: 18px;
+  text-align: center;
+}
+
+/*--payment--*/
+.doodle .doodle-payment {
+  display: inline-block;
+  vertical-align: top;
+  float: left;
+  width: 290px;
+  height: 345px;
+  background: url(icons/doodle-portrait.png);
+  background-size: 100% 100%;
+  padding: 33px;
+}
+
+.doodle .doodle-payment.centered {
+  display: block;
+  float: none;
+  margin: 0 auto;
+  width: 450px;
+  padding: 30px 60px;
+}
+
+.doodle .doodle-payment.success {
+  background: url(icons/doodle-portrait-success.png);
+}
+
+.doodle .doodle-payment.error {
+  background: url(icons/doodle-portrait-error.png);
+}
+
+/*--settings--*/
+.doodle-settings.panel-content {
+  padding: 0;
+  width: 476px;
+  position: relative;
+}
+
+.doodle-settings .doodle.half-width {
+  width: 470px;
+  padding: 34px 80px 20px 40px;
+  height: 220px;
+}
+
+.doodle-settings .doodle.half-width:after {
+  content: "";
+  display: block;
+  background: url(icons/doodle-white-arrow.png);
+  width: 77px;
+  height: 184px;
+  right: 12px;
+  top: 0;
+  position: absolute;
+}
+
+.doodle-settings p.leading {
+  bottom: 27px;
+  position: absolute;
+  right: 82px;
+  text-align: right;
+}
+
+/*--timeline--*/
+#library-content .doodle.timeline-doodle {
+  display: none;
+  background: url(icons/filebrowser-timeline-doodle.png) no-repeat;
+  height: 256px;
+  width: 988px;
+  position: absolute;
+  left: 0;
+}
+
+#library-content[data-content=files].only-sample-media .doodle.timeline-doodle {
+  display: block;
+}
+
+#library-content .doodle.timeline-doodle p {
+  position: absolute;
+  width: 250px;
+  right: 46px;
+  top: 100px;
+  text-align: center;
+  font-size: 27px;
+}
+
+#library-content .doodle.timeline-doodle p:first-of-type {
+  width: 164px;
+  height: 40px;
+  top: 79px;
+  left: 400px;
+  color: #C2C2C2;
+  font-size: 21px;
+}
+
+#library-content .doodle.timeline-doodle p:last-of-type,
+#library-content .doodle.timeline-doodle p strong {
+  width: 561px;
+  left: 60px;
+  top: 153px;
+  color: #488DF0;
+  font-size: 18px;
+  text-shadow: none;
+}
+
+/*--live-view--*/
+.doodle.doodle-live-view {
+  background: url(icons/doodle-live-view.png) no-repeat;
+  width: 640px;
+  height: 360px;
+  margin: 0 auto;
+  padding: 30px 60px;
+}

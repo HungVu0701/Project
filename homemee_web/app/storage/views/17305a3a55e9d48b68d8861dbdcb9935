@@ -1,0 +1,51 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+>
+<head>
+    <?php $__env->startSection('description', trans('langs.meta_description')); ?>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content=""/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content=""/>
+    <meta property="og:image" content=""/>
+    <meta property="og:site_name" content=""/>
+    <meta property="og:description" content="<?php echo $__env->yieldContent('description'); ?>"/>
+    <meta name="description" content="<?php echo $__env->yieldContent('description'); ?>">
+    <meta name="author" content="<?php echo trans('langs.meta_author'); ?>">
+    <title>
+        <?php echo $__env->yieldContent('title'); ?>
+    </title>
+
+    <link rel="stylesheet" href=<?php echo URL::asset('css/adminlte/bootstrap.css'); ?>>
+    <link rel="stylesheet" href=<?php echo URL::asset('css/adminlte/font-awesome.css'); ?>>
+    <link rel="stylesheet" href=<?php echo URL::asset('css/adminlte/ionicons.css'); ?>>
+    <link rel="stylesheet" href=<?php echo URL::asset('css/adminlte/dataTables.css'); ?>>
+    <link rel="stylesheet" href=<?php echo URL::asset('css/adminlte/datepicker3.css'); ?>>
+    <link rel="stylesheet" href=<?php echo URL::asset('css/adminlte/AdminLTE.css'); ?>>
+    <link rel="stylesheet" href=<?php echo URL::asset('css/adminlte/_all-skins.css'); ?>>
+
+    <script type="text/javascript" src="<?php echo URL::asset('css/adminlte/ca-pub-4495360934352473.js'); ?>"></script>
+    <?php echo $__env->make('javascript.adminlte', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <script src="<?php echo URL::asset('css/adminlte/jQuery-2.js'); ?>"></script>
+    <script src="<?php echo URL::asset('css/adminlte/bootstrap.js'); ?>"></script>
+    <script src="<?php echo URL::asset('css/adminlte/jquery_002.js'); ?>"></script>
+    <script src="<?php echo URL::asset('css/adminlte/bootstrap-datepicker.js'); ?>"></script>
+    <script src="<?php echo URL::asset('css/adminlte/dataTables.js'); ?>"></script>
+    <script src="<?php echo URL::asset('css/adminlte/jquery.js'); ?>"></script>
+    <script src="<?php echo URL::asset('css/adminlte/fastclick.js'); ?>"></script>
+    <script src="<?php echo URL::asset('css/adminlte/app.js'); ?>"></script>
+    <script src="<?php echo URL::asset('css/adminlte/demo.js'); ?>"></script>
+
+    <?php echo $__env->yieldContent('styles'); ?>
+    <script src="<?php echo URL::asset('js/jquery.validate.min.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo URL::asset('js/notify.min.js'); ?>"></script>
+    <script>
+        var time_out = 500;
+        var timer = null;
+    </script>
+</head>
+<?php echo $__env->yieldContent('body'); ?>
+</html>

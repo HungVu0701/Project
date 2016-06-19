@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>Weather Widget</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<style type="text/css" media="screen">
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: url("../static/weather-modern/OpenSans-CondLight.woff") format('woff');
+  src: url("../static/weather-modern/OpenSans-CondLight.ttf") format('truetype');
+}
+
+html {
+  height: 100%;
+}
+
+body,
+div,
+p,
+img {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  overflow: hidden;
+  height: 100%;
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
+  background-size: 100% 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+body.wind {
+  background-image: url("../static/weather-modern/wind-bg.jpg");
+}
+
+body.snow {
+  background-image: url("../static/weather-modern/snow-bg.jpg");
+}
+
+body.rain {
+  background-image: url("../static/weather-modern/rain-bg.jpg");
+}
+
+body.fog {
+  background-image: url("../static/weather-modern/fog-bg.jpg");
+}
+
+body.sleet {
+  background-image: url("../static/weather-modern/sleet-bg.jpg");
+}
+
+body.partly-cloudy-night {
+  background-image: url("../static/weather-modern/partly-cloudy-night-bg.jpg");
+}
+
+body.clear-night {
+  background-image: url("../static/weather-modern/clear-night-bg.jpg");
+}
+
+body.clear-day {
+  background-image: url("../static/weather-modern/clear-day-bg.jpg");
+}
+
+body.partly-cloudy-day {
+  background-image: url("../static/weather-modern/partly-cloudy-day-bg.jpg");
+}
+
+body.cloudy {
+  background-image: url("../static/weather-modern/cloudy-bg.jpg");
+}
+
+.wrapper {
+  position: absolute;
+  width: 1280px;
+  height: 720px;
+  left: 50%;
+  top: 50%;
+  margin: -360px 0 0 -640px;
+}
+
+.current-wrapper {
+  width: 1024px;
+  height: 470px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.current-wrapper:before {
+  content: '';
+  position: absolute;
+  left: -75px;
+  bottom: -29px;
+  width: 1161px;
+  height: 451px;
+  background: url("../static/weather-modern/shadow-bg.png") no-repeat left bottom transparent;
+  z-index: -1;
+}
+
+.current {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.current .icon {
+  position: absolute;
+  left: 78px;
+  float: right;
+  top: 20px;
+  width: 424px;
+  height: 424px;
+  overflow: hidden;
+  background-size: 100%;
+}
+
+.current .info {
+  position: absolute;
+  left: 561px;
+  z-index: 10;
+
+  color: #ffffff;
+
+  text-shadow: 2px 2px 18px rgba(0, 0, 0, 0.3);
+
+  width: 36%;
+  height: 65%;
+}
+
+.current .info .city {
+  margin-left: 5px;
+  height: 16%;
+}
+
+.current .info .date {
+  position: absolute;
+  top: 30px;
+
+  font-size: 140px;
+  vertical-align: top;
+  text-transform: uppercase;
+}
+
+.current .info .temp {
+  position: absolute;
+  top: 105px;
+
+  font-size: 280px;
+  font-weight: 100;
+}
+
+.current.clear-night .icon {
+  background-image: url("../static/weather-modern/clear-night.png");
+}
+
+.current.partly-cloudy-night .icon {
+  background-image: url("../static/weather-modern/partly-cloudy-night.png");
+}
+
+.current.snow .icon {
+  background-image: url("../static/weather-modern/snow.png");
+}
+
+.current.sleet .icon {
+  background-image: url("../static/weather-modern/sleet.png");
+}
+
+.current.rain .icon {
+  background-image: url("../static/weather-modern/rain.png");
+}
+
+.current.cloudy .icon {
+  background-image: url("../static/weather-modern/cloudy.png");
+}
+
+.current.clear-day .icon {
+  background-image: url("../static/weather-modern/clear-day.png");
+}
+
+.current.partly-cloudy-day .icon {
+  background-image: url("../static/weather-modern/partly-cloudy-day.png");
+}
+
+.current.fog .icon {
+  background-image: url("../static/weather-modern/fog.png");
+}
+
+.current.wind .icon {
+  background-image: url("../static/weather-modern/wind.png");
+}
+
+.effect-bg {
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  background-size: 100% 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.current.wind .effect-bg {
+  background-image: url("../static/weather-modern/wind-bg-effect.jpg");
+}
+
+.current.snow .effect-bg {
+  background-image: url("../static/weather-modern/snow-bg-effect.jpg");
+}
+
+.current.rain .effect-bg {
+  background-image: url("../static/weather-modern/rain-bg-effect.jpg");
+}
+
+.current.fog .effect-bg {
+  background-image: url("../static/weather-modern/fog-bg-effect.jpg");
+}
+
+.current.sleet .effect-bg {
+  background-image: url("../static/weather-modern/sleet-bg-effect.jpg");
+}
+
+.current.partly-cloudy-night .effect-bg {
+  background-image: url("../static/weather-modern/partly-cloudy-night-bg-effect.jpg");
+}
+
+.current.clear-night .effect-bg {
+  background-image: url("../static/weather-modern/clear-night-bg-effect.jpg");
+}
+
+.current.clear-day .effect-bg {
+  background-image: url("../static/weather-modern/clear-day-bg-effect.jpg");
+}
+
+.current.partly-cloudy-day .effect-bg {
+  background-image: url("../static/weather-modern/partly-cloudy-day-bg-effect.jpg");
+}
+
+.current.cloudy .effect-bg {
+  background-image: url("../static/weather-modern/cloudy-bg-effect.jpg");
+}
+
+.forecast {
+  position: relative;
+  display: inline-block;
+  width: 1280px;
+  height: 235px;
+}
+
+.forecast .info {
+  position: relative;
+  z-index: 10;
+  float: left;
+  top: 36px;
+}
+
+.forecast .icon {
+  margin: 20px 20px 0 30px;
+  position: relative;
+  top: 36px;
+  left: 12px;
+  width: 106px;
+  height: 106px;
+  background-size: 100%;
+  float: left;
+}
+
+.forecast .temp {
+  margin-left: 2px;
+  font-size: 63px;
+  line-height: 70px;
+  color: #ffffff;
+
+  text-shadow: 2px 2px 14px rgba(0, 0, 0, 0.3);
+
+}
+
+.forecast .max {
+  font-weight: bold;
+}
+
+.forecast .date {
+  width: 232px;
+  font-size: 68px;
+  line-height: 66px;
+  margin-left: 2px;
+  color: #ffffff;
+
+  text-shadow: 2px 2px 14px rgba(0, 0, 0, 0.3);
+
+  vertical-align: top;
+  text-transform: uppercase;
+}
+
+.forecast .today {
+  padding-left: 28px;
+}
+
+.forecast .after-tomorrow {
+  padding-right: 28px;
+}
+
+.forecast .today,
+.forecast .tomorrow,
+.forecast .after-tomorrow {
+  float: left;
+  width: 427px;
+  height: 235px;
+  overflow: hidden;
+}
+
+.forecast .tomorrow {
+  width: 426px;
+}
+
+.forecast .clear-night .icon {
+  background-image: url("../static/weather-modern-forecast/small-clear-night.png");
+}
+
+.forecast .partly-cloudy-night .icon {
+  background-image: url("../static/weather-modern-forecast/small-partly-cloudy-night.png");
+}
+
+.forecast .snow .icon {
+  background-image: url("../static/weather-modern-forecast/small-snow.png");
+}
+
+.forecast .sleet .icon {
+  background-image: url("../static/weather-modern-forecast/small-sleet.png");
+}
+
+.forecast .rain .icon {
+  background-image: url("../static/weather-modern-forecast/small-rain.png");
+}
+
+.forecast .cloudy .icon {
+  background-image: url("../static/weather-modern-forecast/small-cloudy.png");
+}
+
+.forecast .clear-day .icon {
+  background-image: url("../static/weather-modern-forecast/small-clear-day.png");
+}
+
+.forecast .partly-cloudy-day .icon {
+  background-image: url("../static/weather-modern-forecast/small-partly-cloudy-day.png");
+}
+
+.forecast .fog .icon {
+  background-image: url("../static/weather-modern-forecast/small-fog.png");
+}
+
+.forecast .wind .icon {
+  background-image: url("../static/weather-modern-forecast/small-wind.png");
+}
+
+
+</style>
+</head><body style="" class="partly-cloudy-day"><div style="display: block; transform: scale(1);" class="wrapper partly-cloudy-day" id="wrapper">
+  <div class="current-wrapper">
+    <div class="current partly-cloudy-day">
+        <div class="icon"></div>
+      <div class="info">
+        
+        <div class="city fit-to-box">
+          <p style="font-size: 41px;">ha noi</p>
+        </div>
+        
+        <p class="date">
+        Hiện tại
+        </p>
+        <p class="temp">16°</p>
+      </div>
+      <div style="transform: scale(1); width: 1280px; margin-left: -640px; height: 720px; top: 0px;" class="effect-bg" id="effect-bg"></div>
+    </div>
+  </div>
+  <div class="forecast">
+    <div class="today partly-cloudy-day">
+      <div class="icon"></div>
+      <div class="info">
+        <span class="date">
+        Hôm nay
+        </span>
+        <div class="temp"><span class="max">18°</span>/ <span class="min">15°</span></div>
+      </div>
+    </div>
+    <div class="tomorrow clear-day">
+      <div class="icon"></div>
+      <div class="info">
+        <div class="date">fri</div>
+        <div class="temp"><span class="max">18°</span>/ <span class="min">15°</span></div>
+      </div>
+    </div>
+    <div class="after-tomorrow clear-day">
+      <div class="icon"></div>
+      <div class="info">
+        <div class="date">sat</div>
+        <div class="temp"><span class="max">18°</span>/ <span class="min">15°</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    var WEEK_DAYS = ['CN', 'Hai', 'Ba', 'Bốn', 'Năm', 'Sáu', 'Bảy'];
+  var qs = function(selector) {
+    return document.querySelector(selector);
+  }
+
+  var body = document.getElementsByTagName('body')[0];
+
+  function getDataFromStorage(name) {
+    try {
+      return JSON.parse(localStorage.getItem(name + "/weather/forecast/1,1"));
+    } catch (e) {
+      console.error("It was not possible retrieve data from Local Storage.");
+      return null;
+    }
+  }
+
+  function setDataToStorage(name, value) {
+    try {
+      localStorage.setItem(name + "/weather/forecast/1,1", JSON.stringify(value));
+    } catch (e) {
+      console.error("It was not possible set data on Local Storage.");
+    }
+  }
+
+  var effect_bg = document.getElementById('effect-bg');
+  var effect_bg_parent = effect_bg.parentNode;
+  var wrapper = document.getElementById('wrapper');
+  var effect_bg_width, effect_bg_height;
+
+  function setEffectBgPosition() {
+    effect_bg_width = body.offsetWidth;
+    if (effect_bg_width < 1280) {
+      effect_bg_width = 1280;
+    }
+    effect_bg.style.width = effect_bg_width + 'px';
+    effect_bg.style.marginLeft = (0 - effect_bg_width/2) + 'px';
+
+    effect_bg_height = body.offsetHeight;
+    if (effect_bg_height > 720) {
+      effect_bg.style.height = effect_bg_height + 'px';
+      effect_bg.style.top = 0 - wrapper.offsetTop + 'px';
+    } else {
+      effect_bg.style.height = '720px';
+      effect_bg.style.top = '0px';
+    }
+  }
+
+  function convert(celsius) {
+    if (!isFinite(celsius) || !(typeof celsius === 'number')) {
+      return '-';
+    }
+
+            return Math.round(celsius) + '&degC';
+    
+  }
+
+  function displayCurrentWeather(forecast) {
+    var now = Math.floor((Date.now() + (forecast.offset * 60 * 60 * 1000)) / (1000 * 60 * 60)) * (60 * 60);
+    var current = forecast.hourly[now];
+    if (!current) {
+      var today = Math.floor(now / (24 * 60 * 60)) * (24 * 60 * 60);
+      current = forecast.daily[today];
+    }
+    var temperature = current.temperature;
+    body.className = current.icon;
+    qs('.current').className = 'current ' + current.icon;
+    qs('.wrapper').className = 'wrapper ' + current.icon;
+    qs('.current .info .temp').innerHTML = '' + convert(temperature);
+  }
+
+  function displayForecastWeather(forecast) {
+    var today = Math.floor((Date.now() + (forecast.offset * 60 * 60 * 1000)) / (1000 * 60 * 60 * 24)) * (60 * 60 * 24);
+    var day_of_week = (new Date()).getDay();
+    qs('.today').className = 'today ' + forecast.daily[today].icon;
+    qs('.today .info .max').innerHTML = '' + convert(forecast.daily[today].temperatureMax);
+    qs('.today .info .min').innerHTML = '' + convert(forecast.daily[today].temperatureMin);
+
+    var tomorrow = today + (3600 * 24);
+    qs('.tomorrow').className = 'tomorrow ' + forecast.daily[tomorrow].icon;
+    qs('.tomorrow .info .max').innerHTML = '' + convert(forecast.daily[tomorrow].temperatureMax);
+    qs('.tomorrow .info .min').innerHTML = '' + convert(forecast.daily[tomorrow].temperatureMin);
+
+    qs('.tomorrow .info .date').innerHTML = WEEK_DAYS[(day_of_week + 1) % 7].toLowerCase();
+
+    var afterTomorrow = tomorrow + (3600 * 24);
+    qs('.after-tomorrow').className = 'after-tomorrow ' + forecast.daily[afterTomorrow].icon;
+    qs('.after-tomorrow .info .max').innerHTML = '' + convert(forecast.daily[afterTomorrow].temperatureMax);
+    qs('.after-tomorrow .info .min').innerHTML = '' + convert(forecast.daily[afterTomorrow].temperatureMin);
+    qs('.after-tomorrow .info .date').innerHTML = WEEK_DAYS[(day_of_week + 2) % 7].toLowerCase();
+  }
+
+  function displayWeather(forecast) {
+    displayCurrentWeather(forecast);
+    displayForecastWeather(forecast);
+    qs('.wrapper').style.display = 'block';
+  }
+
+  var weatherData = getDataFromStorage('weather') || {"hourly":{"1429333200":{"apparentTemperature":15.6,"precipIntensity":0,"temperature":15.6,"dewPoint":10.57,"cloudCover":0,"humidity":0.72,"ozone":342.3,"pressure":1022.93,"windSpeed":3.49,"precipProbability":0,"windBearing":268,"summary":"Clear","icon":"clear-night"},"1429232400":{"apparentTemperature":15.49,"precipIntensity":0,"temperature":15.49,"dewPoint":10.71,"cloudCover":0,"humidity":0.73,"ozone":366.62,"pressure":1022.16,"windSpeed":5.21,"precipProbability":0,"windBearing":305,"summary":"Clear","icon":"clear-night"},"1429279200":{"apparentTemperature":18.21,"precipIntensity":0,"temperature":18.21,"dewPoint":13.98,"cloudCover":0,"humidity":0.76,"ozone":344.3,"pressure":1024.34,"windSpeed":5.2,"precipProbability":0,"windBearing":293,"summary":"Clear","icon":"clear-day"},"1429300800":{"apparentTemperature":16.57,"precipIntensity":0,"temperature":16.57,"dewPoint":12.29,"cloudCover":0,"humidity":0.76,"ozone":349.8,"pressure":1024.01,"windSpeed":6,"precipProbability":0,"windBearing":303,"summary":"Clear","icon":"clear-night"},"1429164000":{"apparentTemperature":16.23,"precipIntensity":0,"temperature":16.23,"dewPoint":9.87,"cloudCover":0.27,"humidity":0.66,"ozone":382.93,"pressure":1017.39,"windSpeed":7.01,"precipProbability":0,"windBearing":359,"summary":"Partly Cloudy","icon":"partly-cloudy-day"},"1429207200":{"apparentTemperature":17.24,"precipIntensity":0,"temperature":17.24,"dewPoint":12.39,"cloudCover":0.68,"humidity":0.73,"ozone":365.8,"pressure":1021.38,"windSpeed":4.52,"precipProbability":0,"windBearing":315,"summary":"Mostly Cloudy","icon":"partly-cloudy-day"},"1429174800":{"apparentTemperature":17.1,"precipIntensity":0.0254,"temperature":17.1,"dewPoint":9.95,"precipType":"rain","cloudCover":0.55,"humidity":0.63,"ozone":378.75,"pressure":1019.25,"windSpeed":6.11,"precipProbability":0.01,"windBearing":339,"summary":"Partly Cloudy","icon":"partly-cloudy-day"},"1429171200":{"apparentTemperature":16.67,"precipIntensity":0.0279,"temperature":16.67,"dewPoint":9.46,"precipType":"rain","cloudCover":0.55,"humidity":0.62,"ozone":381,"pressure":1018.61,"windSpeed":6.37,"precipProbability":0.01,"windBearing":342,"summary":"Partly Cloudy","icon":"partly-cloudy-day"},"1429236000":{"apparentTemperature":15.52,"precipIntensity":0,"temperature":15.52,"dewPoint":10.71,"cloudCover":0,"humidity":0.73,"ozone":364.5,"pressure":1022.15,"windSpeed":5.5,"precipProbability":0,"windBearing":307,"summary":"Clear","icon":"clear-night"},"1429214400":{"apparentTemperature":16.54,"precipIntensity":0,"temperature":16.54,"dewPoint":11.82,"cloudCover":0.37,"humidity":0.74,"ozone":368.4,"pressure":1021.78,"windSpeed":4.34,"precipProbability":0,"windBearing":326,"summary":"Partly Cloudy","icon":"partly-cloudy-night"},"1429239600":{"apparentTemperature":15.65,"precipIntensity":0,"temperature":15.65,"dewPoint":10.81,"cloudCover":0,"humidity":0.73,"ozone":360.31,"pressure":1022.21,"windSpeed":5.48,"precipProbability":0,"windBearing":308,"summary":"Clear","icon":"clear-night"},"1429326000":{"apparentTemperature":15.07,"precipIntensity":0,"temperature":15.07,"dewPoint":10.14,"cloudCover":0,"humidity":0.72,"ozone":343.05,"pressure":1023.05,"windSpeed":3.74,"precipProbability":0,"windBearing":276,"summary":"Clear","icon":"clear-night"},"1429182000":{"apparentTemperature":18.01,"precipIntensity":0,"temperature":18.01,"dewPoint":11.51,"cloudCover":0.44,"humidity":0.66,"ozone":373.4,"pressure":1020.43,"windSpeed":5.47,"precipProbability":0,"windBearing":334,"summary":"Partly Cloudy","icon":"partly-cloudy-day"},"1429203600":{"apparentTemperature":17.57,"precipIntensity":0,"temperature":17.57,"dewPoint":12.63,"cloudCover":0.74,"humidity":0.73,"ozone":364.9,"pressure":1021.22,"windSpeed":4.69,"precipProbability":0,"windBearing":310,"summary":"Mostly Cloudy","icon":"partly-cloudy-day"},"1429189200":{"apparentTemperature":18.23,"precipIntensity":0,"temperature":18.23,"dewPoint":12.66,"cloudCover":0.3,"humidity":0.7,"ozone":368.61,"pressure":1020.88,"windSpeed":5.11,"precipProbability":0,"windBearing":323,"summary":"Partly Cloudy","icon":"partly-cloudy-day"},"1429192800":{"apparentTemperature":18.19,"precipIntensity":0,"temperature":18.19,"dewPoint":12.98,"cloudCover":0.3,"humidity":0.72,"ozone":366.8,"pressure":1021.01,"windSpeed":5,"precipProbability":0,"windBearing":318,"summary":"Partly Cloudy","icon":"partly-cloudy-day"},"1429336800":{"apparentTemperature":15.91,"precipIntensity":0,"temperature":15.91,"dewPoint":10.76,"cloudCover":0,"humidity":0.71,"ozone":341.28,"pressure":1023.04,"windSpeed":3.48,"precipProbability":0,"windBearing":262,"summary":"Clear","icon":"clear-day"},"1429210800":{"apparentTemperature":16.88,"precipIntensity":0,"temperature":16.88,"dewPoint":12.11,"cloudCover":0.52,"humidity":0.74,"ozone":367.3,"pressure":1021.59,"windSpeed":4.4,"precipProbability":0,"windBearing":323,"summary":"Partly Cloudy","icon":"partly-cloudy-night"},"1429311600":{"apparentTemperature":15.67,"precipIntensity":0,"temperature":15.67,"dewPoint":10.74,"cloudCover":0,"humidity":0.73,"ozone":345.4,"pressure":1023.9,"windSpeed":4.81,"precipProbability":0,"windBearing":292,"summary":"Clear","icon":"clear-night"},"1429200000":{"apparentTemperature":17.83,"precipIntensity":0,"temperature":17.83,"dewPoint":12.84,"cloudCover":0.63,"humidity":0.73,"ozone":364.96,"pressure":1021.14,"windSpeed":4.8,"precipProbability":0,"windBearing":311,"summary":"Mostly Cloudy","icon":"partly-cloudy-day"},"1429257600":{"apparentTemperature":17.18,"precipIntensity":0,"temperature":17.18,"dewPoint":12.64,"cloudCover":0,"humidity":0.75,"ozone":348.5,"pressure":1023.91,"windSpeed":4.75,"precipProbability":0,"windBearing":310,"summary":"Clear","icon":"clear-day"},"1429178400":{"apparentTemperature":17.62,"precipIntensity":0,"temperature":17.62,"dewPoint":10.76,"cloudCover":0.5,"humidity":0.64,"ozone":376.02,"pressure":1019.91,"windSpeed":5.78,"precipProbability":0,"windBearing":337,"summary":"Partly Cloudy","icon":"partly-cloudy-day"},"1429218000":{"apparentTemperature":16.23,"precipIntensity":0,"temperature":16.23,"dewPoint":11.52,"cloudCover":0.23,"humidity":0.74,"ozone":368.77,"pressure":1021.97,"windSpeed":4.23,"precipProbability":0,"windBearing":321,"summary":"Clear","icon":"clear-night"},"1429243200":{"apparentTemperature":15.87,"precipIntensity":0,"temperature":15.87,"dewPoint":10.99,"cloudCover":0,"humidity":0.73,"ozone":355.04,"pressure":1022.32,"windSpeed":5.29,"precipProbability":0,"windBearing":309,"summary":"Clear","icon":"clear-night"},"1429282800":{"apparentTemperature":18.08,"precipIntensity":0,"temperature":18.08,"dewPoint":13.78,"cloudCover":0,"humidity":0.76,"ozone":346.56,"pressure":1024.2,"windSpeed":5.59,"precipProbability":0,"windBearing":296,"summary":"Clear","icon":"clear-day"},"1429290000":{"apparentTemperature":17.59,"precipIntensity":0,"temperature":17.59,"dewPoint":13.18,"cloudCover":0,"humidity":0.75,"ozone":351.1,"pressure":1023.88,"windSpeed":6.35,"precipProbability":0,"windBearing":303,"summary":"Clear","icon":"clear-day"},"1429228800":{"apparentTemperature":15.56,"precipIntensity":0,"temperature":15.56,"dewPoint":10.79,"cloudCover":0,"humidity":0.73,"ozone":367.67,"pressure":1022.23,"windSpeed":4.77,"precipProbability":0,"windBearing":304,"summary":"Clear","icon":"clear-night"},"1429185600":{"apparentTemperature":18.18,"precipIntensity":0,"temperature":18.18,"dewPoint":12.12,"cloudCover":0.37,"humidity":0.68,"ozone":370.95,"pressure":1020.73,"windSpeed":5.25,"precipProbability":0,"windBearing":329,"summary":"Partly Cloudy","icon":"partly-cloudy-day"},"1429275600":{"apparentTemperature":18.24,"precipIntensity":0,"temperature":18.24,"dewPoint":14.07,"cloudCover":0,"humidity":0.77,"ozone":342.74,"pressure":1024.46,"windSpeed":4.88,"precipProbability":0,"windBearing":294,"summary":"Clear","icon":"clear-day"},"1429304400":{"apparentTemperature":16.26,"precipIntensity":0,"temperature":16.26,"dewPoint":11.8,"cloudCover":0,"humidity":0.75,"ozone":348.47,"pressure":1024.02,"windSpeed":5.65,"precipProbability":0,"windBearing":301,"summary":"Clear","icon":"clear-night"},"1429286400":{"apparentTemperature":17.87,"precipIntensity":0,"temperature":17.87,"dewPoint":13.49,"cloudCover":0,"humidity":0.76,"ozone":349.28,"pressure":1024.01,"windSpeed":6.04,"precipProbability":0,"windBearing":300,"summary":"Clear","icon":"clear-day"},"1429261200":{"apparentTemperature":17.49,"precipIntensity":0,"temperature":17.49,"dewPoint":13.12,"cloudCover":0,"humidity":0.76,"ozone":346.17,"pressure":1024.22,"windSpeed":4.59,"precipProbability":0,"windBearing":308,"summary":"Clear","icon":"clear-day"},"1429329600":{"apparentTemperature":15.31,"precipIntensity":0,"temperature":15.31,"dewPoint":10.33,"cloudCover":0,"humidity":0.72,"ozone":342.8,"pressure":1022.95,"windSpeed":3.58,"precipProbability":0,"windBearing":273,"summary":"Clear","icon":"clear-night"},"1429315200":{"apparentTemperature":15.37,"precipIntensity":0,"temperature":15.37,"dewPoint":10.41,"cloudCover":0,"humidity":0.72,"ozone":344.52,"pressure":1023.66,"windSpeed":4.47,"precipProbability":0,"windBearing":288,"summary":"Clear","icon":"clear-night"},"1429322400":{"apparentTemperature":14.98,"precipIntensity":0,"temperature":14.98,"dewPoint":10.07,"cloudCover":0,"humidity":0.72,"ozone":343.4,"pressure":1023.15,"windSpeed":3.93,"precipProbability":0,"windBearing":279,"summary":"Clear","icon":"clear-night"},"1429264800":{"apparentTemperature":17.79,"precipIntensity":0,"temperature":17.79,"dewPoint":13.57,"cloudCover":0,"humidity":0.76,"ozone":343.35,"pressure":1024.48,"windSpeed":4.44,"precipProbability":0,"windBearing":305,"summary":"Clear","icon":"clear-day"},"1429272000":{"apparentTemperature":18.17,"precipIntensity":0,"temperature":18.17,"dewPoint":14.06,"cloudCover":0,"humidity":0.77,"ozone":341.64,"pressure":1024.59,"windSpeed":4.58,"precipProbability":0,"windBearing":297,"summary":"Clear","icon":"clear-day"},"1429308000":{"apparentTemperature":15.96,"precipIntensity":0,"temperature":15.96,"dewPoint":11.23,"cloudCover":0,"humidity":0.74,"ozone":346.8,"pressure":1024,"windSpeed":5.21,"precipProbability":0,"windBearing":297,"summary":"Clear","icon":"clear-night"},"1429167600":{"apparentTemperature":16.41,"precipIntensity":0.0279,"temperature":16.41,"dewPoint":9.51,"precipType":"rain","cloudCover":0.44,"humidity":0.64,"ozone":382.2,"pressure":1017.99,"windSpeed":6.64,"precipProbability":0.01,"windBearing":350,"summary":"Partly Cloudy","icon":"partly-cloudy-day"},"1429250400":{"apparentTemperature":16.47,"precipIntensity":0,"temperature":16.47,"dewPoint":11.68,"cloudCover":0,"humidity":0.73,"ozone":349.51,"pressure":1022.97,"windSpeed":4.99,"precipProbability":0,"windBearing":311,"summary":"Clear","icon":"clear-day"},"1429297200":{"apparentTemperature":16.91,"precipIntensity":0,"temperature":16.91,"dewPoint":12.63,"cloudCover":0,"humidity":0.76,"ozone":350.76,"pressure":1023.98,"windSpeed":6.25,"precipProbability":0,"windBearing":304,"summary":"Clear","icon":"clear-night"},"1429246800":{"apparentTemperature":16.14,"precipIntensity":0,"temperature":16.14,"dewPoint":11.28,"cloudCover":0,"humidity":0.73,"ozone":351,"pressure":1022.55,"windSpeed":5.11,"precipProbability":0,"windBearing":310,"summary":"Clear","icon":"clear-night"},"1429225200":{"apparentTemperature":15.7,"precipIntensity":0,"temperature":15.7,"dewPoint":10.95,"cloudCover":0,"humidity":0.73,"ozone":368.3,"pressure":1022.25,"windSpeed":4.4,"precipProbability":0,"windBearing":304,"summary":"Clear","icon":"clear-night"},"1429254000":{"apparentTemperature":16.84,"precipIntensity":0,"temperature":16.84,"dewPoint":12.17,"cloudCover":0,"humidity":0.74,"ozone":349.25,"pressure":1023.48,"windSpeed":4.87,"precipProbability":0,"windBearing":311,"summary":"Clear","icon":"clear-day"},"1429196400":{"apparentTemperature":18.06,"precipIntensity":0,"temperature":18.06,"dewPoint":13.01,"cloudCover":0.43,"humidity":0.72,"ozone":365.62,"pressure":1021.09,"windSpeed":4.9,"precipProbability":0,"windBearing":314,"summary":"Partly Cloudy","icon":"partly-cloudy-day"},"1429221600":{"apparentTemperature":15.93,"precipIntensity":0,"temperature":15.93,"dewPoint":11.2,"cloudCover":0.1,"humidity":0.74,"ozone":368.74,"pressure":1022.15,"windSpeed":4.22,"precipProbability":0,"windBearing":311,"summary":"Clear","icon":"clear-night"},"1429293600":{"apparentTemperature":17.27,"precipIntensity":0,"temperature":17.27,"dewPoint":12.91,"cloudCover":0,"humidity":0.76,"ozone":351.38,"pressure":1023.91,"windSpeed":6.39,"precipProbability":0,"windBearing":304,"summary":"Clear","icon":"clear-day"},"1429268400":{"apparentTemperature":18.02,"precipIntensity":0,"temperature":18.02,"dewPoint":13.91,"cloudCover":0,"humidity":0.77,"ozone":341.6,"pressure":1024.62,"windSpeed":4.42,"precipProbability":0,"windBearing":301,"summary":"Clear","icon":"clear-day"},"1429318800":{"apparentTemperature":15.11,"precipIntensity":0,"temperature":15.11,"dewPoint":10.17,"cloudCover":0,"humidity":0.72,"ozone":343.91,"pressure":1023.36,"windSpeed":4.17,"precipProbability":0,"windBearing":284,"summary":"Clear","icon":"clear-night"}},"daily":{"1429660800":{"apparentTemperatureMinTime":1429736400,"temperatureMinTime":1429736400,"cloudCover":0.02,"temperatureMin":14.4,"summary":"Windy starting in the afternoon.","dewPoint":12.39,"apparentTemperatureMax":19.09,"temperatureMax":19.09,"temperatureMaxTime":1429696800,"windBearing":272,"moonPhase":0.13,"sunsetTime":1429719823,"pressure":1008.75,"apparentTemperatureMin":14.4,"precipIntensityMax":0,"icon":"wind","apparentTemperatureMaxTime":1429696800,"humidity":0.73,"ozone":332.91,"windSpeed":7.28,"precipIntensity":0,"sunriseTime":1429672302,"precipProbability":0},"1429401600":{"apparentTemperatureMinTime":1429398000,"temperatureMinTime":1429398000,"cloudCover":0,"temperatureMin":14.95,"summary":"Clear throughout the day.","dewPoint":11.86,"apparentTemperatureMax":18.23,"temperatureMax":18.23,"temperatureMaxTime":1429441200,"windBearing":226,"moonPhase":0.03,"sunsetTime":1429460490,"pressure":1018.4,"apparentTemperatureMin":14.95,"precipIntensityMax":0,"icon":"clear-day","apparentTemperatureMaxTime":1429441200,"humidity":0.73,"ozone":327.21,"windSpeed":2.93,"precipIntensity":0,"sunriseTime":1429413307,"precipProbability":0},"1429228800":{"apparentTemperatureMinTime":1429225200,"temperatureMinTime":1429225200,"cloudCover":0,"temperatureMin":15.49,"summary":"Clear throughout the day.","dewPoint":12.36,"apparentTemperatureMax":18.24,"temperatureMax":18.24,"temperatureMaxTime":1429268400,"windBearing":303,"moonPhase":0.95,"sunsetTime":1429287601,"pressure":1023.61,"apparentTemperatureMin":15.49,"precipIntensityMax":0,"icon":"clear-day","apparentTemperatureMaxTime":1429268400,"humidity":0.75,"ozone":350.49,"windSpeed":5.24,"precipIntensity":0,"sunriseTime":1429240649,"precipProbability":0},"1429574400":{"apparentTemperatureMinTime":1429650000,"temperatureMinTime":1429650000,"cloudCover":0,"temperatureMin":17.2,"summary":"Clear throughout the day.","dewPoint":13.34,"apparentTemperatureMax":19.74,"temperatureMax":19.74,"temperatureMaxTime":1429614000,"windBearing":256,"moonPhase":0.1,"sunsetTime":1429633378,"pressure":1011.5,"apparentTemperatureMin":17.2,"precipIntensityMax":0,"icon":"clear-day","apparentTemperatureMaxTime":1429614000,"humidity":0.72,"ozone":330.65,"windSpeed":2.98,"precipIntensity":0,"sunriseTime":1429585969,"precipProbability":0},"1429747200":{"apparentTemperatureMinTime":1429747200,"precipType":"rain","cloudCover":0.05,"precipIntensityMaxTime":1429761600,"temperatureMin":13.32,"summary":"Breezy and partly cloudy in the morning.","dewPoint":8.46,"apparentTemperatureMax":16.91,"temperatureMax":16.91,"temperatureMaxTime":1429794000,"windBearing":286,"moonPhase":0.17,"temperatureMinTime":1429747200,"sunsetTime":1429806268,"pressure":1014.74,"apparentTemperatureMin":13.32,"precipIntensityMax":0.033,"icon":"wind","apparentTemperatureMaxTime":1429794000,"humidity":0.63,"ozone":356.36,"windSpeed":8.36,"precipIntensity":0.0152,"sunriseTime":1429758635,"precipProbability":0.01},"1429488000":{"apparentTemperatureMinTime":1429484400,"temperatureMinTime":1429484400,"cloudCover":0.02,"temperatureMin":15.98,"summary":"Clear throughout the day.","dewPoint":12.43,"apparentTemperatureMax":20.16,"temperatureMax":20.16,"temperatureMaxTime":1429534800,"windBearing":203,"moonPhase":0.06,"sunsetTime":1429546934,"pressure":1014.14,"apparentTemperatureMin":15.98,"precipIntensityMax":0,"icon":"clear-day","apparentTemperatureMaxTime":1429534800,"humidity":0.68,"ozone":324.94,"windSpeed":4.49,"precipIntensity":0,"sunriseTime":1429499638,"precipProbability":0},"1429315200":{"apparentTemperatureMinTime":1429315200,"temperatureMinTime":1429315200,"cloudCover":0,"temperatureMin":14.98,"summary":"Clear throughout the day.","dewPoint":11.55,"apparentTemperatureMax":18.16,"temperatureMax":18.16,"temperatureMaxTime":1429354800,"windBearing":269,"moonPhase":0.99,"sunsetTime":1429374045,"pressure":1022.28,"apparentTemperatureMin":14.98,"precipIntensityMax":0,"icon":"clear-day","apparentTemperatureMaxTime":1429354800,"humidity":0.72,"ozone":336.79,"windSpeed":4.14,"precipIntensity":0,"sunriseTime":1429326978,"precipProbability":0},"1429142400":{"apparentTemperatureMinTime":1429142400,"precipType":"rain","cloudCover":0.33,"precipIntensityMaxTime":1429164000,"temperatureMin":15.34,"summary":"Partly cloudy until evening.","dewPoint":11.21,"apparentTemperatureMax":18.23,"temperatureMax":18.23,"temperatureMaxTime":1429182000,"windBearing":333,"moonPhase":0.91,"temperatureMinTime":1429142400,"sunsetTime":1429201158,"pressure":1019.52,"apparentTemperatureMin":15.34,"precipIntensityMax":0.0279,"icon":"partly-cloudy-day","apparentTemperatureMaxTime":1429182000,"humidity":0.7,"ozone":376.28,"windSpeed":5.28,"precipIntensity":0.0102,"sunriseTime":1429154320,"precipProbability":0.01}},"offset":2};
+  if (weatherData) {
+    try {
+      displayWeather(weatherData);
+    } catch (e) {
+      console.error('got exception from cache', e)
+    }
+  }
+
+  var url = "/weather/forecast/1,1",
+      protocol = /^([\w-]+:)\/\//.test(url)? RegExp.$1 : window.location.protocol;
+
+  xhr = new window.XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4) {
+      xhr.onreadystatechange = function() {};
+      if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304 || (xhr.status == 0 && protocol == 'file:')) {
+        result = xhr.responseText;
+        if (result) {
+          try {
+            weatherData = JSON.parse(result);
+            setDataToStorage('weather', weatherData);
+            displayWeather(weatherData);
+          } catch (e) {
+            console.error('got exception', e);
+          }
+        }
+      }
+    }
+  }
+  xhr.open('GET', url, true);
+  xhr.send();
+
+  (function() {
+  "use strict";
+  var elements = document.getElementsByClassName('fit-to-box');
+  for (var i = 0; i < elements.length; i++) {
+    var elemBox = elements[i];
+    var elemText = elemBox.children[0];
+    var prevScrollHeight = 0;
+    var loopTolerance = 0;
+    var size = parseInt(elemText.style.fontSize, 10);
+    if (isNaN(size)) {
+      size = parseInt(window.getComputedStyle(elemText).fontSize, 10);
+    }
+
+    if (elemText.offsetHeight < elemBox.offsetHeight) {
+      prevScrollHeight = 0;
+      loopTolerance = 0;
+      while (elemText.scrollHeight < elemBox.offsetHeight &&
+             loopTolerance < 5) {
+        size += 1;
+        elemText.style.fontSize = size + 'px';
+        if (elemText.scrollHeight == prevScrollHeight) {
+          loopTolerance += 1;
+        } else {
+          loopTolerance = 0;
+        }
+        prevScrollHeight = elemText.scrollHeight;
+      }
+    }
+
+    prevScrollHeight = 0;
+    loopTolerance = 0;
+    while ((elemText.scrollHeight > elemBox.offsetHeight ||
+           elemText.scrollWidth > elemBox.offsetWidth) &&
+           loopTolerance < 5) {
+      size -= 1;
+      elemText.style.fontSize = size + 'px';
+      if (elemText.scrollHeight == prevScrollHeight) {
+        loopTolerance += 1;
+      } else {
+        loopTolerance = 0;
+      }
+      prevScrollHeight = elemText.scrollHeight;
+    }
+  }
+})();
+
+
+  (function() {
+    "use strict";
+    var resizeTimeout = null;
+    window.onresize = function() {
+
+      if (resizeTimeout !== null) {
+        window.clearTimeout(resizeTimeout);
+        resizeTimeout = null;
+      }
+
+      // We need this timeout because sometimes `window.innerWidth` will report invalid values
+      resizeTimeout = window.setTimeout(function() {
+        var proportion = (Math.abs(window.innerWidth - 1280) < 4)? 1 : window.innerWidth / 1280;
+        var property = 'scale(' + proportion + ')';
+        var compansate_proportion = 100 / (100 * proportion);
+        var compansate_property = 'scale(' + compansate_proportion + ')';
+        wrapper.style.webkitTransform = property;
+        wrapper.style.transform = property;
+        effect_bg.style.webkitTransform = compansate_property;
+        effect_bg.style.transform = compansate_property;
+        setEffectBgPosition();
+        body.style.display = 'inline-block';
+        window.setTimeout(function() {
+          body.style.display = '';
+        },50)
+      }, 200);
+    };
+
+    // This is extremly needed to avoid a screen freeze on Android.
+    wrapper.style.webkitTransform = 'scale(1)';
+    wrapper.style.transform = 'scale(1)';
+    window.onresize();
+  })();
+</script>
+</body></html>

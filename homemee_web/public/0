@@ -1,0 +1,8 @@
+[17-Jun-2016 17:53:32 Asia/Ho_Chi_Minh] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to Illuminate\Exception\WhoopsDisplayer::display() must be an instance of Exception, instance of Error given, called in E:\VIT3_Project\homemee_web\vendor\laravel\framework\src\Illuminate\Exception\Handler.php on line 280 and defined in E:\VIT3_Project\homemee_web\vendor\laravel\framework\src\Illuminate\Exception\WhoopsDisplayer.php:43
+Stack trace:
+#0 E:\VIT3_Project\homemee_web\vendor\laravel\framework\src\Illuminate\Exception\Handler.php(280): Illuminate\Exception\WhoopsDisplayer->display(Object(Error))
+#1 E:\VIT3_Project\homemee_web\vendor\laravel\framework\src\Illuminate\Exception\Handler.php(159): Illuminate\Exception\Handler->displayException(Object(Error))
+#2 E:\VIT3_Project\homemee_web\vendor\laravel\framework\src\Illuminate\Exception\Handler.php(170): Illuminate\Exception\Handler->handleException(Object(Error))
+#3 [internal function]: Illuminate\Exception\Handler->handleUncaughtException(Object(Error))
+#4 {main}
+  thrown in E:\VIT3_Project\homemee_web\vendor\laravel\framework\src\Illuminate\Exception\WhoopsDisplayer.php on line 43

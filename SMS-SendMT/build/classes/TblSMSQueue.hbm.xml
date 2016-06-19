@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.viettel.model.TblSMSQueue" table="tbl_sms_queue" >
+        <id name="gid" type="long">
+            <column name="gid" />
+            <generator class="increment" />
+        </id>
+        <property name="phone" type="string">
+            <column name="phone" length="12" not-null="true" />
+        </property>
+        <property name="content" type="string">
+            <column name="content" length="500" not-null="true" />
+        </property>     
+        <property name="status" type="int">
+            <column name="status" length="1" />
+        </property>   
+        <property name="createdAt" type="timestamp">
+            <column name="created_at" />
+        </property>
+        <property name="updatedAt" type="timestamp">
+            <column name="updated_at" />
+        </property>
+		
+		
+		
+    </class>
+</hibernate-mapping>

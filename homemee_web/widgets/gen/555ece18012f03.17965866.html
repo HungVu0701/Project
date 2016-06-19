@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>Weather Widget</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<style type="text/css" media="screen">
+html {
+  height: 100%;
+}
+
+body,
+div,
+p,
+img {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  font-family: Roboto, 'Helvetica Neue', Arial, Tahoma, sans-serif;
+  overflow: hidden;
+  background-color: black;
+}
+
+.wrapper {
+  position: absolute;
+  width: 1280px;
+  height: 720px;
+  left: 50%;
+  top: 50%;
+  margin: -360px 0 0 -640px;
+}
+
+.current {
+  width: 1280px;
+  height: 424px;
+}
+
+body.wind,
+body.clear-day,
+body.partly-cloudy-day {
+  background-image: url("../static/weather-classic/bg-current.png");
+  background-repeat: repeat-x;
+  background-position: 0px 0px;
+  background-size: 1px 300%;
+}
+
+body.rain,
+body.snow,
+body.sleet,
+body.fog,
+body.cloudy {
+  background-image: url("../static/weather-classic/bg-current.png");
+  background-repeat: repeat-x;
+  background-position: 0px 50%;
+  background-size: 1px 300%;
+}
+
+body.clear-night,
+body.partly-cloudy-night {
+  background-image: url("../static/weather-classic/bg-current.png");
+  background-repeat: repeat-x;
+  background-position: 0px 100%;
+  background-size: 1px 300%;
+}
+
+.current .info {
+  position: absolute;
+  top: 8px;
+  left: 64px;
+  z-index: 10;
+
+  color: #ffffff;
+
+  text-shadow: 4px 4px 12px rgba(0, 0, 0, 0.7);
+
+}
+
+.current .info:first-child {
+  margin-top: 30px;
+}
+
+.current .info .date {
+  font-size: 90px;
+  font-style: italic;
+  vertical-align: top;
+}
+
+.current .info .city {
+  font-size: 60px;
+  font-style: italic;
+  vertical-align: top;
+}
+
+.current .info .temp {
+  font-size: 140px;
+  font-weight: bold;
+}
+
+.current .icon {
+  position: absolute;
+  left: 360px;
+  float: right;
+  width: 920px;
+  height: 424px;
+  overflow: hidden;
+}
+
+.current.clear-night .layer-01 {
+  position: absolute;
+  z-index: 0;
+  width: 1280px;
+  height: 424px;
+  background-image: url("../static/weather-classic/stars2.png");
+  background-size: 334px 334px;
+  -webkit-animation: starfade 5s ease infinite alternate 0s;
+     -moz-animation: starfade 5s ease infinite alternate 0s;
+          animation: starfade 5s ease infinite alternate 0s;
+}
+
+.current.clear-night .layer-02 {
+  position: absolute;
+  width: 1280px;
+  height: 424px;
+  background-image: url("../static/weather-classic/stars.png");
+  background-size: 334px 334px;
+  opacity: 0.2;
+  -webkit-animation: starfade 5s ease infinite alternate 3s;
+     -moz-animation: starfade 5s ease infinite alternate 3s;
+          animation: starfade 5s ease infinite alternate 3s;
+}
+
+.current.clear-night .layer-03 {
+  position: absolute;
+  top: 80px;
+  left: 360px;
+  width: 280px;
+  height: 280px;
+  background-image: url("../static/weather-classic/big-moon.png");
+  background-size: 100%;
+}
+
+.current.partly-cloudy-night .layer-01 {
+  position: absolute;
+  top: 72px;
+  left: 195px;
+  width: 200px;
+  height: 200px;
+  background-image: url("../static/weather-classic/big-moon.png");
+  background-size: 100%;
+}
+
+.current.partly-cloudy-night .layer-02 {
+  position: absolute;
+  top: 160px;
+  width: 840px;
+  height: 250px;
+  background-image: url("../static/weather-classic/big-cloud.png");
+  background-size: 100%;
+  opacity: 0;
+  -webkit-animation: fade 24s ease infinite alternate 12s, moveflipped 24s ease infinite forwards 12s;
+     -moz-animation: fade 24s ease infinite alternate 12s, moveflipped 24s ease infinite forwards 12s;
+          animation: fade 24s ease infinite alternate 12s, moveflipped 24s ease infinite forwards 12s;
+}
+
+.current.partly-cloudy-night .layer-03 {
+  position: absolute;
+  top: 100px;
+  width: 840px;
+  height: 250px;
+  background-image: url("../static/weather-classic/big-cloud.png");
+  background-size: 100%;
+  -webkit-animation: fade 24s ease infinite alternate 0s, movecloudy 24s ease infinite forwards 0s;
+     -moz-animation: fade 24s ease infinite alternate 0s, movecloudy 24s ease infinite forwards 0s;
+          animation: fade 24s ease infinite alternate 0s, movecloudy 24s ease infinite forwards 0s;
+}
+
+.current.clear-day .layer-01 {
+  position: absolute;
+  top: 20px;
+  left: 300px;
+  width: 400px;
+  height: 400px;
+  background-image: url("../static/weather-classic/big-sun.png");
+  background-size: 100%;
+  -webkit-animation: rotate 60s linear infinite 0s;
+     -moz-animation: rotate 60s linear infinite 0s;
+          animation: rotate 60s linear infinite 0s;
+}
+
+.current.cloudy .layer-01 {
+  position: absolute;
+  top: 220px;
+  width: 535px;
+  height: 160px;
+  background-image: url("../static/weather-classic/big-cloud.png");
+  background-size: 100%;
+  opacity: 0;
+  -webkit-animation: fade 24s ease infinite alternate 11s, moveflipped 24s ease infinite forwards 11s;
+     -moz-animation: fade 24s ease infinite alternate 11s, moveflipped 24s ease infinite forwards 11s;
+          animation: fade 24s ease infinite alternate 11s, moveflipped 24s ease infinite forwards 11s;
+}
+
+.current.cloudy .layer-02 {
+  position: absolute;
+  top: 40px;
+  width: 732px;
+  height: 218px;
+  background-image: url("../static/weather-classic/big-cloud.png");
+  background-size: 100%;
+  opacity: 0;
+  -webkit-animation: fade 24s ease infinite alternate 1s, movecloudy 24s ease infinite forwards 1s;
+     -moz-animation: fade 24s ease infinite alternate 1s, movecloudy 24s ease infinite forwards 1s;
+          animation: fade 24s ease infinite alternate 1s, movecloudy 24s ease infinite forwards 1s;
+}
+
+.current.partly-cloudy-day .layer-01 {
+  position: absolute;
+  top: 30px;
+  left: 158px;
+  width: 300px;
+  height: 300px;
+  background-image: url("../static/weather-classic/big-sun.png");
+  background-size: 100%;
+  -webkit-animation: rotate 60s linear infinite 0s;
+     -moz-animation: rotate 60s linear infinite 0s;
+          animation: rotate 60s linear infinite 0s;
+}
+
+.current.partly-cloudy-day .layer-02 {
+  position: absolute;
+  top: 136px;
+  width: 840px;
+  height: 250px;
+  background-image: url("../static/weather-classic/big-cloud.png");
+  background-size: 100%;
+}
+
+.current.rain .layer-01 {
+  position: absolute;
+  top: 120px;
+  left: 350px;
+  width: 416px;
+  height: 278px;
+  background-image: url("../static/weather-classic/big-raindrops.png");
+  background-size: 100%;
+  opacity: 0;
+  -webkit-animation: fade 2s linear infinite alternate 0s, rain 2s linear infinite forwards 0s;
+     -moz-animation: fade 2s linear infinite alternate 0s, rain 2s linear infinite forwards 0s;
+          animation: fade 2s linear infinite alternate 0s, rain 2s linear infinite forwards 0s;
+}
+
+.current.rain .layer-02 {
+  position: absolute;
+  top: 120px;
+  left: 260px;
+  width: 416px;
+  height: 278px;
+  background-image: url("../static/weather-classic/big-raindrops.png");
+  background-size: 100%;
+  opacity: 0;
+  -webkit-animation: fade 2s linear infinite alternate 0.8s, rain 2s linear infinite forwards 0.8s;
+     -moz-animation: fade 2s linear infinite alternate 0.8s, rain 2s linear infinite forwards 0.8s;
+          animation: fade 2s linear infinite alternate 0.8s, rain 2s linear infinite forwards 0.8s;
+}
+
+.current.rain .layer-03 {
+  position: absolute;
+  top: 120px;
+  left: 300px;
+  width: 416px;
+  height: 278px;
+  background-image: url("../static/weather-classic/big-raindrops.png");
+  background-size: 100%;
+  opacity: 0;
+  -webkit-animation: fade 2s linear infinite alternate 1.35s, rain 2s linear infinite forwards 1.35s;
+     -moz-animation: fade 2s linear infinite alternate 1.35s, rain 2s linear infinite forwards 1.35s;
+          animation: fade 2s linear infinite alternate 1.35s, rain 2s linear infinite forwards 1.35s;
+}
+
+.current.rain .layer-04 {
+  position: relative;
+  top: 50px;
+  width: 840px;
+  height: 250px;
+  background-image: url("../static/weather-classic/big-thunder.png");
+  background-size: 100%;
+  opacity: 0;
+  -webkit-animation: thunder 5s ease infinite alternate 1s;
+     -moz-animation: thunder 5s ease infinite alternate 1s;
+          animation: thunder 5s ease infinite alternate 1s;
+}
+
+.current.rain .layer-05 {
+  position: absolute;
+  top: 60px;
+  width: 840px;
+  height: 250px;
+  background-image: url("../static/weather-classic/big-cloud.png");
+  background-size: 100%;
+}
+
+.current.fog .layer-01 {
+  position: absolute;
+  top: 66px;
+  left: 36px;
+  width: 842px;
+  height: 358px;
+  background-image: url("../static/weather-classic/big-tree.png");
+  background-size: 100%;
+}
+
+.current.fog .layer-02 {
+  position: absolute;
+  top: 168px;
+  width: 840px;
+  height: 250px;
+  background-image: url("../static/weather-classic/big-cloud.png");
+  background-size: 100%;
+  opacity: 0.3;
+  -webkit-transform: scaleX(-1);
+     -moz-transform: scaleX(-1);
+          transform: scaleX(-1);
+  -webkit-animation: fogfade 5s ease infinite alternate 2s;
+     -moz-animation: fogfade 5s ease infinite alternate 2s;
+          animation: fogfade 5s ease infinite alternate 2s;
+}
+
+.current.fog .layer-03 {
+  position: absolute;
+  top: 40px;
+  left: 39px;
+  width: 840px;
+  height: 250px;
+  background-image: url("../static/weather-classic/big-cloud.png");
+  background-size: 100%;
+  opacity: 0.3;
+  -webkit-animation: fogfade 6s ease infinite alternate 0s;
+     -moz-animation: fogfade 6s ease infinite alternate 0s;
+          animation: fogfade 6s ease infinite alternate 0s;
+}
+
+.current.sleet .layer-01 {
+  position: relative;
+  top: 118px;
+  left: 170px;
+  width: 324px;
+  height: 220px;
+  background-image: url("../static/weather-classic/big-raindrops.png");
+  background-size: 100%;
+  -webkit-animation: fade 2s linear infinite alternate 0s, rain 2s linear infinite forwards 0s;
+     -moz-animation: fade 2s linear infinite alternate 0s, rain 2s linear infinite forwards 0s;
+          animation: fade 2s linear infinite alternate 0s, rain 2s linear infinite forwards 0s;
+}
+
+.current.sleet .layer-02 {
+  position: relative;
+  top: -85px;
+  left: 210px;
+  width: 324px;
+  height: 220px;
+  background-image: url("../static/weather-classic/big-raindrops.png");
+  background-size: 100%;
+  opacity: 0;
+  -webkit-animation: fade 2s linear infinite alternate 1s, rain 2s linear infinite forwards 1s;
+     -moz-animation: fade 2s linear infinite alternate 1s, rain 2s linear infinite forwards 1s;
+          animation: fade 2s linear infinite alternate 1s, rain 2s linear infinite forwards 1s;
+}
+
+.current.sleet .layer-03 {
+  position: absolute;
+  top: 140px;
+  left: 475px;
+  width: 80px;
+  height: 80px;
+  background-image: url("../static/weather-classic/big-snowflake.png");
+  background-size: 100%;
+  -webkit-animation: fade 5s ease-in-out infinite alternate 0s, falling 5s ease-in-out infinite forwards 0s;
+     -moz-animation: fade 5s ease-in-out infinite alternate 0s, falling 5s ease-in-out infinite forwards 0s;
+          animation: fade 5s ease-in-out infinite alternate 0s, falling 5s ease-in-out infinite forwards 0s;
+}
+
+.current.sleet .layer-04 {
+  position: absolute;
+  top: 180px;
+  left: 550px;
+  width: 100px;
+  height: 100px;
+  background-image: url("../static/weather-classic/big-snowflake.png");
+  background-size: 100%;
+  opacity: 0;
+  -webkit-animation: fade 4s ease-in-out infinite alternate 2s, falling 4s ease-in-out infinite forwards 2s;
+     -moz-animation: fade 4s ease-in-out infinite alternate 2s, falling 4s ease-in-out infinite forwards 2s;
+          animation: fade 4s ease-in-out infinite alternate 2s, falling 4s ease-in-out infinite forwards 2s;
+}
+
+.current.sleet .layer-05 {
+  position: absolute;
+  top: 160px;
+  left: 600px;
+  width: 60px;
+  height: 60px;
+  background-image: url("../static/weather-classic/big-snowflake.png");
+  background-size: 100%;
+  -webkit-animation: fade 3s ease-in-out infinite alternate 0s, falling 3s ease-in-out infinite forwards 0s;
+     -moz-animation: fade 3s ease-in-out infinite alternate 0s, falling 3s ease-in-out infinite forwards 0s;
+          animation: fade 3s ease-in-out infinite alternate 0s, falling 3s ease-in-out infinite forwards 0s;
+}
+
+.current.sleet .layer-06 {
+  position: absolute;
+  top: 60px;
+  width: 840px;
+  height: 250px;
+  background-image: url("../static/weather-classic/big-cloud.png");
+  background-size: 100%;
+}
+
+.current.snow .layer-01 {
+  position: absolute;
+  top: 160px;
+  left: 220px;
+  width: 80px;
+  height: 80px;
+  background-image: url("../static/weather-classic/big-snowflake.png");
+  background-size: 100%;
+  opacity: 0;
+  -webkit-animation: fade 4s ease-in-out infinite alternate 1s, falling 4s ease-in-out infinite forwards 1s;
+     -moz-animation: fade 4s ease-in-out infinite alternate 1s, falling 4s ease-in-out infinite forwards 1s;
+          animation: fade 4s ease-in-out infinite alternate 1s, falling 4s ease-in-out infinite forwards 1s;
+}
+
+.current.snow .layer-02 {
+  position: absolute;
+  top: 180px;
+  left: 300px;
+  width: 100px;
+  height: 100px;
+  background-image: url("../static/weather-classic/big-snowflake.png");
+  background-size: 100%;
+  opacity: 0;
+  -webkit-animation: fade 4s ease-in-out infinite alternate 1s, falling 4s ease-in-out infinite forwards 1s;
+     -moz-animation: fade 4s ease-in-out infinite alternate 1s, falling 4s ease-in-out infinite forwards 1s;
+          animation: fade 4s ease-in-out infinite alternate 1s, falling 4s ease-in-out infinite forwards 1s;
+}
+
+.current.snow .layer-03 {
+  position: absolute;
+  top: 160px;
+  left: 400px;
+  width: 60px;
+  height: 60px;
+  background-image: url("../static/weather-classic/big-snowflake.png");
+  background-size: 100%;
+  opacity: 0;
+  -webkit-animation: fade 4s ease-in-out infinite alternate 0s, falling 4s ease-in-out infinite forwards 0s;
+     -moz-animation: fade 4s ease-in-out infinite alternate 0s, falling 4s ease-in-out infinite forwards 0s;
+          animation: fade 4s ease-in-out infinite alternate 0s, falling 4s ease-in-out infinite forwards 0s;
+}
+
+.current.snow .layer-04 {
+  position: absolute;
+  top: 180px;
+  left: 520px;
+  width: 100px;
+  height: 100px;
+  background-image: url("../static/weather-classic/big-snowflake.png");
+  background-size: 100%;
+  opacity: 0;
+  -webkit-animation: fade 4s ease-in-out infinite alternate 2s, falling 4s ease-in-out infinite forwards 2s;
+     -moz-animation: fade 4s ease-in-out infinite alternate 2s, falling 4s ease-in-out infinite forwards 2s;
+          animation: fade 4s ease-in-out infinite alternate 2s, falling 4s ease-in-out infinite forwards 2s;
+}
+
+.current.snow .layer-05 {
+  position: absolute;
+  top: 160px;
+  left: 600px;
+  width: 60px;
+  height: 60px;
+  background-image: url("../static/weather-classic/big-snowflake.png");
+  background-size: 100%;
+  -webkit-animation: fade 5s ease-in-out infinite alternate 0s, falling 5s ease-in-out infinite forwards 0s;
+     -moz-animation: fade 5s ease-in-out infinite alternate 0s, falling 5s ease-in-out infinite forwards 0s;
+          animation: fade 5s ease-in-out infinite alternate 0s, falling 5s ease-in-out infinite forwards 0s;
+}
+
+.current.snow .layer-06 {
+  position: absolute;
+  top: 60px;
+  width: 840px;
+  height: 250px;
+  background-image: url("../static/weather-classic/big-cloud.png");
+  background-size: 100%;
+}
+
+.current.wind .layer-01 {
+  position: absolute;
+  top: 192px;
+  left: 500px;
+  width: 328px;
+  height: 239px;
+  background-image: url("../static/weather-classic/big-bushes.png");
+  background-size: 100%;
+  opacity: 0.7;
+  -webkit-animation: bushes 4s ease infinite alternate 1s;
+     -moz-animation: bushes 4s ease infinite alternate 1s;
+          animation: bushes 4s ease infinite alternate 1s;
+}
+
+.current.wind .layer-02 {
+  position: absolute;
+  top: 173px;
+  left: 337px;
+  width: 353px;
+  height: 257px;
+  background-image: url("../static/weather-classic/big-bushes.png");
+  background-size: 100%;
+  opacity: 0.9;
+  -webkit-animation: bushes 4s ease infinite alternate 1s;
+     -moz-animation: bushes 4s ease infinite alternate 1s;
+          animation: bushes 4s ease infinite alternate 1s;
+}
+
+.current.wind .layer-03 {
+  position: absolute;
+  top: 130px;
+  left: 140px;
+  width: 428px;
+  height: 312px;
+  background-image: url("../static/weather-classic/big-bushes.png");
+  background-size: 100%;
+  -webkit-animation: bushes 4s ease infinite alternate 0s;
+     -moz-animation: bushes 4s ease infinite alternate 0s;
+          animation: bushes 4s ease infinite alternate 0s;
+}
+
+.current.wind .layer-04 {
+  position: absolute;
+  top: 80px;
+  left: 10px;
+  width: 702px;
+  height: 182px;
+  background-image: url("../static/weather-classic/big-wind.png");
+  background-size: 100%;
+  -webkit-animation: fade 8s ease infinite alternate 0s, move 8s ease infinite forwards 0s;
+     -moz-animation: fade 8s ease infinite alternate 0s, move 8s ease infinite forwards 0s;
+          animation: fade 8s ease infinite alternate 0s, move 8s ease infinite forwards 0s;
+}
+
+.forecast {
+  position: fixed;
+  display: inline-block;
+  width: 1280px;
+  height: 296px;
+  bottom: 0;
+  left: 0;
+  -webkit-transform-origin: 0 296px;
+          transform-origin: 0 296px;
+}
+
+.forecast .info {
+  position: absolute;
+  z-index: 10;
+}
+
+.forecast .icon {
+  margin: 20px 0 0 30px;
+  position: relative;
+}
+
+.forecast .clear-day,
+.forecast .wind,
+.forecast .partly-cloudy-day {
+  background-image: url("../static/weather-classic/bg-foreca.png");
+  background-position: top;
+  background-repeat: repeat-x;
+  background-size: 1px 888px;
+}
+
+.forecast .rain,
+.forecast .snow,
+.forecast .sleet,
+.forecast .fog,
+.forecast .cloudy {
+  background-image: url("../static/weather-classic/bg-foreca.png");
+  background-position: bottom;
+  background-repeat: repeat-x;
+  background-size: 1px 888px;
+}
+
+.forecast .clear-night,
+.forecast .partly-cloudy-night {
+  background-image: url("../static/weather-classic/bg-foreca.png");
+  background-position: center;
+  background-repeat: repeat-x;
+  background-size: 1px 888px;
+}
+
+.forecast .temp {
+  margin-left: 42px;
+  font-size: 70px;
+  line-height: 70px;
+  color: #ffffff;
+
+  text-shadow: 3px 3px 9px rgba(0, 0, 0, 0.7);
+
+}
+
+.forecast .max {
+  font-weight: bold;
+}
+
+.forecast .date {
+  width: 232px;
+  font-size: 55px;
+  font-style: italic;
+  line-height: 66px;
+  margin-left: 42px;
+  color: #ffffff;
+
+  text-shadow: 3px 3px 9px rgba(0, 0, 0, 0.7);
+
+  vertical-align: top;
+}
+
+.forecast .today,
+.forecast .tomorrow,
+.forecast .after-tomorrow {
+  float: left;
+  width: 427px;
+  height: 296px;
+  overflow: hidden;
+}
+
+.forecast .tomorrow {
+  width: 426px;
+}
+
+.forecast .tomorrow .icon {
+  width: 426px;
+  height: 296px;
+}
+
+.forecast .clear-night .icon {
+  position: relative;
+  top: 119px;
+  left: 116px;
+  width: 130px;
+  height: 130px;
+  background-image: url("../static/weather-classic/big-moon.png");
+  background-size: 100%;
+}
+
+.forecast .partly-cloudy-night .icon {
+  position: relative;
+  top: 116px;
+  left: 92px;
+  z-index: 0;
+  width: 100px;
+  height: 100px;
+  background-image: url("../static/weather-classic/big-moon.png");
+  background-size: 100%;
+}
+
+.forecast .partly-cloudy-night .icon:before {
+  position: relative;
+  top: 33px;
+  left: -30px;
+  z-index: 1;
+  display: block;
+  width: 322px;
+  height: 96px;
+  background-image: url("../static/weather-classic/big-cloud.png");
+  background-size: 100%;
+  content: "";
+}
+
+.forecast .snow .icon {
+  position: relative;
+  top: 112px;
+  left: 50px;
+  z-index: 1;
+  display: block;
+  width: 322px;
+  height: 96px;
+  background-image: url("../static/weather-classic/big-cloud.png");
+  background-size: 100%;
+  content: "";
+}
+
+.forecast .snow .icon:before {
+  position: absolute;
+  top: 88px;
+  left: 114px;
+  z-index: 0;
+  display: block;
+  width: 60px;
+  height: 60px;
+  background-image: url("../static/weather-classic/big-snowflake.png");
+  background-size: 100%;
+  content: "";
+}
+
+.forecast .snow .icon:after {
+  position: absolute;
+  top: 62px;
+  left: 173px;
+  z-index: 0;
+  display: block;
+  width: 80px;
+  height: 80px;
+  background-image: url("../static/weather-classic/big-snowflake.png");
+  background-size: 100%;
+  content: "";
+}
+
+.forecast .sleet .icon {
+  top: 111px;
+  left: 50px;
+  z-index: 2;
+  width: 322px;
+  height: 96px;
+  background-image: url("../static/weather-classic/big-cloud.png");
+  background-size: 100%;
+}
+
+.forecast .sleet .icon:before {
+  position: absolute;
+  top: 55px;
+  left: 46px;
+  z-index: 1;
+  display: block;
+  width: 161px;
+  height: 114px;
+  background-image: url("../static/weather-classic/big-raindrops.png");
+  background-size: 100%;
+  content: "";
+}
+
+.forecast .sleet .icon:after {
+  position: absolute;
+  top: 69px;
+  left: 164px;
+  z-index: 0;
+  display: block;
+  width: 87px;
+  height: 87px;
+  background-image: url("../static/weather-classic/big-snowflake.png");
+  background-size: 100%;
+  content: "";
+}
+
+.forecast .rain .icon {
+  top: 117px;
+  left: 50px;
+  z-index: 2;
+  width: 314px;
+  height: 93px;
+  background-image: url("../static/weather-classic/big-cloud.png");
+  background-size: 100%;
+}
+
+.forecast .rain .icon:before {
+  position: absolute;
+  top: 53px;
+  left: 94px;
+  z-index: 1;
+  display: block;
+  width: 151px;
+  height: 101px;
+  background-image: url("../static/weather-classic/big-raindrops.png");
+  background-size: 100%;
+  content: "";
+}
+
+.forecast .cloudy .icon {
+  top: 111px;
+  left: 50px;
+  z-index: 1;
+  width: 298px;
+  height: 87px;
+}
+
+.forecast .cloudy .icon:before {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  width: inherit;
+  height: inherit;
+  background-image: url("../static/weather-classic/big-cloud.png");
+  background-size: 100%;
+  content: "";
+}
+
+.forecast .cloudy .icon:after {
+  position: absolute;
+  top: 57px;
+  left: 49px;
+  z-index: 0;
+  display: block;
+  width: inherit;
+  height: inherit;
+  background-image: url("../static/weather-classic/big-cloud.png");
+  background-size: 100%;
+  content: "";
+  -webkit-transform: scaleX(-1);
+     -moz-transform: scaleX(-1);
+       -o-transform: scaleX(-1);
+          transform: scaleX(-1);
+}
+
+.forecast .clear-day .icon {
+  position: relative;
+  top: 88px;
+  left: 72px;
+  width: 190px;
+  height: 190px;
+  background-image: url("../static/weather-classic/big-sun.png");
+  background-size: 100%;
+}
+
+.forecast .partly-cloudy-day .icon {
+  position: relative;
+  top: 97px;
+  left: 92px;
+  z-index: 0;
+  width: 150px;
+  height: 150px;
+  background-image: url("../static/weather-classic/big-sun.png");
+  background-size: 100%;
+}
+
+.forecast .partly-cloudy-day .icon:before {
+  position: relative;
+  top: 56px;
+  left: -30px;
+  z-index: 1;
+  display: block;
+  width: 322px;
+  height: 96px;
+  background-image: url("../static/weather-classic/big-cloud.png");
+  background-size: 100%;
+  content: "";
+}
+
+.forecast .fog .icon {
+  position: relative;
+  top: 109px;
+  z-index: 1;
+  width: 393px;
+  height: 165px;
+  background-image: url("../static/weather-classic/big-tree.png");
+  background-size: 100%;
+}
+
+.forecast .fog .icon:before {
+  position: absolute;
+  top: -4px;
+  left: 84px;
+  z-index: 3;
+  display: block;
+  width: 322px;
+  height: 96px;
+  background-image: url("../static/weather-classic/big-cloud.png");
+  background-size: 100%;
+  content: "";
+  opacity: 0.5;
+  -webkit-transform: scaleX(-1);
+     -moz-transform: scaleX(-1);
+       -o-transform: scaleX(-1);
+          transform: scaleX(-1);
+}
+
+.forecast .fog .icon:after {
+  position: absolute;
+  top: 50px;
+  left: 52px;
+  z-index: 2;
+  display: block;
+  width: 368px;
+  height: 109px;
+  background-image: url("../static/weather-classic/big-cloud.png");
+  background-size: 100%;
+  content: "";
+  opacity: 0.5;
+}
+
+.forecast .wind .icon {
+  position: relative;
+  top: 132px;
+  left: 64px;
+  width: 298px;
+  height: 172px;
+  background-image: url("../static/weather-classic/big-bushes.png");
+  background-size: 100%;
+  -webkit-transform: rotate(7deg);
+     -moz-transform: rotate(7deg);
+          transform: rotate(7deg);
+}
+
+.forecast .wind .icon:before {
+  position: absolute;
+  top: -40px;
+  left: -31px;
+  display: block;
+  width: 345px;
+  height: 96px;
+  background-image: url("../static/weather-classic/big-wind.png");
+  background-size: 100%;
+  content: "";
+  -webkit-transform: rotate(-5deg);
+     -moz-transform: rotate(-5deg);
+          transform: rotate(-5deg);
+}
+
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(-360deg);
+  }
+}
+
+@-moz-keyframes rotate {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+  to {
+    -moz-transform: rotate(-360deg);
+  }
+}
+
+@keyframes  rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@-webkit-keyframes bushes {
+  to {
+    -webkit-transform: rotate(4deg) translateX(20px);
+  }
+}
+
+@-moz-keyframes bushes {
+  to {
+    -moz-transform: rotate(4deg) translateX(20px);
+  }
+}
+
+@keyframes  bushes {
+  to {
+    transform: rotate(4deg) translateX(20px);
+  }
+}
+
+@-webkit-keyframes starfade {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}
+
+@-moz-keyframes starfade {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}
+
+@keyframes  starfade {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}
+
+@-webkit-keyframes fogfade {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+@-moz-keyframes fogfade {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes  fogfade {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+@-webkit-keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes  fade {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes moveflipped {
+  from {
+    -webkit-transform: translateX(0) scaleX(-1);
+  }
+  to {
+    -webkit-transform: translateX(180px) scaleX(-1);
+  }
+}
+
+@-moz-keyframes moveflipped {
+  from {
+    -moz-transform: translateX(0) scaleX(-1);
+  }
+  to {
+    -moz-transform: translateX(180px) scaleX(-1);
+  }
+}
+
+@keyframes  moveflipped {
+  from {
+    transform: translateX(0) scaleX(-1);
+  }
+  to {
+    transform: translateX(180px) scaleX(-1);
+  }
+}
+
+@-webkit-keyframes movecloudy {
+  to {
+    -webkit-transform: translateX(180px);
+  }
+}
+
+@-moz-keyframes movecloudy {
+  to {
+    -moz-transform: translateX(180px);
+  }
+}
+
+@keyframes  movecloudy {
+  to {
+    transform: translateX(180px);
+  }
+}
+
+@-webkit-keyframes move {
+  to {
+    -webkit-transform: translateX(300px);
+  }
+}
+
+@-moz-keyframes move {
+  to {
+    -moz-transform: translateX(300px);
+  }
+}
+
+@keyframes  move {
+  to {
+    transform: translateX(300px);
+  }
+}
+
+@-webkit-keyframes rain {
+  to {
+    -webkit-transform: translateX(-220px) translateY(400px);
+  }
+}
+
+@-moz-keyframes rain {
+  to {
+    -moz-transform: translateX(-220px) translateY(400px);
+  }
+}
+
+@keyframes  rain {
+  to {
+    transform: translateX(-220px) translateY(400px);
+  }
+}
+
+@-webkit-keyframes falling {
+  0% {
+    -webkit-transform: translateY(0) rotate(0deg) scale(0.9, 0.9);
+    -webkit-transform-origin: left -20px;
+  }
+  100% {
+    -webkit-transform: translateY(300px) rotate(360deg) scale(1.2, 1.2);
+  }
+}
+
+@-moz-keyframes falling {
+  0% {
+    -moz-transform: translateY(0) rotate(0deg) scale(0.9, 0.9);
+    -moz-transform-origin: left -20px;
+  }
+  100% {
+    -moz-transform: translateY(300px) rotate(360deg) scale(1.2, 1.2);
+  }
+}
+
+@keyframes  falling {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(0.9, 0.9);
+    transform-origin: left -20px;
+  }
+  100% {
+    transform: translateY(300px) rotate(360deg) scale(1.2, 1.2);
+  }
+}
+
+@-webkit-keyframes thunder {
+  0% {
+    opacity: 1;
+  }
+  5% {
+    opacity: 0;
+  }
+  95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes thunder {
+  0% {
+    opacity: 1;
+  }
+  5% {
+    opacity: 0;
+  }
+  95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes  thunder {
+  0% {
+    opacity: 1;
+  }
+  5% {
+    opacity: 0;
+  }
+  95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+</style>
+</head><body style="" class="partly-cloudy-day"><div id="wrapper" class="wrapper" style="display: block; transform: scale(1);">
+  <div class="current partly-cloudy-day">
+    <div class="info">
+      <p class="city">Hà Nội</p>
+      <p class="date">
+      Hiện tại
+      </p>
+      <p class="temp">16°</p>
+    </div>
+    <div class="icon">
+      <div class="layer-01"></div>
+      <div class="layer-02"></div>
+      <div class="layer-03"></div>
+      <div class="layer-04"></div>
+      <div class="layer-05"></div>
+      <div class="layer-06"></div>
+    </div>
+  </div>
+</div>
+<div style="transform: scale(1);" id="forecast" class="forecast">
+  <div class="today partly-cloudy-day">
+    <div class="info">
+      <span class="date">
+      Hôm nay
+      </span>
+      <div class="temp"><span class="max">18°</span>/<span class="min">15°</span></div>
+    </div>
+    <div class="icon"></div>
+  </div>
+  <div class="tomorrow clear-day">
+    <div class="info">
+      <div class="date">fri</div>
+      <div class="temp"><span class="max">18°</span>/<span class="min">15°</span></div>
+    </div>
+    <div class="icon"></div>
+  </div>
+  <div class="after-tomorrow clear-day">
+    <div class="info">
+      <div class="date">sat</div>
+      <div class="temp"><span class="max">18°</span>/<span class="min">15°</span></div>
+    </div>
+    <div class="icon"></div>
+  </div>
+</div>
+<script type="text/javascript">
+    var WEEK_DAYS = ['CN', 'Hai', 'Ba', 'Bốn', 'Năm', 'Sáu', 'Bảy'];
+  var qs = function(selector) {
+    return document.querySelector(selector);
+  }
+
+  function getDataFromStorage(name) {
+    try {
+      return JSON.parse(localStorage.getItem(name + "/weather/forecast/22,22"));
+    } catch (e) {
+      console.error("It was not possible retrieve data from Local Storage.");
+      return null;
+    }
+  }
+
+  function setDataToStorage(name, value) {
+    try {
+      localStorage.setItem(name + "/weather/forecast/22,22", JSON.stringify(value));
+    } catch (e) {
+      console.error("It was not possible set data on Local Storage.");
+    }
+  }
+
+  function convert(celsius) {
+    if (!isFinite(celsius) || !(typeof celsius === 'number')) {
+      return '-';
+    }
+
+            return Math.round(celsius) + '&degC';
+      
+  }
+
+  function displayCurrentWeather(forecast) {
+    var now = Math.floor((Date.now() + (forecast.offset * 60 * 60 * 1000)) / (1000 * 60 * 60)) * (60 * 60);
+    var current = forecast.hourly[now];
+    if (!current) {
+      var today = Math.floor(now / (24 * 60 * 60)) * (24 * 60 * 60);
+      current = forecast.daily[today];
+    }
+    var temperature = current.temperature;
+    qs('body').className = current.icon;
+    qs('.current').className = 'current ' + current.icon;
+    qs('.current .info .temp').innerHTML = '' + convert(temperature);
+  }
+
+  function displayForecastWeather(forecast) {
+    var today = Math.floor((Date.now() + (forecast.offset * 60 * 60 * 1000)) / (1000 * 60 * 60 * 24)) * (60 * 60 * 24);
+    var day_of_week = (new Date()).getDay();
+    qs('.today').className = 'today ' + forecast.daily[today].icon;
+    qs('.today .info .max').innerHTML = '' + convert(forecast.daily[today].temperatureMax);
+    qs('.today .info .min').innerHTML = '' + convert(forecast.daily[today].temperatureMin);
+
+    var tomorrow = today + (3600 * 24);
+    qs('.tomorrow').className = 'tomorrow ' + forecast.daily[tomorrow].icon;
+    qs('.tomorrow .info .max').innerHTML = '' + convert(forecast.daily[tomorrow].temperatureMax);
+    qs('.tomorrow .info .min').innerHTML = '' + convert(forecast.daily[tomorrow].temperatureMin);
+
+    qs('.tomorrow .info .date').innerHTML = WEEK_DAYS[(day_of_week + 1) % 7].toLowerCase();
+
+    var afterTomorrow = tomorrow + (3600 * 24);
+    qs('.after-tomorrow').className = 'after-tomorrow ' + forecast.daily[afterTomorrow].icon;
+    qs('.after-tomorrow .info .max').innerHTML = '' + convert(forecast.daily[afterTomorrow].temperatureMax);
+    qs('.after-tomorrow .info .min').innerHTML = '' + convert(forecast.daily[afterTomorrow].temperatureMin);
+    qs('.after-tomorrow .info .date').innerHTML = WEEK_DAYS[(day_of_week + 2) % 7].toLowerCase();
+  }
+
+  function displayWeather(forecast) {
+    displayCurrentWeather(forecast);
+    displayForecastWeather(forecast);
+    qs('.wrapper').style.display = 'block';
+  }
+
+  var weatherData = getDataFromStorage('weather') || {"hourly":{"1429333200":{"apparentTemperature":15.6,"precipIntensity":0,"temperature":15.6,"dewPoint":10.57,"cloudCover":0,"humidity":0.72,"ozone":342.3,"pressure":1022.93,"windSpeed":3.49,"precipProbability":0,"windBearing":268,"summary":"Clear","icon":"clear-night"},"1429232400":{"apparentTemperature":15.49,"precipIntensity":0,"temperature":15.49,"dewPoint":10.71,"cloudCover":0,"humidity":0.73,"ozone":366.62,"pressure":1022.16,"windSpeed":5.21,"precipProbability":0,"windBearing":305,"summary":"Clear","icon":"clear-night"},"1429279200":{"apparentTemperature":18.21,"precipIntensity":0,"temperature":18.21,"dewPoint":13.98,"cloudCover":0,"humidity":0.76,"ozone":344.3,"pressure":1024.34,"windSpeed":5.2,"precipProbability":0,"windBearing":293,"summary":"Clear","icon":"clear-day"},"1429300800":{"apparentTemperature":16.57,"precipIntensity":0,"temperature":16.57,"dewPoint":12.29,"cloudCover":0,"humidity":0.76,"ozone":349.8,"pressure":1024.01,"windSpeed":6,"precipProbability":0,"windBearing":303,"summary":"Clear","icon":"clear-night"},"1429164000":{"apparentTemperature":16.23,"precipIntensity":0,"temperature":16.23,"dewPoint":9.87,"cloudCover":0.27,"humidity":0.66,"ozone":382.93,"pressure":1017.39,"windSpeed":7.01,"precipProbability":0,"windBearing":359,"summary":"Partly Cloudy","icon":"partly-cloudy-day"},"1429207200":{"apparentTemperature":17.24,"precipIntensity":0,"temperature":17.24,"dewPoint":12.39,"cloudCover":0.68,"humidity":0.73,"ozone":365.8,"pressure":1021.38,"windSpeed":4.52,"precipProbability":0,"windBearing":315,"summary":"Mostly Cloudy","icon":"partly-cloudy-day"},"1429174800":{"apparentTemperature":17.1,"precipIntensity":0.0254,"temperature":17.1,"dewPoint":9.95,"precipType":"rain","cloudCover":0.55,"humidity":0.63,"ozone":378.75,"pressure":1019.25,"windSpeed":6.11,"precipProbability":0.01,"windBearing":339,"summary":"Partly Cloudy","icon":"partly-cloudy-day"},"1429171200":{"apparentTemperature":16.67,"precipIntensity":0.0279,"temperature":16.67,"dewPoint":9.46,"precipType":"rain","cloudCover":0.55,"humidity":0.62,"ozone":381,"pressure":1018.61,"windSpeed":6.37,"precipProbability":0.01,"windBearing":342,"summary":"Partly Cloudy","icon":"partly-cloudy-day"},"1429236000":{"apparentTemperature":15.52,"precipIntensity":0,"temperature":15.52,"dewPoint":10.71,"cloudCover":0,"humidity":0.73,"ozone":364.5,"pressure":1022.15,"windSpeed":5.5,"precipProbability":0,"windBearing":307,"summary":"Clear","icon":"clear-night"},"1429214400":{"apparentTemperature":16.54,"precipIntensity":0,"temperature":16.54,"dewPoint":11.82,"cloudCover":0.37,"humidity":0.74,"ozone":368.4,"pressure":1021.78,"windSpeed":4.34,"precipProbability":0,"windBearing":326,"summary":"Partly Cloudy","icon":"partly-cloudy-night"},"1429239600":{"apparentTemperature":15.65,"precipIntensity":0,"temperature":15.65,"dewPoint":10.81,"cloudCover":0,"humidity":0.73,"ozone":360.31,"pressure":1022.21,"windSpeed":5.48,"precipProbability":0,"windBearing":308,"summary":"Clear","icon":"clear-night"},"1429326000":{"apparentTemperature":15.07,"precipIntensity":0,"temperature":15.07,"dewPoint":10.14,"cloudCover":0,"humidity":0.72,"ozone":343.05,"pressure":1023.05,"windSpeed":3.74,"precipProbability":0,"windBearing":276,"summary":"Clear","icon":"clear-night"},"1429182000":{"apparentTemperature":18.01,"precipIntensity":0,"temperature":18.01,"dewPoint":11.51,"cloudCover":0.44,"humidity":0.66,"ozone":373.4,"pressure":1020.43,"windSpeed":5.47,"precipProbability":0,"windBearing":334,"summary":"Partly Cloudy","icon":"partly-cloudy-day"},"1429203600":{"apparentTemperature":17.57,"precipIntensity":0,"temperature":17.57,"dewPoint":12.63,"cloudCover":0.74,"humidity":0.73,"ozone":364.9,"pressure":1021.22,"windSpeed":4.69,"precipProbability":0,"windBearing":310,"summary":"Mostly Cloudy","icon":"partly-cloudy-day"},"1429189200":{"apparentTemperature":18.23,"precipIntensity":0,"temperature":18.23,"dewPoint":12.66,"cloudCover":0.3,"humidity":0.7,"ozone":368.61,"pressure":1020.88,"windSpeed":5.11,"precipProbability":0,"windBearing":323,"summary":"Partly Cloudy","icon":"partly-cloudy-day"},"1429192800":{"apparentTemperature":18.19,"precipIntensity":0,"temperature":18.19,"dewPoint":12.98,"cloudCover":0.3,"humidity":0.72,"ozone":366.8,"pressure":1021.01,"windSpeed":5,"precipProbability":0,"windBearing":318,"summary":"Partly Cloudy","icon":"partly-cloudy-day"},"1429336800":{"apparentTemperature":15.91,"precipIntensity":0,"temperature":15.91,"dewPoint":10.76,"cloudCover":0,"humidity":0.71,"ozone":341.28,"pressure":1023.04,"windSpeed":3.48,"precipProbability":0,"windBearing":262,"summary":"Clear","icon":"clear-day"},"1429210800":{"apparentTemperature":16.88,"precipIntensity":0,"temperature":16.88,"dewPoint":12.11,"cloudCover":0.52,"humidity":0.74,"ozone":367.3,"pressure":1021.59,"windSpeed":4.4,"precipProbability":0,"windBearing":323,"summary":"Partly Cloudy","icon":"partly-cloudy-night"},"1429311600":{"apparentTemperature":15.67,"precipIntensity":0,"temperature":15.67,"dewPoint":10.74,"cloudCover":0,"humidity":0.73,"ozone":345.4,"pressure":1023.9,"windSpeed":4.81,"precipProbability":0,"windBearing":292,"summary":"Clear","icon":"clear-night"},"1429200000":{"apparentTemperature":17.83,"precipIntensity":0,"temperature":17.83,"dewPoint":12.84,"cloudCover":0.63,"humidity":0.73,"ozone":364.96,"pressure":1021.14,"windSpeed":4.8,"precipProbability":0,"windBearing":311,"summary":"Mostly Cloudy","icon":"partly-cloudy-day"},"1429257600":{"apparentTemperature":17.18,"precipIntensity":0,"temperature":17.18,"dewPoint":12.64,"cloudCover":0,"humidity":0.75,"ozone":348.5,"pressure":1023.91,"windSpeed":4.75,"precipProbability":0,"windBearing":310,"summary":"Clear","icon":"clear-day"},"1429178400":{"apparentTemperature":17.62,"precipIntensity":0,"temperature":17.62,"dewPoint":10.76,"cloudCover":0.5,"humidity":0.64,"ozone":376.02,"pressure":1019.91,"windSpeed":5.78,"precipProbability":0,"windBearing":337,"summary":"Partly Cloudy","icon":"partly-cloudy-day"},"1429218000":{"apparentTemperature":16.23,"precipIntensity":0,"temperature":16.23,"dewPoint":11.52,"cloudCover":0.23,"humidity":0.74,"ozone":368.77,"pressure":1021.97,"windSpeed":4.23,"precipProbability":0,"windBearing":321,"summary":"Clear","icon":"clear-night"},"1429243200":{"apparentTemperature":15.87,"precipIntensity":0,"temperature":15.87,"dewPoint":10.99,"cloudCover":0,"humidity":0.73,"ozone":355.04,"pressure":1022.32,"windSpeed":5.29,"precipProbability":0,"windBearing":309,"summary":"Clear","icon":"clear-night"},"1429282800":{"apparentTemperature":18.08,"precipIntensity":0,"temperature":18.08,"dewPoint":13.78,"cloudCover":0,"humidity":0.76,"ozone":346.56,"pressure":1024.2,"windSpeed":5.59,"precipProbability":0,"windBearing":296,"summary":"Clear","icon":"clear-day"},"1429290000":{"apparentTemperature":17.59,"precipIntensity":0,"temperature":17.59,"dewPoint":13.18,"cloudCover":0,"humidity":0.75,"ozone":351.1,"pressure":1023.88,"windSpeed":6.35,"precipProbability":0,"windBearing":303,"summary":"Clear","icon":"clear-day"},"1429228800":{"apparentTemperature":15.56,"precipIntensity":0,"temperature":15.56,"dewPoint":10.79,"cloudCover":0,"humidity":0.73,"ozone":367.67,"pressure":1022.23,"windSpeed":4.77,"precipProbability":0,"windBearing":304,"summary":"Clear","icon":"clear-night"},"1429185600":{"apparentTemperature":18.18,"precipIntensity":0,"temperature":18.18,"dewPoint":12.12,"cloudCover":0.37,"humidity":0.68,"ozone":370.95,"pressure":1020.73,"windSpeed":5.25,"precipProbability":0,"windBearing":329,"summary":"Partly Cloudy","icon":"partly-cloudy-day"},"1429275600":{"apparentTemperature":18.24,"precipIntensity":0,"temperature":18.24,"dewPoint":14.07,"cloudCover":0,"humidity":0.77,"ozone":342.74,"pressure":1024.46,"windSpeed":4.88,"precipProbability":0,"windBearing":294,"summary":"Clear","icon":"clear-day"},"1429304400":{"apparentTemperature":16.26,"precipIntensity":0,"temperature":16.26,"dewPoint":11.8,"cloudCover":0,"humidity":0.75,"ozone":348.47,"pressure":1024.02,"windSpeed":5.65,"precipProbability":0,"windBearing":301,"summary":"Clear","icon":"clear-night"},"1429286400":{"apparentTemperature":17.87,"precipIntensity":0,"temperature":17.87,"dewPoint":13.49,"cloudCover":0,"humidity":0.76,"ozone":349.28,"pressure":1024.01,"windSpeed":6.04,"precipProbability":0,"windBearing":300,"summary":"Clear","icon":"clear-day"},"1429261200":{"apparentTemperature":17.49,"precipIntensity":0,"temperature":17.49,"dewPoint":13.12,"cloudCover":0,"humidity":0.76,"ozone":346.17,"pressure":1024.22,"windSpeed":4.59,"precipProbability":0,"windBearing":308,"summary":"Clear","icon":"clear-day"},"1429329600":{"apparentTemperature":15.31,"precipIntensity":0,"temperature":15.31,"dewPoint":10.33,"cloudCover":0,"humidity":0.72,"ozone":342.8,"pressure":1022.95,"windSpeed":3.58,"precipProbability":0,"windBearing":273,"summary":"Clear","icon":"clear-night"},"1429315200":{"apparentTemperature":15.37,"precipIntensity":0,"temperature":15.37,"dewPoint":10.41,"cloudCover":0,"humidity":0.72,"ozone":344.52,"pressure":1023.66,"windSpeed":4.47,"precipProbability":0,"windBearing":288,"summary":"Clear","icon":"clear-night"},"1429322400":{"apparentTemperature":14.98,"precipIntensity":0,"temperature":14.98,"dewPoint":10.07,"cloudCover":0,"humidity":0.72,"ozone":343.4,"pressure":1023.15,"windSpeed":3.93,"precipProbability":0,"windBearing":279,"summary":"Clear","icon":"clear-night"},"1429264800":{"apparentTemperature":17.79,"precipIntensity":0,"temperature":17.79,"dewPoint":13.57,"cloudCover":0,"humidity":0.76,"ozone":343.35,"pressure":1024.48,"windSpeed":4.44,"precipProbability":0,"windBearing":305,"summary":"Clear","icon":"clear-day"},"1429272000":{"apparentTemperature":18.17,"precipIntensity":0,"temperature":18.17,"dewPoint":14.06,"cloudCover":0,"humidity":0.77,"ozone":341.64,"pressure":1024.59,"windSpeed":4.58,"precipProbability":0,"windBearing":297,"summary":"Clear","icon":"clear-day"},"1429308000":{"apparentTemperature":15.96,"precipIntensity":0,"temperature":15.96,"dewPoint":11.23,"cloudCover":0,"humidity":0.74,"ozone":346.8,"pressure":1024,"windSpeed":5.21,"precipProbability":0,"windBearing":297,"summary":"Clear","icon":"clear-night"},"1429167600":{"apparentTemperature":16.41,"precipIntensity":0.0279,"temperature":16.41,"dewPoint":9.51,"precipType":"rain","cloudCover":0.44,"humidity":0.64,"ozone":382.2,"pressure":1017.99,"windSpeed":6.64,"precipProbability":0.01,"windBearing":350,"summary":"Partly Cloudy","icon":"partly-cloudy-day"},"1429250400":{"apparentTemperature":16.47,"precipIntensity":0,"temperature":16.47,"dewPoint":11.68,"cloudCover":0,"humidity":0.73,"ozone":349.51,"pressure":1022.97,"windSpeed":4.99,"precipProbability":0,"windBearing":311,"summary":"Clear","icon":"clear-day"},"1429297200":{"apparentTemperature":16.91,"precipIntensity":0,"temperature":16.91,"dewPoint":12.63,"cloudCover":0,"humidity":0.76,"ozone":350.76,"pressure":1023.98,"windSpeed":6.25,"precipProbability":0,"windBearing":304,"summary":"Clear","icon":"clear-night"},"1429246800":{"apparentTemperature":16.14,"precipIntensity":0,"temperature":16.14,"dewPoint":11.28,"cloudCover":0,"humidity":0.73,"ozone":351,"pressure":1022.55,"windSpeed":5.11,"precipProbability":0,"windBearing":310,"summary":"Clear","icon":"clear-night"},"1429225200":{"apparentTemperature":15.7,"precipIntensity":0,"temperature":15.7,"dewPoint":10.95,"cloudCover":0,"humidity":0.73,"ozone":368.3,"pressure":1022.25,"windSpeed":4.4,"precipProbability":0,"windBearing":304,"summary":"Clear","icon":"clear-night"},"1429254000":{"apparentTemperature":16.84,"precipIntensity":0,"temperature":16.84,"dewPoint":12.17,"cloudCover":0,"humidity":0.74,"ozone":349.25,"pressure":1023.48,"windSpeed":4.87,"precipProbability":0,"windBearing":311,"summary":"Clear","icon":"clear-day"},"1429196400":{"apparentTemperature":18.06,"precipIntensity":0,"temperature":18.06,"dewPoint":13.01,"cloudCover":0.43,"humidity":0.72,"ozone":365.62,"pressure":1021.09,"windSpeed":4.9,"precipProbability":0,"windBearing":314,"summary":"Partly Cloudy","icon":"partly-cloudy-day"},"1429221600":{"apparentTemperature":15.93,"precipIntensity":0,"temperature":15.93,"dewPoint":11.2,"cloudCover":0.1,"humidity":0.74,"ozone":368.74,"pressure":1022.15,"windSpeed":4.22,"precipProbability":0,"windBearing":311,"summary":"Clear","icon":"clear-night"},"1429293600":{"apparentTemperature":17.27,"precipIntensity":0,"temperature":17.27,"dewPoint":12.91,"cloudCover":0,"humidity":0.76,"ozone":351.38,"pressure":1023.91,"windSpeed":6.39,"precipProbability":0,"windBearing":304,"summary":"Clear","icon":"clear-day"},"1429268400":{"apparentTemperature":18.02,"precipIntensity":0,"temperature":18.02,"dewPoint":13.91,"cloudCover":0,"humidity":0.77,"ozone":341.6,"pressure":1024.62,"windSpeed":4.42,"precipProbability":0,"windBearing":301,"summary":"Clear","icon":"clear-day"},"1429318800":{"apparentTemperature":15.11,"precipIntensity":0,"temperature":15.11,"dewPoint":10.17,"cloudCover":0,"humidity":0.72,"ozone":343.91,"pressure":1023.36,"windSpeed":4.17,"precipProbability":0,"windBearing":284,"summary":"Clear","icon":"clear-night"}},"daily":{"1429660800":{"apparentTemperatureMinTime":1429736400,"temperatureMinTime":1429736400,"cloudCover":0.02,"temperatureMin":14.4,"summary":"Windy starting in the afternoon.","dewPoint":12.39,"apparentTemperatureMax":19.09,"temperatureMax":19.09,"temperatureMaxTime":1429696800,"windBearing":272,"moonPhase":0.13,"sunsetTime":1429719823,"pressure":1008.75,"apparentTemperatureMin":14.4,"precipIntensityMax":0,"icon":"wind","apparentTemperatureMaxTime":1429696800,"humidity":0.73,"ozone":332.91,"windSpeed":7.28,"precipIntensity":0,"sunriseTime":1429672302,"precipProbability":0},"1429401600":{"apparentTemperatureMinTime":1429398000,"temperatureMinTime":1429398000,"cloudCover":0,"temperatureMin":14.95,"summary":"Clear throughout the day.","dewPoint":11.86,"apparentTemperatureMax":18.23,"temperatureMax":18.23,"temperatureMaxTime":1429441200,"windBearing":226,"moonPhase":0.03,"sunsetTime":1429460490,"pressure":1018.4,"apparentTemperatureMin":14.95,"precipIntensityMax":0,"icon":"clear-day","apparentTemperatureMaxTime":1429441200,"humidity":0.73,"ozone":327.21,"windSpeed":2.93,"precipIntensity":0,"sunriseTime":1429413307,"precipProbability":0},"1429228800":{"apparentTemperatureMinTime":1429225200,"temperatureMinTime":1429225200,"cloudCover":0,"temperatureMin":15.49,"summary":"Clear throughout the day.","dewPoint":12.36,"apparentTemperatureMax":18.24,"temperatureMax":18.24,"temperatureMaxTime":1429268400,"windBearing":303,"moonPhase":0.95,"sunsetTime":1429287601,"pressure":1023.61,"apparentTemperatureMin":15.49,"precipIntensityMax":0,"icon":"clear-day","apparentTemperatureMaxTime":1429268400,"humidity":0.75,"ozone":350.49,"windSpeed":5.24,"precipIntensity":0,"sunriseTime":1429240649,"precipProbability":0},"1429574400":{"apparentTemperatureMinTime":1429650000,"temperatureMinTime":1429650000,"cloudCover":0,"temperatureMin":17.2,"summary":"Clear throughout the day.","dewPoint":13.34,"apparentTemperatureMax":19.74,"temperatureMax":19.74,"temperatureMaxTime":1429614000,"windBearing":256,"moonPhase":0.1,"sunsetTime":1429633378,"pressure":1011.5,"apparentTemperatureMin":17.2,"precipIntensityMax":0,"icon":"clear-day","apparentTemperatureMaxTime":1429614000,"humidity":0.72,"ozone":330.65,"windSpeed":2.98,"precipIntensity":0,"sunriseTime":1429585969,"precipProbability":0},"1429747200":{"apparentTemperatureMinTime":1429747200,"precipType":"rain","cloudCover":0.05,"precipIntensityMaxTime":1429761600,"temperatureMin":13.32,"summary":"Breezy and partly cloudy in the morning.","dewPoint":8.46,"apparentTemperatureMax":16.91,"temperatureMax":16.91,"temperatureMaxTime":1429794000,"windBearing":286,"moonPhase":0.17,"temperatureMinTime":1429747200,"sunsetTime":1429806268,"pressure":1014.74,"apparentTemperatureMin":13.32,"precipIntensityMax":0.033,"icon":"wind","apparentTemperatureMaxTime":1429794000,"humidity":0.63,"ozone":356.36,"windSpeed":8.36,"precipIntensity":0.0152,"sunriseTime":1429758635,"precipProbability":0.01},"1429488000":{"apparentTemperatureMinTime":1429484400,"temperatureMinTime":1429484400,"cloudCover":0.02,"temperatureMin":15.98,"summary":"Clear throughout the day.","dewPoint":12.43,"apparentTemperatureMax":20.16,"temperatureMax":20.16,"temperatureMaxTime":1429534800,"windBearing":203,"moonPhase":0.06,"sunsetTime":1429546934,"pressure":1014.14,"apparentTemperatureMin":15.98,"precipIntensityMax":0,"icon":"clear-day","apparentTemperatureMaxTime":1429534800,"humidity":0.68,"ozone":324.94,"windSpeed":4.49,"precipIntensity":0,"sunriseTime":1429499638,"precipProbability":0},"1429315200":{"apparentTemperatureMinTime":1429315200,"temperatureMinTime":1429315200,"cloudCover":0,"temperatureMin":14.98,"summary":"Clear throughout the day.","dewPoint":11.55,"apparentTemperatureMax":18.16,"temperatureMax":18.16,"temperatureMaxTime":1429354800,"windBearing":269,"moonPhase":0.99,"sunsetTime":1429374045,"pressure":1022.28,"apparentTemperatureMin":14.98,"precipIntensityMax":0,"icon":"clear-day","apparentTemperatureMaxTime":1429354800,"humidity":0.72,"ozone":336.79,"windSpeed":4.14,"precipIntensity":0,"sunriseTime":1429326978,"precipProbability":0},"1429142400":{"apparentTemperatureMinTime":1429142400,"precipType":"rain","cloudCover":0.33,"precipIntensityMaxTime":1429164000,"temperatureMin":15.34,"summary":"Partly cloudy until evening.","dewPoint":11.21,"apparentTemperatureMax":18.23,"temperatureMax":18.23,"temperatureMaxTime":1429182000,"windBearing":333,"moonPhase":0.91,"temperatureMinTime":1429142400,"sunsetTime":1429201158,"pressure":1019.52,"apparentTemperatureMin":15.34,"precipIntensityMax":0.0279,"icon":"partly-cloudy-day","apparentTemperatureMaxTime":1429182000,"humidity":0.7,"ozone":376.28,"windSpeed":5.28,"precipIntensity":0.0102,"sunriseTime":1429154320,"precipProbability":0.01}},"offset":2};
+  if (weatherData) {
+    try {
+      displayWeather(weatherData);
+    } catch (e) {
+      console.error('got exception from cache', e)
+    }
+  }
+
+  var url = "/weather/forecast/22,22",
+      protocol = /^([\w-]+:)\/\//.test(url)? RegExp.$1 : window.location.protocol;
+
+  xhr = new window.XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4) {
+      xhr.onreadystatechange = function() {};
+      if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304 || (xhr.status == 0 && protocol == 'file:')) {
+        result = xhr.responseText;
+        if (result) {
+          try {
+            weatherData = JSON.parse(result);
+            setDataToStorage('weather', weatherData);
+            displayWeather(weatherData);
+          } catch (e) {
+            console.error('got exception', e);
+          }
+        }
+      }
+    }
+  }
+  xhr.open('GET', url, true);
+  xhr.send();
+
+  (function() {
+    "use strict";
+    var resizeTimeout = null;
+    var body = document.getElementsByTagName('body')[0];
+    var wrapper = document.getElementById('wrapper');
+    var forecast = document.getElementById('forecast');
+    window.onresize = function() {
+      if (resizeTimeout !== null) {
+        window.clearTimeout(resizeTimeout);
+        resizeTimeout = null;
+      }
+
+      // We need this timeout because sometimes `window.innerWidth` will report invalid values
+      resizeTimeout = window.setTimeout(function() {
+        var proportion = (Math.abs(window.innerWidth - 1280) < 4)? 1 : window.innerWidth / 1280;
+        var property = 'scale(' + proportion + ')';
+        wrapper.style.webkitTransform = property;
+        wrapper.style.transform = property;
+        forecast.style.webkitTransform = property;
+        forecast.style.transform = property;
+
+        // Force browser repaint
+        // http://stackoverflow.com/questions/3485365/how-can-i-force-webkit-to-redraw-repaint-to-propagate-style-changes
+        body.style.display = 'inline-block';
+        window.setTimeout(function() {
+          body.style.display = '';
+        },50)
+      }, 200);
+    };
+
+    // This is extremly needed to avoid a screen freeze on Android.
+    wrapper.style.webkitTransform = 'scale(1)';
+    wrapper.style.transform = 'scale(1)';
+    forecast.style.webkitTransform = 'scale(1)';
+    forecast.style.transform = 'scale(1)';
+    window.onresize();
+  })();
+</script>
+</body></html>
